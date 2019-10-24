@@ -19,7 +19,7 @@ export default function sketch(p) {
 		nBar.position(20, sliderXPosition);
 
 		pBar = p.createSlider(0, 100);
-		pBar.position(700 - p.width - 20, sliderXPosition);
+		pBar.position(700-pBar.width-20, sliderXPosition);
 	}
 
 	p.draw = () => {
@@ -71,7 +71,7 @@ export default function sketch(p) {
 
 		// Print bar values 
 		p.text(nVal, 20, sliderXPosition - 10);
-		p.text(pVal, 700 - p.width - 20, sliderXPosition - 10);
+		p.text(pVal, 700 - pBar.width - 20, sliderXPosition - 10);
 	}
 
 	p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
