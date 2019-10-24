@@ -6,7 +6,7 @@ export default class Distribution {
         if (n == k) {
             return (1);
         }
-        return this.binomialCoef(n, k) * pow(p, n) * pow((1 - p), n - k);
+        return this.binomialCoef(n, k) * Math.pow(p, n) * Math.pow((1 - p), n - k);
     }
     
     // calculate binomial coefficient

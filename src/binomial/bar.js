@@ -7,8 +7,8 @@ export default class Bar {
         this.height = height;
     }
 
-    display() {
-        fill(255);
-        rect(this.xPos, this.yPos, this.width, -this.height);
+    display(p) {
+        p.fill(255);
+        p.rect(this.xPos, this.yPos, this.width, -this.height);
     }
 }
