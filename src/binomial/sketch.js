@@ -68,8 +68,8 @@ export default function sketch(p) {
 
 
 		// Print bar values 
-		p.text(nVal, 20, sliderYPosition - 10);
-		p.text(pVal, 700 - pBar.width - 20, sliderYPosition - 10);
+		p.text('n = ' + nVal, 20, sliderYPosition - 10);
+		p.text('p = ' + (pVal*100)+'%', 700 - pBar.width - 20, sliderYPosition - 10);
 	}
 
 	p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
@@ -81,6 +81,4 @@ export default function sketch(p) {
 		nBar.position(20, canvas.position().y+ canvas.height+sliderYPosition);
 		pBar.position(700-pBar.width-20, canvas.position().y+sliderYPosition);
 	}
-
-	console.log(p);
 }
