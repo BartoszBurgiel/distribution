@@ -14,15 +14,15 @@ export default function sketch(p) {
 
 	p.setup = () => {
 		canvas = p.createCanvas(700, 400);
-
-		nBar = p.createSlider(0, 150);
-		nBar.position(20, sliderXPosition);
-
+		nBar = p.createSlider(0, 150);	
 		pBar = p.createSlider(0, 100);
+
+		nBar.position(sliderXPosition, p.height-20);
 		pBar.position(700-pBar.width-20, sliderXPosition);
 	}
 
 	p.draw = () => {
+
 
 		// Array with all bars
 		let bars = [];
