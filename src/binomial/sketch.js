@@ -5,20 +5,18 @@ export default function sketch(p) {
 	
 	let canvas;
 	let nBar, pBar;
-	const sliderXPosition = 360;
+	const sliderYPosition = 360;
 	
 	let m;
 	m = new Distribution();
-	console.log(this);
-
 
 	p.setup = () => {
 		canvas = p.createCanvas(700, 400);
 		nBar = p.createSlider(0, 150);	
-		pBar = p.createSlider(0, 100);
+		pBar = p.createSlider(0, 1, 0.5, 0.01);
 
-		nBar.position(sliderXPosition, p.height-20);
-		pBar.position(700-pBar.width-20, sliderXPosition);
+		nBar.position(20, canvas.position().y + sliderYPosition);
+		pBar.position(700-pBar.width-20, canvas.position().y +sliderYPosition);
 	}
 
 	p.draw = () => {
@@ -29,7 +27,7 @@ export default function sketch(p) {
 
 		// Get values from the sliders
 		const nVal = nBar.value();
-		const pVal = pBar.value() / 100;
+		const pVal = pBar.value();
 
 		p.background(220, 0, 230);
 
@@ -70,12 +68,19 @@ export default function sketch(p) {
 
 
 		// Print bar values 
-		p.text(nVal, 20, sliderXPosition - 10);
-		p.text(pVal, 700 - pBar.width - 20, sliderXPosition - 10);
+		p.text(nVal, 20, sliderYPosition - 10);
+		p.text(pVal, 700 - pBar.width - 20, sliderYPosition - 10);
 	}
 
 	p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
 		if (canvas) //Make sure the canvas has been created
 			p.fill(newProps.color);
 	}
+
+	p.windowResized = () => {
+		nBar.position(20, canvas.position().y+ canvas.height+sliderYPosition);
+		pBar.position(700-pBar.width-20, canvas.position().y+sliderYPosition);
+	}
+
+	console.log(p);
 }
