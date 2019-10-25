@@ -1,6 +1,7 @@
 import Distribution from './math.js';
 import Bar from './bar.js';
 
+
 export default function sketch(p) {
 	
 	let canvas;
