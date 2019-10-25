@@ -10,5 +10,6 @@ export default class Bar {
     display(p) {
         p.fill(255);
         p.rect(this.xPos, this.yPos, this.width, -this.height);
+        p.fill(0);
     }
 }

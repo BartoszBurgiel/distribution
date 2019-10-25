@@ -59,11 +59,11 @@ export default function sketch(p) {
 		p.line(30, 100, 30, 300);
 
 		// X - Axis
-		p.line(30, 300`, 650, 300);
+		p.line(30, 300, 650, 300);
 
 		p.strokeWeight(1);
 
-		// Print bars
+		// Print bars and x-axis labeling
 		for (let i = 0; i < nVal; i++) {
 
 			let prop = m.bDistribution(nVal, pVal, i);
@@ -71,6 +71,8 @@ export default function sketch(p) {
 			let absHeight = p.map(prop, 0, highestProp, 0, 200);
 			bars[i].height = absHeight;
 			bars[i].display(p);
+
+			p.text(i+1, 30 + ((600 * i / nVal) + (600 * (i+1) / nVal)) / 2, 312.5);
 		}
 
 
