@@ -9,20 +9,22 @@ export default function sketch(p) {
 	const sliderYPosition = 360;
 	
 	let m = new Distribution();
-	let cartesian = new Caretsian(30, )
-
+	let cartesian;
+	
 	p.setup = () => {
 		canvas = p.createCanvas(700, 400);
 		nBar = p.createSlider(0, 150);	
 		pBar = p.createSlider(0, 1, 0.5, 0.01);
-
+		
 		nBar.position(20, canvas.position().y + sliderYPosition);
 		pBar.position(700-pBar.width-20, canvas.position().y +sliderYPosition);
+	
+		cartesian = new Caretsian(30, 30, 300, 600, 0, 100, 0, 1, p)
 	}
 
 	p.draw = () => {
 
-
+		cartesian.createCartesian()
 		// Array with all bars
 		let bars = [];
 
