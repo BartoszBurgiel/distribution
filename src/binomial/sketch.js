@@ -1,6 +1,6 @@
 import Distribution from './math.js';
 import Bar from './bar.js';
-
+import Caretsian from './cartesian.js';
 
 export default function sketch(p) {
 	
@@ -8,8 +8,8 @@ export default function sketch(p) {
 	let nBar, pBar;
 	const sliderYPosition = 360;
 	
-	let m;
-	m = new Distribution();
+	let m = new Distribution();
+	let cartesian = new Caretsian(30, )
 
 	p.setup = () => {
 		canvas = p.createCanvas(700, 400);
@@ -53,16 +53,6 @@ export default function sketch(p) {
 
 		// Y-Axis - Label
 		p.text(highestProp, 20, 80);
-
-		p.strokeWeight(2);
-		
-		// Y - Axis
-		p.line(30, 100, 30, 300);
-
-		// X - Axis
-		p.line(30, 300, 650, 300);
-
-		p.strokeWeight(1);
 
 		// Print bars and x-axis labeling
 		for (let i = 0; i < nVal; i++) {
