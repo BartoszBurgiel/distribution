@@ -26,4 +26,12 @@ export default class Distribution {
             return (n * this.factorial(n - 1));
         }    
     }
+
+    standardDeviation = (n, p) => {
+        return Math.sqrt(n * p * (1-p))
+    }
+
+    expectedValue = (n, p) => {
+        return n * p
+    }
 }
