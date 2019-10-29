@@ -14,7 +14,7 @@ export default function sketch(p) {
 	p.setup = () => {
 		canvas = p.createCanvas(700, 400);
 		nBar = p.createSlider(0, 150);	
-		pBar = p.createSlider(0, 1, 0.5, 0.01);
+		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01);
 
 		nBar.position(20, canvas.position().y + sliderYPosition);
 		pBar.position(700-pBar.width-20, canvas.position().y +sliderYPosition);
