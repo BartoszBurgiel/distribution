@@ -3,12 +3,17 @@ export default class Distribution {
 
     // calculate binomial distribution
     bDistribution(n, p, k) {
-        return this.binomialCoef(n, k) * Math.pow(p, n) * Math.pow((1 - p), n - k);
+        return this.binomialCoef(n, k) * Math.pow(p, k) * Math.pow((1 - p), n - k);
     }
     
     // calculate binomial coefficient
-    binomialCoef(n, k) {
-        return this.factorial(n) / (this.factorial(k) * this.factorial(n - k));
+    binomialCoef = (n, k) => {
+
+        let c = 1;
+        for (var x = n-k+1; x <= n; x++) c *= x;
+        for (x = 1; x <= k; x++) c /= x;
+
+        return c
     }
     
     // get factiorial of a given integer
