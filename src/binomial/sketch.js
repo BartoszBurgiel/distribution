@@ -54,16 +54,6 @@ export default function sketch(p) {
 		// Y-Axis - Label
 		p.text(highestProp, 20, 80);
 
-		p.strokeWeight(2);
-		
-		// Y - Axis
-		p.line(30, 100, 30, 300);
-
-		// X - Axis
-		p.line(30, 300, 650, 300);
-
-		p.strokeWeight(1);
-
 		// Print bars and x-axis labeling
 		for (let i = 0; i < nVal; i++) {
 
