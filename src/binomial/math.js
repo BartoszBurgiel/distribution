@@ -3,9 +3,6 @@ export default class Distribution {
 
     // calculate binomial distribution
     bDistribution(n, p, k) {
-        if (n == k) {
-            return (1);
-        }
         return this.binomialCoef(n, k) * Math.pow(p, n) * Math.pow((1 - p), n - k);
     }
     
