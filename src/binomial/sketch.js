@@ -52,7 +52,7 @@ export default function sketch(p) {
 
 
 		// Y-Axis - Label
-		p.text(highestProp, 20, 80);
+		p.text(Math.round(highestProp*100) + '%', 20, 80);
 
 		// Print bars and x-axis labeling
 		for (let i = 0; i < nVal; i++) {
@@ -69,7 +69,7 @@ export default function sketch(p) {
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10);
-		p.text('p = ' + (pVal*100)+'%', 700 - pBar.width - 20, sliderYPosition - 10);
+		p.text('p = ' + Math.round(pVal*100)+'%', 700 - pBar.width - 20, sliderYPosition - 10);
 	}
 
 	p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
