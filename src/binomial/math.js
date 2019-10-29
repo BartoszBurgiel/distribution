@@ -2,7 +2,7 @@
 export default class Distribution {
 
     // calculate binomial distribution
-    bDistribution(n, p, k) {
+    bDistribution = (n, p, k) => {
         return this.binomialCoef(n, k) * Math.pow(p, k) * Math.pow((1 - p), n - k);
     }
     
@@ -17,7 +17,7 @@ export default class Distribution {
     }
     
     // get factiorial of a given integer
-    factorial(n) {
+    factorial = (n) => {
         if (n == 1) {
             return (1);
         } else if (n == 0) {
