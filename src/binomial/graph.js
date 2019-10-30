@@ -8,6 +8,8 @@ export default function binomialDistributionGraph(p) {
 	let canvas
 	let nBar, pBar
 	let dataDisplay
+
+	// Global slider position
 	const sliderYPosition = 360
 	
 	let m
@@ -46,8 +48,10 @@ export default function binomialDistributionGraph(p) {
 		dataDisplay.addLabel("μ", m.expectedValue(nVal, pVal))
 		dataDisplay.addLabel("σ", m.standardDeviation(nVal, pVal))
 
+		// Display dataDisplay 
 		dataDisplay.display()
 
+		// Set fill back
 		p.fill(0)
 
 
@@ -75,6 +79,7 @@ export default function binomialDistributionGraph(p) {
 
 			let prop = m.bDistribution(nVal, pVal, i)
 
+			// Calculate, set and display bar's hight
 			let absHeight = p.map(prop, 0, highestProp, 0, 200)
 			bars[i].height = absHeight
 			bars[i].display(p)
@@ -93,6 +98,7 @@ export default function binomialDistributionGraph(p) {
 			p.fill(newProps.color)
 	}
 
+	// Make sure the sliders are in place
 	p.windowResized = () => {
 		nBar.position(20, canvas.position().y+ canvas.height+sliderYPosition)
 		pBar.position(700-pBar.width-20, canvas.position().y+sliderYPosition)
