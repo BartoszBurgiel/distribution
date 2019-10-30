@@ -1,27 +1,39 @@
 import Distribution from './math.js';
 import Bar from './bar.js';
+import Data from './data.js';
 
 
 export default function sketch(p) {
 	
 	let canvas;
 	let nBar, pBar;
+	let dataDisplay;
 	const sliderYPosition = 360;
 	
 	let m;
 	m = new Distribution();
 
 	p.setup = () => {
-		canvas = p.createCanvas(700, 400);
+
+		// Initialize canvas
+		canvas = p.createCanvas(900, 400);
+
+		// Initialize slider
 		nBar = p.createSlider(0, 150);	
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01);
 
+		// Set slider
 		nBar.position(20, canvas.position().y + sliderYPosition);
 		pBar.position(700-pBar.width-20, canvas.position().y +sliderYPosition);
+
+		// Data class
+		dataDisplay = new Data(p, 700, 0, 400, 200)
 	}
 
 	p.draw = () => {
 
+		// Reset screen
+		p.background(220, 0, 230);
 
 		// Array with all bars
 		let bars = [];
@@ -30,7 +42,7 @@ export default function sketch(p) {
 		const nVal = nBar.value();
 		const pVal = pBar.value();
 
-		p.background(220, 0, 230);
+		dataDisplay.display()
 
 		p.fill(0);
 
