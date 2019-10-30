@@ -42,6 +42,10 @@ export default function sketch(p) {
 		const nVal = nBar.value();
 		const pVal = pBar.value();
 
+		// Create labels for data display
+		dataDisplay.addLabel("μ", m.expectedValue(nVal, pVal))
+		dataDisplay.addLabel("σ", m.standardDeviation(nVal, pVal))
+
 		dataDisplay.display()
 
 		p.fill(0);

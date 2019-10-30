@@ -27,9 +27,10 @@ export default class Data {
         // Display labels
         let i = 0
 
+        this.p.fill(0)
         for (let [key, val] of this.labels) {
             //Print all lables      
-            this.p.text(key+'='+val , 20 + this.x, 60 + this.y + (this.height/this.labels.length) )
+            this.p.text(key+' = '+val , 20 + this.x, 60 + this.y + (this.height/this.labels.size) * i )
             i++
         }
     }
