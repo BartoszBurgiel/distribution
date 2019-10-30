@@ -8,12 +8,7 @@ export default class Distribution {
     
     // calculate binomial coefficient
     binomialCoef = (n, k) => {
-
-        let c = 1;
-        for (var x = n-k+1; x <= n; x++) c *= x;
-        for (x = 1; x <= k; x++) c /= x;
-
-        return c
+        return this.factorial(n) / (this.factorial(k) * this.factorial(n - k))
     }
     
     // get factiorial of a given integer
