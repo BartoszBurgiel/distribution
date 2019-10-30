@@ -1,6 +1,6 @@
 import Distribution from './math.js';
-import Bar from './bar.js';
-import Data from './data.js';
+import Bar from '../display/bar.js';
+import Data from '../display/data.js';
 
 
 export default function binomialDistributionGraph(p) {
