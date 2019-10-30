@@ -3,7 +3,7 @@ import Bar from './bar.js';
 import Data from './data.js';
 
 
-export default function sketch(p) {
+export default function binomialDistributionGraph(p) {
 	
 	let canvas;
 	let nBar, pBar;
