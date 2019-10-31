@@ -7,6 +7,9 @@ export default class Binomial {
     
     // calculate binomial coefficient
     binomialCoef = (n, k) => {
+        if (k === 0) {
+            return (1)
+        }
         return this.factorial(n) / (this.factorial(k) * this.factorial(n - k))
     }
 

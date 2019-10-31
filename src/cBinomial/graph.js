@@ -24,7 +24,7 @@ export default function cumulatedBinomialDistributionGraph(p) {
 		canvas = p.createCanvas(900, 400)
 
 		// Initialize slider
-		nBar = p.createSlider(0, 150)
+		nBar = p.createSlider(1, 150)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
 
 		// Set slider
@@ -63,13 +63,15 @@ export default function cumulatedBinomialDistributionGraph(p) {
 		let propSum = 0
 
 		// Generate bars
-		for (let i = 1; i < nVal; i++) {
+		for (let i = 0; i < nVal; i++) {
 			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 			
 			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
 
 			propSum += currentPropability
 	
+			console.log("dsdss", propSum)
+
 			// Calculate, set and display bar's hight
 			let absHeight = p.map(propSum, 0, 1, 0, 200)
 			bars[i].height = absHeight
@@ -79,6 +81,8 @@ export default function cumulatedBinomialDistributionGraph(p) {
 
 		hoverInfo.bars = bars
 		hoverInfo.showHoverWindow()
+
+		console.log("here we are", binomialMath.bDistribution(nVal, pVal, 0))
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)
