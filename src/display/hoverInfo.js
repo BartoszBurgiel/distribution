@@ -29,12 +29,31 @@ export default class HoverInfo {
                             this.p.rect(550, 20, 100, 20)
 
                             this.p.fill(0)
-                            
+
                             // Label 
                             this.p.text('P(' + element.k + ') = ' + Math.round(element.prop * 10000) / 100 + '%', 560, 32.5)
                         }
                     }
                 });
+            }
+        }
+    }
+
+    showHoverWindowNormal = (x, prop) => {
+
+        // Check x-Axis
+        if (this.p.mouseX >= 30 && this.p.mouseX <= 700) {
+
+            // Check y-Axis
+            if (this.p.mouseY <= 300 && this.p.mouseY >= 100) {
+                this.p.fill(255)
+
+                // Draw window
+                this.p.rect(550, 20, 120, 20)
+
+                this.p.fill(0)
+                // Label 
+                this.p.text('P(' + Math.round(x*100)/100+ ') = ' + Math.round(prop * 10000) / 100 + '%', 560, 32.5)
             }
         }
     }

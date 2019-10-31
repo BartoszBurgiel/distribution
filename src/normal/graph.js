@@ -1,6 +1,7 @@
 import Distribution from '../math/distribution.js';
 import Data from '../display/data.js';
 import Normal from '../math/normal.js';
+import HoverInfo from '../display/hoverInfo.js'
 
 
 export default function normalDistributionGraph(p) {
@@ -14,6 +15,7 @@ export default function normalDistributionGraph(p) {
 
 	let distributionMath = new Distribution()
 	let normalMath = new Normal()
+	let hoverInfo = new HoverInfo([], p)
 
 	p.setup = () => {
 
@@ -76,6 +78,9 @@ export default function normalDistributionGraph(p) {
 
 			p.line(x1, y1, x2, y2)
 		}
+
+		let hoverMousePos = p.map(p.mouseX, 30, 700, 0, nVal)
+		hoverInfo.showHoverWindowNormal(hoverMousePos, normalMath.solve(hoverMousePos, sigma, mu))
 
 		p.text(asd, 40, 40)
 
