@@ -12,19 +12,24 @@ export default class HoverInfo {
         if(this.p.mouseX >= 30 && this.p.mouseX <= 600) {
             
             // check y-Axis
-            if (this.p.mouseY >= 300 && this.p.mouseY <=200) {
-
+            if (this.p.mouseY <= 300 && this.p.mouseY >=200) {
+                
                 // iterate over bars 
-                this.array.forEach(element => {
+                this.bars.forEach(element => {
                     
                     // check x-range
                     if (this.p.mouseX >= element.xPos && this.p.mouseX <= element.xPos + element.width) {
-                        console.log(element.prop, "hehe")
-                    }
+                        
+                        // Display only if hover over bar
+                        if (this.p.mouseY >= 300 - element.height) {
+                            console.log(element.prop, "hehe")
+                            return true
 
-                    break
+                        } 
+                    }
                 });
             }
         } 
+        return false
     }
 }

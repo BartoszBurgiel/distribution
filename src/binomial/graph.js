@@ -2,6 +2,7 @@ import Distribution from '../math/distribution.js';
 import Bar from '../display/bar.js';
 import Data from '../display/data.js';
 import Binomial from '../math/binomial.js';
+import HoverInfo from '../display/hoverInfo.js';
 
 
 export default function binomialDistributionGraph(p) {
@@ -15,6 +16,7 @@ export default function binomialDistributionGraph(p) {
 
 	let distributionMath = new Distribution()
 	let binomialMath = new Binomial()
+	let hoverInfo = new HoverInfo([], p)
 
 	p.setup = () => {
 
@@ -31,6 +33,7 @@ export default function binomialDistributionGraph(p) {
 
 		// Data class
 		dataDisplay = new Data(p, 700, 0, 400, 200)
+
 	}
 
 	p.draw = () => {
@@ -85,6 +88,9 @@ export default function binomialDistributionGraph(p) {
 			bars[i].display(p)
 		}
 
+		// Hovering 
+		hoverInfo.bars = bars
+
 
 		// Y-Axis - Label
 		p.text(Math.round(highestProp * 100) + '%', 20, 80)
@@ -104,4 +110,8 @@ export default function binomialDistributionGraph(p) {
 		nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
 		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
 	}
+
+	p.mouseMoved = () => {
+		hoverInfo.checkIfHoverBars()
+	} 
 }
