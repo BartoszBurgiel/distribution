@@ -9,7 +9,7 @@ export default class HoverInfo {
 
     showHoverWindow = () => {
         // Check x-Axis
-        if (this.p.mouseX >= 30 && this.p.mouseX <= 700) {
+        if (this.p.mouseX >= 30 && this.p.mouseX <= 630) {
 
             // Check y-Axis
             if (this.p.mouseY <= 300 && this.p.mouseY >= 100) {
@@ -42,7 +42,7 @@ export default class HoverInfo {
     showHoverWindowNormal = (x, prop) => {
 
         // Check x-Axis
-        if (this.p.mouseX >= 30 && this.p.mouseX <= 700) {
+        if (this.p.mouseX >= 30 && this.p.mouseX <= 630) {
 
             // Check y-Axis
             if (this.p.mouseY <= 300 && this.p.mouseY >= 100) {
