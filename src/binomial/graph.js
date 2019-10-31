@@ -73,7 +73,7 @@ export default function binomialDistributionGraph(p) {
 
 		// Generate bars
 		for (let i = 0; i < nVal; i++) {
-			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0)
+			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
 
 			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
@@ -91,6 +91,7 @@ export default function binomialDistributionGraph(p) {
 		// Hovering 
 		hoverInfo.bars = bars
 
+		hoverInfo.showHoverWindow()
 
 		// Y-Axis - Label
 		p.text(Math.round(highestProp * 100) + '%', 20, 80)
@@ -110,8 +111,4 @@ export default function binomialDistributionGraph(p) {
 		nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
 		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
 	}
-
-	p.mouseMoved = () => {
-		hoverInfo.checkIfHoverBars()
-	} 
 }
