@@ -1,6 +1,7 @@
-import Distribution from './math.js';
+import Distribution from '../math/distribution.js';
 import Bar from '../display/bar.js';
 import Data from '../display/data.js';
+import Binomial from '../math/binomial.js';
 
 
 export default function binomialDistributionGraph(p) {
@@ -12,8 +13,8 @@ export default function binomialDistributionGraph(p) {
 	// Global slider position
 	const sliderYPosition = 360
 	
-	let m
-	m = new Distribution()
+	let distributionMath = new Distribution()
+	let binomialMath = new Binomial()
 
 	p.setup = () => {
 
@@ -44,9 +45,13 @@ export default function binomialDistributionGraph(p) {
 		const nVal = nBar.value()
 		const pVal = pBar.value()
 
-		// Create labels for data display
-		dataDisplay.addLabel("μ", m.expectedValue(nVal, pVal))
-		dataDisplay.addLabel("σ", m.standardDeviation(nVal, pVal))
+		// Create labels for data 
+		
+		let sigma = distributionMath.standardDeviation(nVal, pVal)
+		let mu = distributionMath.expectedValue(nVal, pVal)
+
+		dataDisplay.addLabel("μ", mu)
+		dataDisplay.addLabel("σ", sigma)
 
 		// Display dataDisplay 
 		dataDisplay.display()
@@ -62,7 +67,7 @@ export default function binomialDistributionGraph(p) {
 		for (let i = 0; i < nVal; i++) {
 			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, p)
 
-			let currentPropability = m.bDistribution(nVal, pVal, i)
+			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
 			// Find the highest propability
 			if (currentPropability > highestProp && currentPropability <= 1) {
@@ -77,7 +82,7 @@ export default function binomialDistributionGraph(p) {
 		// Print bars and x-axis labeling
 		for (let i = 0; i < nVal; i++) {
 
-			let prop = m.bDistribution(nVal, pVal, i)
+			let prop = binomialMath.bDistribution(nVal, pVal, i)
 
 			// Calculate, set and display bar's hight
 			let absHeight = p.map(prop, 0, highestProp, 0, 200)

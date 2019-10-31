@@ -1,6 +1,4 @@
-import Distribution from "../binomial/math";
-
-export default class Normal extends Distribution {
+export default class Normal {
     
     solve = (x, sD, eV) => {
         // Calculate the coefficient 

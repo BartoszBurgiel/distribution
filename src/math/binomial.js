@@ -1,14 +1,23 @@
-import Distribution from "./distribution";
+export default class Binomial {
 
-export default class Binomial extends Distribution {
-    
     // calculate binomial distribution
     bDistribution = (n, p, k) => {
-        return super.binomialCoef(n, k) * Math.pow(p, k) * Math.pow((1 - p), n - k)
+        return this.binomialCoef(n, k) * Math.pow(p, k) * Math.pow((1 - p), n - k)
     }
     
     // calculate binomial coefficient
     binomialCoef = (n, k) => {
-        return super.factorial(n) / (super.factorial(k) * super.factorial(n - k))
+        return this.factorial(n) / (this.factorial(k) * this.factorial(n - k))
+    }
+
+    // get factiorial of a given integer
+    factorial = (n) => {
+        if (n === 1) {
+            return (1)
+        } else if (n === 0) {
+            return (0)
+        } else {
+            return (n * this.factorial(n - 1))
+        }
     }
 }
