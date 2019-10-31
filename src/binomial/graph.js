@@ -22,7 +22,7 @@ export default function binomialDistributionGraph(p) {
 		canvas = p.createCanvas(900, 400)
 
 		// Initialize slider
-		nBar = p.createSlider(0, 150)
+		nBar = p.createSlider(1, 150)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
 
 		// Set slider
@@ -70,25 +70,15 @@ export default function binomialDistributionGraph(p) {
 			if (currentPropability > highestProp && currentPropability <= 1) {
 				highestProp = currentPropability
 			}
+
+			let absHeight = p.map(currentPropability, 0, 0.6, 0, 200)
+			bars[i].height = absHeight
+			bars[i].display(p)
 		}
 
 
 		// Y-Axis - Label
 		p.text(Math.round(highestProp * 100) + '%', 20, 80)
-
-		// Print bars and x-axis labeling
-		for (let i = 0; i < nVal; i++) {
-
-			let prop = binomialMath.bDistribution(nVal, pVal, i)
-
-			// Calculate, set and display bar's hight
-			let absHeight = p.map(prop, 0, highestProp, 0, 200)
-			bars[i].height = absHeight
-			bars[i].display(p)
-
-			p.text(i + 1, 30 + ((600 * i / nVal) + (600 * (i + 1) / nVal)) / 2, 312.5)
-		}
-
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)

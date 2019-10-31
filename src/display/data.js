@@ -21,8 +21,8 @@ export default class Data {
 
         this.p.fill(0)
         this.p.textSize(24)
-        this.p.text("Werte", this.x+20, this.y+30)
-        this.p.textSize(12)
+        this.p.text("Info", this.x+20, this.y+30)
+        this.p.textSize(16)
 
         // Display labels
         let i = 0
@@ -33,6 +33,8 @@ export default class Data {
             this.p.text(key+' = '+Math.round(val*10000)/10000 , 20 + this.x, 60 + this.y + (this.height/this.labels.size) * i )
             i++
         }
+
+        this.p.textSize(12)
     }
 
     addLabel(key, val) {
