@@ -81,6 +81,7 @@ export default function binomialDistributionGraph(p) {
 
 			let absHeight = p.map(currentPropability, 0, 0.6, 0, 200)
 			bars[i].height = absHeight
+			bars[i].prop = currentPropability
 			bars[i].display(p)
 		}
 
