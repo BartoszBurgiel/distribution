@@ -15,8 +15,10 @@ export default class Normal {
     mostCommonValues = (sD, eV) => {
         let sum = 0
         
-        for(let i = (eV-sD); i<=(sD + eV); i+=0.05) {
-            sum += this.solve(i, sD, eV) * 0.05
+        const factor = 0.01
+
+        for(let i = (eV-sD); i<=(sD + eV); i+=factor) {
+            sum += this.solve(i, sD, eV) * factor
         }
 
         return sum

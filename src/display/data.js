@@ -35,9 +35,9 @@ export default class Data {
 
             // if Val is not a number 
             if (typeof val === 'number') {
-                this.p.text(key+' = '+Math.round(val*10000)/10000 , 20 + this.x, 60 + this.y + (this.height/this.labels.size) * i )
+                this.p.text(key+' = '+Math.round(val*10000)/10000 , 10 + this.x, 60 + this.y + (this.height/this.labels.size) * i )
             } else {                
-                this.p.text(key+' = '+val , 20 + this.x, 60 + this.y + (this.height/this.labels.size) * i)
+                this.p.text(key+' = '+val , 10 + this.x, 60 + this.y + (this.height/this.labels.size) * i)
             }
             
             i++

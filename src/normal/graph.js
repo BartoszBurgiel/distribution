@@ -21,7 +21,7 @@ export default function normalDistributionGraph(p) {
 		canvas = p.createCanvas(900, 400)
 
 		// Initialize slider
-		nBar = p.createSlider(1, 150)
+		nBar = p.createSlider(50, 500, 250)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
 
 		// Set slider
@@ -51,7 +51,7 @@ export default function normalDistributionGraph(p) {
 		dataDisplay.addLabel("μ", mu)
 		dataDisplay.addLabel("σ", sigma)
 		dataDisplay.addLabel("σ²", variace)
-		dataDisplay.addLabel("[μ±σ]", '['+(Math.round((mu-sigma)*1000)/1000)+':'+(Math.round((mu+sigma)*1000)/1000)+']')
+		dataDisplay.addLabel("[μ±σ]", '['+(Math.round((mu-sigma)*100)/100)+':'+(Math.round((mu+sigma)*100)/100)+']')
 		dataDisplay.addLabel("P[μ±σ])", mostCommomValues)
 
 		// Display dataDisplay 
@@ -60,16 +60,24 @@ export default function normalDistributionGraph(p) {
 		// Set fill back
 		p.fill(0)
 
+		let asd = 0
+
 		// plot function
-		for(let i = 0; i<600; i+=3) {
+		for(let i = 0; i<600; i++) {
 
 			let x1 = 30 + i
 			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
-			let x2 = 30 + i+3
-			let y2 = 300 - p.map(normalMath.solve(p.map(i+3, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
+			let x2 = 30 + i+1
+			let y2 = 300 - p.map(normalMath.solve(p.map(i+1, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
+
+			if (normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu) > asd) {
+				asd = normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu)
+			}
 
 			p.line(x1, y1, x2, y2)
 		}
+
+		p.text(asd, 40, 40)
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)
