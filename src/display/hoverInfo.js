@@ -11,13 +11,13 @@ export default class HoverInfo {
         // Check x-Axis
         if (this.p.mouseX >= 30 && this.p.mouseX <= 600) {
 
-            // check y-Axis
+            // Check y-Axis
             if (this.p.mouseY <= 300 && this.p.mouseY >= 200) {
 
-                // iterate over bars 
+                // Iterate over bars 
                 this.bars.forEach(element => {
 
-                    // check x-range
+                    // Check x-range
                     if (this.p.mouseX >= element.xPos && this.p.mouseX <= element.xPos + element.width) {
 
                         // Display only if hover over bar
@@ -29,6 +29,7 @@ export default class HoverInfo {
                             this.p.rect(550, 20, 100, 20)
 
                             this.p.fill(0)
+                            
                             // Label 
                             this.p.text('P(' + element.k + ') = ' + Math.round(element.prop * 10000) / 100 + '%', 560, 32.5)
                         }

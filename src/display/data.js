@@ -1,4 +1,4 @@
-// Data class will be used to create fields containing variables etc.
+// Data class will be used to create field showing given labels
 export default class Data {
     constructor(p, x, y, height, width) {
         this.p = p
@@ -12,6 +12,7 @@ export default class Data {
         this.labels = new Map()
     }
 
+    // Create rect showing all labels
     display () {
 
         // Background

@@ -57,8 +57,7 @@ export default function cumulatedBinomialDistributionGraph(p) {
 		p.fill(0)
 
 
-		// Highest propability
-		let highestProp = 0
+		// cumulated propability
 		let propSum = 0
 
 		// Generate bars
@@ -67,11 +66,6 @@ export default function cumulatedBinomialDistributionGraph(p) {
 			
 			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
-			// Find the highest propability for the map function
-			if (currentPropability > highestProp && currentPropability <= 1) {
-				highestProp = currentPropability
-			}
-
 			propSum += currentPropability
 	
 			// Calculate, set and display bar's hight
@@ -79,20 +73,6 @@ export default function cumulatedBinomialDistributionGraph(p) {
 			bars[i].height = absHeight
 			bars[i].display(p)
 		}
-
-
-		// Y-Axis - Label
-		p.text(Math.round(highestProp * 100) + '%', 20, 80)
-
-		// This variable represents the cumulated propability
-
-		// Print bars and x-axis labeling
-		for (let i = 1; i < nVal; i++) {
-
-
-			p.text(i + 1, 30 + ((600 * i / nVal) + (600 * (i + 1) / nVal)) / 2, 312.5)
-		}
-
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)

@@ -37,9 +37,6 @@ export default function normalDistributionGraph(p) {
 		// Reset screen
 		p.background(220, 0, 230)
 
-		// Array with all bars
-		let bars = []
-
 		// Get values from the sliders
 		const nVal = nBar.value()
 		const pVal = pBar.value()
@@ -62,25 +59,6 @@ export default function normalDistributionGraph(p) {
 
 		// Set fill back
 		p.fill(0)
-
-
-
-		// Highest propability
-		let highestProp = 0
-
-		// find the highest propability
-		for (let i = 0; i < nVal; i++) {
-			let currentPropability = normalMath.solve(nVal, pVal, i)
-
-			// Find the highest propability
-			if (currentPropability > highestProp && currentPropability <= 1) {
-				highestProp = currentPropability
-			}
-		}
-
-
-		// Y-Axis - Label
-		p.text(Math.round(highestProp * 100) + '%', 20, 80)
 
 		// plot function
 		for(let i = 0; i<600; i+=3) {

@@ -33,7 +33,6 @@ export default function binomialDistributionGraph(p) {
 
 		// Data class
 		dataDisplay = new Data(p, 700, 0, 400, 200)
-
 	}
 
 	p.draw = () => {
@@ -67,7 +66,6 @@ export default function binomialDistributionGraph(p) {
 		// Set fill back
 		p.fill(0)
 
-
 		// Highest propability
 		let highestProp = 0
 
@@ -90,11 +88,7 @@ export default function binomialDistributionGraph(p) {
 
 		// Hovering 
 		hoverInfo.bars = bars
-
 		hoverInfo.showHoverWindow()
-
-		// Y-Axis - Label
-		p.text(Math.round(highestProp * 100) + '%', 20, 80)
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)

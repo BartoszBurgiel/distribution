@@ -3,9 +3,6 @@ import P5Wrapper from 'react-p5-wrapper';
 import normalDistributionGraph from '../normal/graph.js';
 
 export default class NormalDistribution extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return (
