@@ -1,7 +1,6 @@
 import Distribution from '../math/distribution.js';
-import Bar from '../display/bar.js';
 import Data from '../display/data.js';
-import Binomial from '../math/binomial.js';
+import Normal from '../math/normal.js';
 
 
 export default function normalDistributionGraph(p) {
@@ -14,7 +13,7 @@ export default function normalDistributionGraph(p) {
 	const sliderYPosition = 360
 
 	let distributionMath = new Distribution()
-	let binomialMath = new Binomial()
+	let normalMath = new Normal()
 
 	p.setup = () => {
 
@@ -22,7 +21,7 @@ export default function normalDistributionGraph(p) {
 		canvas = p.createCanvas(900, 400)
 
 		// Initialize slider
-		nBar = p.createSlider(0, 150)
+		nBar = p.createSlider(1, 150)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
 
 		// Set slider
@@ -60,11 +59,9 @@ export default function normalDistributionGraph(p) {
 		// Highest propability
 		let highestProp = 0
 
-		// Generate bars
+		// find the highest propability
 		for (let i = 0; i < nVal; i++) {
-			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, p)
-
-			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
+			let currentPropability = normalMath.solve(nVal, pVal, i)
 
 			// Find the highest propability
 			if (currentPropability > highestProp && currentPropability <= 1) {
@@ -76,19 +73,20 @@ export default function normalDistributionGraph(p) {
 		// Y-Axis - Label
 		p.text(Math.round(highestProp * 100) + '%', 20, 80)
 
-		// Print bars and x-axis labeling
-		for (let i = 0; i < nVal; i++) {
+		// Temp Variables
+		let sD = distributionMath.standardDeviation(nVal, pVal)
+		let eV = distributionMath.expectedValue(nVal, pVal)
 
-			let prop = binomialMath.bDistribution(nVal, pVal, i)
+		// plot function
+		for(let i = 0; i<600; i+=3) {
 
-			// Calculate, set and display bar's hight
-			let absHeight = p.map(prop, 0, highestProp, 0, 200)
-			bars[i].height = absHeight
-			bars[i].display(p)
+			let x1 = 30 + i
+			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sD, eV), 0, 1, 0, 300)
+			let x2 = 30 + i+3
+			let y2 = 300 - p.map(normalMath.solve(p.map(i+3, 0, 600, 0, nVal), sD, eV), 0, 1, 0, 300)
 
-			p.text(i + 1, 30 + ((600 * i / nVal) + (600 * (i + 1) / nVal)) / 2, 312.5)
+			p.line(x1, y1, x2, y2)
 		}
-
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)

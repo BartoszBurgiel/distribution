@@ -9,10 +9,4 @@ export default class Normal {
 
         return coef * Math.pow(Math.E, power)
     }
-
-    plot = (x, sD, eV, n, width, height, xPos, yPos, p) => {
-        for(let i = 0; i<=n;i+=p.map(i, 0, n, 0, width)) {
-            p.line(p.map(i, 0, n, 0, width), p.map(this.solve(i, sD, eV), 0, 1, 0, height), p.map(i+1, 0, n, 0, width), p.map(this.solve(i+1, sD, eV), 0, 1, 0, height))
-        }
-    }
 }

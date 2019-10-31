@@ -7,7 +7,6 @@ const App = () => {
 	return (
 		<>
 			<BinomialDistribution></BinomialDistribution>
-			<br />
 			<NormalDistribution></NormalDistribution>
 		</>
 	);
