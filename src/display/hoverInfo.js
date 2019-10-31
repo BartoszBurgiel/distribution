@@ -9,10 +9,10 @@ export default class HoverInfo {
 
     showHoverWindow = () => {
         // Check x-Axis
-        if (this.p.mouseX >= 30 && this.p.mouseX <= 600) {
+        if (this.p.mouseX >= 30 && this.p.mouseX <= 700) {
 
             // Check y-Axis
-            if (this.p.mouseY <= 300 && this.p.mouseY >= 200) {
+            if (this.p.mouseY <= 300 && this.p.mouseY >= 100) {
 
                 // Iterate over bars 
                 this.bars.forEach(element => {

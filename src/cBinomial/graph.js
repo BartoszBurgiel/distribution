@@ -2,6 +2,7 @@ import Distribution from '../math/distribution.js';
 import Bar from '../display/bar.js';
 import Data from '../display/data.js';
 import Binomial from '../math/binomial.js';
+import HoverInfo from '../display/hoverInfo.js';
 
 
 export default function cumulatedBinomialDistributionGraph(p) {
@@ -15,6 +16,7 @@ export default function cumulatedBinomialDistributionGraph(p) {
 
 	let distributionMath = new Distribution()
 	let binomialMath = new Binomial()
+	let hoverInfo = new HoverInfo([], p)
 
 	p.setup = () => {
 
@@ -62,17 +64,21 @@ export default function cumulatedBinomialDistributionGraph(p) {
 
 		// Generate bars
 		for (let i = 1; i < nVal; i++) {
-			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0)
-			
 			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
+			
+			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
 
 			propSum += currentPropability
 	
 			// Calculate, set and display bar's hight
 			let absHeight = p.map(propSum, 0, 1, 0, 200)
 			bars[i].height = absHeight
+			bars[i].prop = propSum
 			bars[i].display(p)
 		}
+
+		hoverInfo.bars = bars
+		hoverInfo.showHoverWindow()
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)
