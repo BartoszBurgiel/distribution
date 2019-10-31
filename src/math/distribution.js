@@ -7,4 +7,9 @@ export default class Distribution {
     expectedValue = (n, p) => {
         return n * p
     }
+
+    variance = (n, p) => {
+        return Math.pow(this.standardDeviation(n, p), 2)
+    }
+
 }

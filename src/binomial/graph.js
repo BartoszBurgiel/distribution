@@ -5,14 +5,14 @@ import Binomial from '../math/binomial.js';
 
 
 export default function binomialDistributionGraph(p) {
-	
+
 	let canvas
 	let nBar, pBar
 	let dataDisplay
 
 	// Global slider position
 	const sliderYPosition = 360
-	
+
 	let distributionMath = new Distribution()
 	let binomialMath = new Binomial()
 
@@ -22,12 +22,12 @@ export default function binomialDistributionGraph(p) {
 		canvas = p.createCanvas(900, 400)
 
 		// Initialize slider
-		nBar = p.createSlider(0, 150)	
+		nBar = p.createSlider(0, 150)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
 
 		// Set slider
 		nBar.position(20, canvas.position().y + sliderYPosition)
-		pBar.position(700-pBar.width-20, canvas.position().y +sliderYPosition)
+		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
 
 		// Data class
 		dataDisplay = new Data(p, 700, 0, 400, 200)
@@ -45,13 +45,10 @@ export default function binomialDistributionGraph(p) {
 		const nVal = nBar.value()
 		const pVal = pBar.value()
 
-		// Create labels for data 
-		
-		let sigma = distributionMath.standardDeviation(nVal, pVal)
-		let mu = distributionMath.expectedValue(nVal, pVal)
-
-		dataDisplay.addLabel("μ", mu)
-		dataDisplay.addLabel("σ", sigma)
+		// Create labels for data 		
+		dataDisplay.addLabel("μ", distributionMath.expectedValue(nVal, pVal))
+		dataDisplay.addLabel("σ", distributionMath.standardDeviation(nVal, pVal))
+		dataDisplay.addLabel("σ²", distributionMath.variance(nVal, pVal))
 
 		// Display dataDisplay 
 		dataDisplay.display()
@@ -77,7 +74,7 @@ export default function binomialDistributionGraph(p) {
 
 
 		// Y-Axis - Label
-		p.text(Math.round(highestProp*100) + '%', 20, 80)
+		p.text(Math.round(highestProp * 100) + '%', 20, 80)
 
 		// Print bars and x-axis labeling
 		for (let i = 0; i < nVal; i++) {
@@ -89,13 +86,13 @@ export default function binomialDistributionGraph(p) {
 			bars[i].height = absHeight
 			bars[i].display(p)
 
-			p.text(i+1, 30 + ((600 * i / nVal) + (600 * (i+1) / nVal)) / 2, 312.5)
+			p.text(i + 1, 30 + ((600 * i / nVal) + (600 * (i + 1) / nVal)) / 2, 312.5)
 		}
 
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)
-		p.text('p = ' + Math.round(pVal*100)+'%', 700 - pBar.width - 20, sliderYPosition - 10)
+		p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
 	}
 
 	p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
@@ -105,7 +102,7 @@ export default function binomialDistributionGraph(p) {
 
 	// Make sure the sliders are in place
 	p.windowResized = () => {
-		nBar.position(20, canvas.position().y+ canvas.height+sliderYPosition)
-		pBar.position(700-pBar.width-20, canvas.position().y+sliderYPosition)
+		nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
+		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
 	}
 }
