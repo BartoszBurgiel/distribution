@@ -53,7 +53,7 @@ export default class HoverInfo {
 
                 this.p.fill(0)
                 // Label 
-                this.p.text('P(' + Math.round(x*100)/100+ ') = ' + Math.round(prop * 10000) / 100 + '%', 560, 32.5)
+                this.p.text('P(' + Math.round(x*100)/100+ ') = ' + Math.round(prop * 100000) / 1000 + '%', 560, 32.5)
             }
         }
     }
