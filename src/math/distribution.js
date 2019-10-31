@@ -11,5 +11,4 @@ export default class Distribution {
     variance = (n, p) => {
         return Math.pow(this.standardDeviation(n, p), 2)
     }
-
 }

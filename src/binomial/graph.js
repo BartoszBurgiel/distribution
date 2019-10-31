@@ -45,10 +45,18 @@ export default function binomialDistributionGraph(p) {
 		const nVal = nBar.value()
 		const pVal = pBar.value()
 
+		// temp Variables 
+		let mu = Math.ceil(distributionMath.expectedValue(nVal, pVal))
+		let sigma = distributionMath.standardDeviation(nVal, pVal)
+		let variace = distributionMath.variance(nVal, pVal)
+		let mostCommonValues = binomialMath.binomMostCommon(nVal, pVal, sigma, mu)
+
 		// Create labels for data 		
-		dataDisplay.addLabel("μ", distributionMath.expectedValue(nVal, pVal))
-		dataDisplay.addLabel("σ", distributionMath.standardDeviation(nVal, pVal))
-		dataDisplay.addLabel("σ²", distributionMath.variance(nVal, pVal))
+		dataDisplay.addLabel("μ", mu)
+		dataDisplay.addLabel("σ", sigma)
+		dataDisplay.addLabel("σ²", variace)
+		dataDisplay.addLabel("[μ±σ]", '['+Math.ceil(mu-sigma)+':'+Math.floor(mu + sigma)+']')
+		dataDisplay.addLabel("P([μ±σ])", mostCommonValues)
 
 		// Display dataDisplay 
 		dataDisplay.display()
@@ -62,7 +70,7 @@ export default function binomialDistributionGraph(p) {
 
 		// Generate bars
 		for (let i = 0; i < nVal; i++) {
-			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, p)
+			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0)
 
 			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 

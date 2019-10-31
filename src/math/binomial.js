@@ -20,4 +20,20 @@ export default class Binomial {
             return (n * this.factorial(n - 1))
         }
     }
+
+    // Calculates the cumulated propability of the most common values 
+    // -> expectedValue +/- standard deviation
+    binomMostCommon = (n, p, sD, eV) => {
+        let min = Math.ceil(eV - sD)
+        let max = Math.floor(eV + sD)
+
+        let sum = 0
+        
+        // Calculated the cumulated propability
+        for(let i = min; i<=max; i++) {
+            sum += this.bDistribution(n, p, i)
+        }
+
+        return sum
+    } 
 }

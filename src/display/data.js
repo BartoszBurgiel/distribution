@@ -28,9 +28,17 @@ export default class Data {
         let i = 0
 
         this.p.fill(0)
+
+        //Print all lables      
         for (let [key, val] of this.labels) {
-            //Print all lables      
-            this.p.text(key+' = '+Math.round(val*10000)/10000 , 20 + this.x, 60 + this.y + (this.height/this.labels.size) * i )
+
+            // if Val is not a number 
+            if (typeof val === 'number') {
+                this.p.text(key+' = '+Math.round(val*10000)/10000 , 20 + this.x, 60 + this.y + (this.height/this.labels.size) * i )
+            } else {                
+                this.p.text(key+' = '+val , 20 + this.x, 60 + this.y + (this.height/this.labels.size) * i)
+            }
+            
             i++
         }
 

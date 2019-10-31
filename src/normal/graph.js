@@ -44,16 +44,25 @@ export default function normalDistributionGraph(p) {
 		const nVal = nBar.value()
 		const pVal = pBar.value()
 
+		// temp Variables 
+		let mu = Math.ceil(distributionMath.expectedValue(nVal, pVal))
+		let sigma = distributionMath.standardDeviation(nVal, pVal)
+		let variace = distributionMath.variance(nVal, pVal)
+		let mostCommomValues = normalMath.mostCommonValues(sigma, mu)
+
 		// Create labels for data 		
-		dataDisplay.addLabel("μ", distributionMath.expectedValue(nVal, pVal))
-		dataDisplay.addLabel("σ", distributionMath.standardDeviation(nVal, pVal))
-		dataDisplay.addLabel("σ²", distributionMath.variance(nVal, pVal))
+		dataDisplay.addLabel("μ", mu)
+		dataDisplay.addLabel("σ", sigma)
+		dataDisplay.addLabel("σ²", variace)
+		dataDisplay.addLabel("[μ±σ]", '['+(Math.round((mu-sigma)*1000)/1000)+':'+(Math.round((mu+sigma)*1000)/1000)+']')
+		dataDisplay.addLabel("P[μ±σ])", mostCommomValues)
 
 		// Display dataDisplay 
 		dataDisplay.display()
 
 		// Set fill back
 		p.fill(0)
+
 
 
 		// Highest propability
@@ -73,17 +82,13 @@ export default function normalDistributionGraph(p) {
 		// Y-Axis - Label
 		p.text(Math.round(highestProp * 100) + '%', 20, 80)
 
-		// Temp Variables
-		let sD = distributionMath.standardDeviation(nVal, pVal)
-		let eV = distributionMath.expectedValue(nVal, pVal)
-
 		// plot function
 		for(let i = 0; i<600; i+=3) {
 
 			let x1 = 30 + i
-			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sD, eV), 0, 1, 0, 300)
+			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
 			let x2 = 30 + i+3
-			let y2 = 300 - p.map(normalMath.solve(p.map(i+3, 0, 600, 0, nVal), sD, eV), 0, 1, 0, 300)
+			let y2 = 300 - p.map(normalMath.solve(p.map(i+3, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
 
 			p.line(x1, y1, x2, y2)
 		}

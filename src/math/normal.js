@@ -9,4 +9,16 @@ export default class Normal {
 
         return coef * Math.pow(Math.E, power)
     }
+
+    // Calculates the cumulated propability of the most common values 
+    // -> expectedValue +/- standard deviation
+    mostCommonValues = (sD, eV) => {
+        let sum = 0
+        
+        for(let i = (eV-sD); i<=(sD + eV); i+=0.05) {
+            sum += this.solve(i, sD, eV) * 0.05
+        }
+
+        return sum
+    }
 }
