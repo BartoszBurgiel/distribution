@@ -1,20 +1,15 @@
 export default class Bar {
 
     constructor(xPos, yPos, width, height) {
-        this.position = {
-            x = xPos,
-            y = yPos 
-        }
-
-        this.dimensions = {
-            width,
-            height
-        }
+        this.xPos = xPos
+        this.yPos = yPos
+        this.width = width
+        this.height = height
     }
 
     display(p) {
         p.fill(255)
-        p.rect(this.position.x, this.position.y, this.dimensions.width, -this.dimensions.height)
+        p.rect(this.xPos, this.yPos, this.width, -this.height)
         p.fill(0)
     }
 }
