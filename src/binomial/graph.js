@@ -11,6 +11,7 @@ export default function binomialDistributionGraph(p) {
 	let canvas
 	let nBar, pBar
 	let dataDisplay
+	let yRange = 1
 
 	// Global slider position
 	const sliderYPosition = 360
@@ -76,7 +77,7 @@ export default function binomialDistributionGraph(p) {
 			highestProp = binomialMath.bDistribution(nVal, pVal, Math.ceil(mu))
 		}
 
-		labeling.labelYAxis(50, 30, 600, 300, highestProp, 1)
+		labeling.labelYAxis(50, 30, 600, 300, highestProp, yRange)
 
 		// Generate bars
 		for (let i = 0; i < nVal; i++) {
@@ -85,7 +86,7 @@ export default function binomialDistributionGraph(p) {
 			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
 			// 300 - 30 because of the xPos margin
-			let absHeight = p.map(currentPropability, 0, 1, 0, 300-30)
+			let absHeight = p.map(currentPropability, 0, yRange, 0, 300-30)
 			bars[i].height = absHeight
 			bars[i].prop = currentPropability
 			bars[i].display(p)
