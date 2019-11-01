@@ -5,7 +5,7 @@ export default class Labeling {
     }
 
     xAxisNormal = (xPos, yPos, width, range) => {
-        this.p.line(xPos, yPos, xPos+width, yPos)
+        this.p.line(xPos, yPos, xPos + width, yPos)
 
 
         for (let i = 0; i < range; i++) {
@@ -33,7 +33,7 @@ export default class Labeling {
 
     xAxisNormalSteps = (range, n, width, i) => {
         return this.p.map(((range / n) / width) * this.p.map(i, 0, range, 0, width), 0, range / n, 0, width)
-    } 
+    }
 
     labelXAxis = (n, i, xPos, yPos) => {
         // Display bar's label
@@ -67,34 +67,28 @@ export default class Labeling {
         this.p.strokeWeight(1)
 
         // Upper bond label 
-        this.p.text(Math.round(yRange*100)+'%', xPos - 45, yPos + 10)
-        
-        // Highest propability stamp
-        let maxPropPos = yPos + height - this.p.map(maxProp, 0, yRange, yPos, height)
-        this.p.text(Math.round(maxProp * 1000) / 10 + '%', xPos - 45, maxPropPos)
-
-        if (maxProp > 0.2) {
-            // Marking line
-            this.p.strokeWeight(0.5)
-            this.p.line(xPos, maxPropPos, xPos + width, maxPropPos)
-            this.p.strokeWeight(1)
-        }
+        this.p.text(Math.round(yRange * 100) + '%', xPos - 45, yPos + 10)
 
         // Add inbetween steps
-        if (maxProp > 0.2 && maxProp < 0.4) {
-            this.inbetweenSteps(xPos, width, height, 3, maxProp, maxPropPos)
+        if (maxProp <= 0.2) {
+            this.inbetweenSteps(xPos, width, height, 2, yRange, yPos + 10)
+        } else if (maxProp > 0.2 && maxProp < 0.4) {
+            this.inbetweenSteps(xPos, width, height, 3, yRange, yPos + 10)
         } else if (maxProp >= 0.4 && maxProp < 0.6) {
-            this.inbetweenSteps(xPos, width, height, 4, maxProp, maxPropPos)
+            this.inbetweenSteps(xPos, width, height, 4, yRange, yPos + 10)
         } else if (maxProp >= 0.6) {
-            this.inbetweenSteps(xPos, width, height, 5, maxProp, maxPropPos)
+            this.inbetweenSteps(xPos, width, height, 5, yRange, yPos + 10)
+        } else if (maxProp > 0.6) {
+            this.inbetweenSteps(xPos, width, height, 6, yRange, yPos + 10)
         }
     }
 
-    inbetweenSteps = (xPos, width, height, n, maxProp, maxPropPos) => {
+    inbetweenSteps = (xPos, width, height, n, yRange, upperBond) => {
         for (let i = 0; i < n; i++) {
             // Propability of the step
-            let stepProp = Math.round(this.p.map(i, 0, n, 0, maxProp) * 1000) / 10
-            let stepPropPos = this.p.map(i, 0, n, height, maxPropPos)
+            let stepProp = Math.round(this.p.map(i, 0, n, 0, yRange) * 1000) / 10
+            let stepPropPos = this.p.map(i, 0, n, height, upperBond)
+
             // Percentage labels
             this.p.text(stepProp + '%', xPos - 45, stepPropPos)
 
