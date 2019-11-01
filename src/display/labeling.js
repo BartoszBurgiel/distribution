@@ -11,21 +11,21 @@ export default class Labeling {
         for (let i = 0; i < range; i++) {
 
             if (range < 250) {
-                
+
                 // Display every tenth
                 if (i % 25 === 0) {
-                    this.p.text(i, xPos - 8 + this.p.map(((range/25)/width) * this.p.map(i, 0, range, 0, width), 0, range/25, 0, width), yPos+20)
+                    this.p.text(i, xPos - 8 + this.p.map(((range / 25) / width) * this.p.map(i, 0, range, 0, width), 0, range / 25, 0, width), yPos + 20)
                 }
             } else if (range < 500) {
 
                 // Display every 25-th
                 if (i % 50 === 0) {
-                    this.p.text(i, xPos - 8 + this.p.map(((range/50)/width) * this.p.map(i, 0, range, 0, width), 0, range/50, 0, width), yPos+20)
+                    this.p.text(i, xPos - 8 + this.p.map(((range / 50) / width) * this.p.map(i, 0, range, 0, width), 0, range / 50, 0, width), yPos + 20)
                 }
             } else {
                 // Display every 50-th
                 if (i % 100 === 0) {
-                    this.p.text(i, xPos - 8 + this.p.map(((range/100)/width) * this.p.map(i, 0, range, 0, width), 0, range/100, 0, width), yPos+20)
+                    this.p.text(i, xPos - 8 + this.p.map(((range / 100) / width) * this.p.map(i, 0, range, 0, width), 0, range / 100, 0, width), yPos + 20)
                 }
             }
         }
@@ -47,6 +47,11 @@ export default class Labeling {
 
             // Display every fifth
             if (i % 5 === 0) {
+                this.p.text(i, xPos - 4, yPos)
+            }
+        } else {
+            // Display every tenth
+            if (i % 10 === 0) {
                 this.p.text(i, xPos - 4, yPos)
             }
         }
