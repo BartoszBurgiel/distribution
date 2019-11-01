@@ -3,6 +3,7 @@ import Bar from '../display/bar.js';
 import Data from '../display/data.js';
 import Binomial from '../math/binomial.js';
 import HoverInfo from '../display/hoverInfo.js';
+import Labeling from '../display/labeling.js';
 
 
 export default function binomialDistributionGraph(p) {
@@ -17,6 +18,7 @@ export default function binomialDistributionGraph(p) {
 	let distributionMath = new Distribution()
 	let binomialMath = new Binomial()
 	let hoverInfo = new HoverInfo([], p)
+	let labeling = new Labeling(p)
 
 	p.setup = () => {
 
@@ -85,23 +87,11 @@ export default function binomialDistributionGraph(p) {
 			bars[i].prop = currentPropability
 			bars[i].display(p)
 
-			// Display bar's label
-			if (nVal < 40) {
-				if (i > 9) {
-					p.text(i, bars[i].xPos + bars[i].width/2 -4, bars[i].yPos+20)
-				} else {					
-					p.text(i, bars[i].xPos + bars[i].width/2, bars[i].yPos+20)
-				}
-			} else if (nVal < 100) {
-				if (i % 5 === 0) {					
-					p.text(i, bars[i].xPos + bars[i].width/2 -4, bars[i].yPos+20)
-				}
-			} else {
-				if (i % 10 === 0) {					
-					p.text(i, bars[i].xPos + bars[i].width/2 -8, bars[i].yPos+20)
-				}
-			}
+			labeling.labelXAxis(nVal, i, bars[i])
+
 		}
+
+		// Display
 
 		// Hovering 
 		hoverInfo.bars = bars
