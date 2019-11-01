@@ -68,15 +68,18 @@ export default function normalDistributionGraph(p) {
 		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
 		labeling.labelYAxis(50, 30, 600, 300, highestPropability)
 
+		// highestPropability + highestPropability / 3
+		let yAxisUpperLimit = (4 *highestPropability)/3
+
 		let sublines = 600
 
 		// plot function
 		for(let i = 0; i<sublines; i++) {
 
 			let x1 = 50 + i
-			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
+			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu), 0, yAxisUpperLimit, 0, 300)
 			let x2 = 50 + i+1
-			let y2 = 300 - p.map(normalMath.solve(p.map(i+1, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
+			let y2 = 300 - p.map(normalMath.solve(p.map(i+1, 0, 600, 0, nVal), sigma, mu), 0, yAxisUpperLimit, 0, 300)
 
 			p.line(x1, y1, x2, y2)
 		}
