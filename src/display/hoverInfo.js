@@ -45,7 +45,7 @@ export default class HoverInfo {
         if (this.p.mouseX >= 50 && this.p.mouseX <= 650) {
 
             // Check y-Axis
-            if (this.p.mouseY <= 300 && this.p.mouseY >= 100) {
+            if (this.p.mouseY <= 300 && this.p.mouseY >= 30) {
                 this.p.fill(255)
 
                 // Draw window
