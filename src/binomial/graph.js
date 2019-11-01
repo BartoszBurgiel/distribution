@@ -40,7 +40,7 @@ export default function binomialDistributionGraph(p) {
 	p.draw = () => {
 
 		// Reset screen
-		p.background(220, 0, 230)
+		p.background(250)
 
 		// Array with all bars
 		let bars = []
