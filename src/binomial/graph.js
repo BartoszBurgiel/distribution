@@ -50,7 +50,7 @@ export default function binomialDistributionGraph(p) {
 		const pVal = pBar.value()
 
 		// temp Variables 
-		let mu = Math.ceil(distributionMath.expectedValue(nVal, pVal))
+		let mu = distributionMath.expectedValue(nVal, pVal)
 		let sigma = distributionMath.standardDeviation(nVal, pVal)
 		let variace = distributionMath.variance(nVal, pVal)
 		let mostCommonValues = binomialMath.binomMostCommon(nVal, pVal, sigma, mu)
@@ -69,7 +69,12 @@ export default function binomialDistributionGraph(p) {
 		p.fill(0)
 
 		// Highest propability
-		let highestProp = binomialMath.bDistribution(nVal, pVal, Math.ceil(nVal*pVal))
+		let highestProp = binomialMath.bDistribution(nVal, pVal, Math.floor(mu))
+
+		if (binomialMath.bDistribution(nVal, pVal, Math.ceil(mu)) > highestProp) {
+			highestProp = binomialMath.bDistribution(nVal, pVal, Math.ceil(mu))
+		}
+
 		labeling.labelYAxis(50, 30, 600, 300, highestProp)
 
 		// Generate bars
