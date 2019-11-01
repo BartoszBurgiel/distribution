@@ -14,24 +14,26 @@ export default class Labeling {
 
                 // Display every tenth
                 if (i % 25 === 0) {
-                    this.p.text(i, xPos - 8 + this.p.map(((range / 25) / width) * this.p.map(i, 0, range, 0, width), 0, range / 25, 0, width), yPos + 20)
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
                 }
             } else if (range < 500) {
 
                 // Display every 25-th
                 if (i % 50 === 0) {
-                    this.p.text(i, xPos - 8 + this.p.map(((range / 50) / width) * this.p.map(i, 0, range, 0, width), 0, range / 50, 0, width), yPos + 20)
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 50, width, i), yPos + 20)
                 }
             } else {
                 // Display every 50-th
                 if (i % 100 === 0) {
-                    this.p.text(i, xPos - 8 + this.p.map(((range / 100) / width) * this.p.map(i, 0, range, 0, width), 0, range / 100, 0, width), yPos + 20)
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 100, width, i), yPos + 20)
                 }
             }
         }
     }
 
-
+    xAxisNormalSteps = (range, n, width, i) => {
+        return this.p.map(((range / n) / width) * this.p.map(i, 0, range, 0, width), 0, range / n, 0, width)
+    } 
 
     labelXAxis = (n, i, xPos, yPos) => {
         // Display bar's label
