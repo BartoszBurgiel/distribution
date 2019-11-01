@@ -29,7 +29,7 @@ export default class Labeling {
         }
     }
 
-    labelYAxis = (xPos, yPos, height, maxProp) => {
+    labelYAxis = (xPos, yPos, width, height, maxProp) => {
         
         // Axis line
         this.p.strokeWeight(1.5)
@@ -40,29 +40,38 @@ export default class Labeling {
         this.p.text('100%', xPos - 45 , yPos + 10)
 
         // Highest propability stamp
-
         let maxPropPos = yPos + height-this.p.map(maxProp, 0, 1, yPos, height)
         this.p.text(Math.round(maxProp * 1000) / 10+'%', xPos - 45, maxPropPos)
 
+        if (maxProp > 0.2) {
+            // Marking line
+            this.p.strokeWeight(0.5)
+            this.p.line(xPos, maxPropPos, xPos + width, maxPropPos)
+            this.p.strokeWeight(1)
+        }
+
         // Add inbetween steps
         if (maxProp > 0.2 && maxProp < 0.4) {
-            this.inbetweenSteps(xPos, yPos, height, 3, maxProp, maxPropPos)
+            this.inbetweenSteps(xPos, width, height, 3, maxProp, maxPropPos)
         } else if (maxProp >= 0.4 && maxProp < 0.6) {            
-            this.inbetweenSteps(xPos, yPos, height, 4, maxProp, maxPropPos)
+            this.inbetweenSteps(xPos, width, height, 4, maxProp, maxPropPos)
         } else if (maxProp >= 0.6) {            
-            this.inbetweenSteps(xPos, yPos, height, 5, maxProp, maxPropPos)
+            this.inbetweenSteps(xPos, width, height, 5, maxProp, maxPropPos)
         }
     }
     
-    inbetweenSteps = (xPos, yPos, height, n, maxProp, maxPropPos) => {
+    inbetweenSteps = (xPos, width, height, n, maxProp, maxPropPos) => {
         for(let i = 0; i<n;i++) {
             // Propability of the step
             let stepProp = Math.round(this.p.map(i, 0, n, 0, maxProp) * 1000)/10
-
+            let stepPropPos = this.p.map(i, 0, n, height, maxPropPos)
             // Percentage labels
-            this.p.text(stepProp + '%', xPos-45, this.p.map(i, 0, n, height, maxPropPos))
+            this.p.text(stepProp + '%', xPos-45, stepPropPos)
             
             // Lines
+            this.p.strokeWeight(0.5)
+            this.p.line(xPos, stepPropPos, xPos + width, stepPropPos)
+            this.p.strokeWeight(1)
         }
     }
 }

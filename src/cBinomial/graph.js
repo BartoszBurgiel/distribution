@@ -40,7 +40,7 @@ export default function cumulatedBinomialDistributionGraph(p) {
 	p.draw = () => {
 
 		// Reset screen
-		p.background(250)
+		p.background(240)
 
 		// Array with all bars
 		let bars = []

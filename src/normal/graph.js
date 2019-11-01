@@ -37,7 +37,7 @@ export default function normalDistributionGraph(p) {
 	p.draw = () => {
 
 		// Reset screen
-		p.background(250)
+		p.background(240)
 
 		// Get values from the sliders
 		const nVal = nBar.value()
