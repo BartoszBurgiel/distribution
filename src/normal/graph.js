@@ -8,7 +8,7 @@ import Labeling from '../display/labeling.js';
 export default function normalDistributionGraph(p) {
 
 	let canvas
-	let nBar, pBar
+	let nBar, pBar, yRangeBar
 	let dataDisplay
 	let yRange = 1
 
@@ -28,10 +28,12 @@ export default function normalDistributionGraph(p) {
 		// Initialize slider
 		nBar = p.createSlider(100, 1000, 500)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
+		yRangeBar = p.createSlider(0.01, 0.99, yRange, 0.01)
 
 		// Set slider
 		nBar.position(20, canvas.position().y + sliderYPosition)
 		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+		yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
 
 		// Data class
 		dataDisplay = new Data(p, 700, 0, 400, 200)
@@ -54,6 +56,13 @@ export default function normalDistributionGraph(p) {
 
 		// Highest propability
 		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
+
+		if(highestPropability >= yRangeBar.value()) {
+			yRange = 5*highestPropability/4
+		} else {
+			yRange = yRangeBar.value()
+		}
+
 		labeling.labelYAxis(50, 30, 600, 300, highestPropability, yRange)
 
 		// Create labels for data 		
@@ -91,6 +100,7 @@ export default function normalDistributionGraph(p) {
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)
 		p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
+		p.text('yRange = ' + Math.round(yRange * 100) + '%', 700 / 2 - pBar.width / 2, sliderYPosition - 10)
 	}
 
 	p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
@@ -102,5 +112,6 @@ export default function normalDistributionGraph(p) {
 	p.windowResized = () => {
 		nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
 		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+		yRangeBar.position(700 / 2 - pBar.width / 2, canvas.position().y + sliderYPosition)
 	}
 }

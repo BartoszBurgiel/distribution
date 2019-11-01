@@ -30,7 +30,7 @@ export default function binomialDistributionGraph(p) {
 		// Initialize slider
 		nBar = p.createSlider(1, 150)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
-		yRangeBar = p.createSlider(0.01, 0.99, yRange, 0.01)
+		yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
 
 		// Set slider
 		nBar.position(20, canvas.position().y + sliderYPosition)
