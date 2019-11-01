@@ -59,7 +59,7 @@ export default class Labeling {
         }
     }
 
-    labelYAxis = (xPos, yPos, width, height, maxProp) => {
+    labelYAxis = (xPos, yPos, width, height, maxProp, yRange) => {
 
         // Axis line
         this.p.strokeWeight(1.5)
@@ -67,10 +67,10 @@ export default class Labeling {
         this.p.strokeWeight(1)
 
         // Upper bond label 
-        this.p.text('100%', xPos - 45, yPos + 10)
+        this.p.text(yRange*100+'%', xPos - 45, yPos + 10)
 
         // Highest propability stamp
-        let maxPropPos = yPos + height - this.p.map(maxProp, 0, 1, yPos, height)
+        let maxPropPos = yPos + height - this.p.map(maxProp, 0, yRange, yPos, height)
         this.p.text(Math.round(maxProp * 1000) / 10 + '%', xPos - 45, maxPropPos)
 
         if (maxProp > 0.2) {
