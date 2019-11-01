@@ -4,31 +4,42 @@ export default class Labeling {
         this.p = p
     }
 
-    labelXAxis = (n, i, bar) => {
+    labelXAxis = (n, i, xPos, yPos) => {
         // Display bar's label
         if (n < 40) {
 
             // If bigger than 9 adjust -> 2 digits are wider -> misaligment
             if (i > 9) {
-                this.p.text(i, bar.xPos + bar.width / 2 - 4, bar.yPos + 20)
+                this.p.text(i, xPos - 4, yPos)
             } else {
-                this.p.text(i, bar.xPos + bar.width / 2, bar.yPos + 20)
+                this.p.text(i, xPos, yPos)
             }
-        } else if (n < 100) {
+        } else if (n < 99) {
 
             // Display every fifth
             if (i % 5 === 0) {
-                this.p.text(i, bar.xPos + bar.width / 2 - 4, bar.yPos + 20)
+                this.p.text(i, xPos - 4, yPos)
             }
-        } else {
+        } else if (n < 250) {
 
             // Display every tenth
             if (i % 10 === 0) {
-                this.p.text(i, bar.xPos + bar.width / 2 - 8, bar.yPos + 20)
+                this.p.text(i, xPos - 8, yPos)
+            }
+        } else if (n < 500) {
+
+            // Display every 25-th
+            if (i % 25 === 0) {
+                this.p.text(i, xPos - 8, yPos)
+            }
+        } else {
+            // Display every 50-th
+            if (i % 50 === 0) {
+                this.p.text(i, xPos - 8, yPos)
             }
         }
     }
-    
+
     labelYAxis = (xPos, yPos, width, height, maxProp) => {
         
         // Axis line

@@ -89,7 +89,7 @@ export default function binomialDistributionGraph(p) {
 			bars[i].prop = currentPropability
 			bars[i].display(p)
 
-			labeling.labelXAxis(nVal, i, bars[i])
+			labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width/2, bars[i].yPos + 20)
 		}
 
 

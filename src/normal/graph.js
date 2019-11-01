@@ -25,7 +25,7 @@ export default function normalDistributionGraph(p) {
 		canvas = p.createCanvas(900, 400)
 
 		// Initialize slider
-		nBar = p.createSlider(50, 500, 250)
+		nBar = p.createSlider(100, 1000, 500)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
 
 		// Set slider
@@ -68,8 +68,10 @@ export default function normalDistributionGraph(p) {
 		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
 		labeling.labelYAxis(50, 30, 600, 300, highestPropability)
 
+		let sublines = 600
+
 		// plot function
-		for(let i = 0; i<600; i++) {
+		for(let i = 0; i<sublines; i++) {
 
 			let x1 = 50 + i
 			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
@@ -77,8 +79,12 @@ export default function normalDistributionGraph(p) {
 			let y2 = 300 - p.map(normalMath.solve(p.map(i+1, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
 
 			p.line(x1, y1, x2, y2)
-		}
 
+			let labelxPos = p.map(((nVal/10) / sublines) * i, 0, nVal/10, 0, sublines)
+
+			labeling.labelXAxis(nVal, Math.round(p.map(i, 0, sublines, 0, nVal)), 50 + labelxPos, 300 + 20)
+		}
+		
 		let hoverMousePos = p.map(p.mouseX, 50, 650, 0, nVal)
 		hoverInfo.showHoverWindowNormal(hoverMousePos, normalMath.solve(hoverMousePos, sigma, mu))
 

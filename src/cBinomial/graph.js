@@ -78,7 +78,7 @@ export default function cumulatedBinomialDistributionGraph(p) {
 			bars[i].prop = propSum
 			bars[i].display(p)
 
-			labeling.labelXAxis(nVal, i, bars[i])
+			labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width/2, bars[i].yPos + 20)
 		}
 
 		hoverInfo.bars = bars
