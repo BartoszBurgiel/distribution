@@ -2,6 +2,7 @@ import Distribution from '../math/distribution.js';
 import Data from '../display/data.js';
 import Normal from '../math/normal.js';
 import HoverInfo from '../display/hoverInfo.js'
+import Labeling from '../display/labeling.js';
 
 
 export default function normalDistributionGraph(p) {
@@ -16,6 +17,7 @@ export default function normalDistributionGraph(p) {
 	let distributionMath = new Distribution()
 	let normalMath = new Normal()
 	let hoverInfo = new HoverInfo([], p)
+	let labeling = new Labeling(p)
 
 	p.setup = () => {
 
@@ -62,27 +64,23 @@ export default function normalDistributionGraph(p) {
 		// Set fill back
 		p.fill(0)
 
-		let asd = 0
+		// Highest propability
+		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
+		labeling.labelYAxis(50, 30, 600, 300, highestPropability)
 
 		// plot function
 		for(let i = 0; i<600; i++) {
 
-			let x1 = 30 + i
+			let x1 = 50 + i
 			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
-			let x2 = 30 + i+1
+			let x2 = 50 + i+1
 			let y2 = 300 - p.map(normalMath.solve(p.map(i+1, 0, 600, 0, nVal), sigma, mu), 0, 1, 0, 300)
-
-			if (normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu) > asd) {
-				asd = normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu)
-			}
 
 			p.line(x1, y1, x2, y2)
 		}
 
-		let hoverMousePos = p.map(p.mouseX, 30, 630, 0, nVal)
+		let hoverMousePos = p.map(p.mouseX, 50, 650, 0, nVal)
 		hoverInfo.showHoverWindowNormal(hoverMousePos, normalMath.solve(hoverMousePos, sigma, mu))
-
-		p.text(asd, 40, 40)
 
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)
