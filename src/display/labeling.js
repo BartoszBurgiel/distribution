@@ -28,7 +28,7 @@ export default class Labeling {
             }
         }
     }
-
+    
     labelYAxis = (xPos, yPos, width, height, maxProp) => {
         
         // Axis line

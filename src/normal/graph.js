@@ -46,7 +46,7 @@ export default function normalDistributionGraph(p) {
 		const pVal = pBar.value()
 
 		// temp Variables 
-		let mu = Math.ceil(distributionMath.expectedValue(nVal, pVal))
+		let mu = distributionMath.expectedValue(nVal, pVal)
 		let sigma = distributionMath.standardDeviation(nVal, pVal)
 		let variace = distributionMath.variance(nVal, pVal)
 		let mostCommomValues = normalMath.mostCommonValues(sigma, mu)
