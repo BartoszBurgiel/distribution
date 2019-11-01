@@ -3,6 +3,7 @@ import Bar from '../display/bar.js';
 import Data from '../display/data.js';
 import Binomial from '../math/binomial.js';
 import HoverInfo from '../display/hoverInfo.js';
+import Labeling from '../display/labeling.js';
 
 
 export default function cumulatedBinomialDistributionGraph(p) {
@@ -17,6 +18,7 @@ export default function cumulatedBinomialDistributionGraph(p) {
 	let distributionMath = new Distribution()
 	let binomialMath = new Binomial()
 	let hoverInfo = new HoverInfo([], p)
+	let labeling = new Labeling(p)
 
 	p.setup = () => {
 
@@ -75,6 +77,8 @@ export default function cumulatedBinomialDistributionGraph(p) {
 			bars[i].height = absHeight
 			bars[i].prop = propSum
 			bars[i].display(p)
+
+			labeling.labelXAxis(nVal, i, bars[i])
 		}
 
 		hoverInfo.bars = bars

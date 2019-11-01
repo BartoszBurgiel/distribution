@@ -29,7 +29,17 @@ export default class Labeling {
         }
     }
 
-    labelYAxis = (maxProp) => {
-        // Axis line 
+    labelYAxis = (xPos, yPos, height, maxProp) => {
+        
+        // Axis line
+        this.p.strokeWeight(1.5)
+        this.p.line(xPos, yPos,xPos, height)
+        this.p.strokeWeight(1)
+
+        // Upper bond label 
+        this.p.text('100%', xPos - 45 , yPos + 10)
+
+        // Highest propability stamp
+        this.p.text(Math.round(maxProp * 1000) / 10+'%', xPos - 45, yPos + height-this.p.map(maxProp, 0, 1, yPos, height))
     }
 }
