@@ -9,9 +9,8 @@ import Labeling from '../display/labeling.js';
 export default function binomialDistributionGraph(p) {
 
 	let canvas
-	let nBar, pBar
+	let nBar, pBar, yRangeBar
 	let dataDisplay
-	let yRange = 1
 
 	// Global slider position
 	const sliderYPosition = 360
@@ -29,16 +28,20 @@ export default function binomialDistributionGraph(p) {
 		// Initialize slider
 		nBar = p.createSlider(1, 150)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
+		yRangeBar = p.createSlider(0.01, 0.99, 1, 0.01)
 
 		// Set slider
 		nBar.position(20, canvas.position().y + sliderYPosition)
 		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+		yRangeBar.position(700/2 - yRangeBar.width/2, canvas.position().y + sliderYPosition)
 
 		// Data class
 		dataDisplay = new Data(p, 700, 0, 400, 200)
 	}
 
 	p.draw = () => {
+
+		let yRange = yRangeBar.value()
 
 		// Reset screen
 		p.background(240)
@@ -102,6 +105,7 @@ export default function binomialDistributionGraph(p) {
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)
 		p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
+		p.text('yRange = ' + Math.round(yRange * 100) + '%', 700/2 - pBar.width/2, sliderYPosition - 10)
 	}
 
 	p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
@@ -113,5 +117,6 @@ export default function binomialDistributionGraph(p) {
 	p.windowResized = () => {
 		nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
 		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+		yRangeBar.position(700/2 - pBar.width/2, canvas.position().y + sliderYPosition)
 	}
 }
