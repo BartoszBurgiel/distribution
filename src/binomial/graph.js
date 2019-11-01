@@ -88,10 +88,7 @@ export default function binomialDistributionGraph(p) {
 			bars[i].display(p)
 
 			labeling.labelXAxis(nVal, i, bars[i])
-
 		}
-
-		// Display
 
 		// Hovering 
 		hoverInfo.bars = bars
