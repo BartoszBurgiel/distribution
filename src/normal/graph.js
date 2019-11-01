@@ -53,7 +53,7 @@ export default function normalDistributionGraph(p) {
 
 		// Highest propability
 		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
-		labeling.labelYAxis(50, 30, 600, 300, highestPropability)
+		labeling.labelYAxis(50, 30, 600, 300, highestPropability, 0.5)
 
 		// Create labels for data 		
 		dataDisplay.addLabel("μ", mu)
@@ -68,13 +68,6 @@ export default function normalDistributionGraph(p) {
 
 		// Set fill back
 		p.fill(0)
-
-<<<<<<< HEAD
-=======
-		// Highest propability
-		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
-		labeling.labelYAxis(50, 30, 600, 300, highestPropability, 0.5)
->>>>>>> normalRescale
 
 		let sublines = 600
 
