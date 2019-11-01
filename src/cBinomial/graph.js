@@ -68,7 +68,7 @@ export default function cumulatedBinomialDistributionGraph(p) {
 		for (let i = 0; i < nVal; i++) {
 			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 			
-			bars[i] = new Bar(30 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
+			bars[i] = new Bar(50 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
 
 			propSum += currentPropability
 
