@@ -5,7 +5,7 @@ export default class Labeling {
     }
 
     xAxisNormal = (xPos, yPos, width, range) => {
-        this.p.line(xPos, yPos, width, yPos)
+        this.p.line(xPos, yPos, xPos+width, yPos)
 
 
         for (let i = 0; i < range; i++) {

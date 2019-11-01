@@ -10,6 +10,7 @@ export default function normalDistributionGraph(p) {
 	let canvas
 	let nBar, pBar
 	let dataDisplay
+	let yRange = 1
 
 	// Global slider position
 	const sliderYPosition = 360
@@ -53,7 +54,7 @@ export default function normalDistributionGraph(p) {
 
 		// Highest propability
 		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
-		labeling.labelYAxis(50, 30, 600, 300, highestPropability, 0.5)
+		labeling.labelYAxis(50, 30, 600, 300, highestPropability, yRange)
 
 		// Create labels for data 		
 		dataDisplay.addLabel("μ", mu)
@@ -75,9 +76,9 @@ export default function normalDistributionGraph(p) {
 		for(let i = 0; i<sublines; i++) {
 
 			let x1 = 50 + i
-			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu), 0, 0.5, 0, 300)
+			let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu), 0, yRange, 0, 300-30)
 			let x2 = 50 + i+1
-			let y2 = 300 - p.map(normalMath.solve(p.map(i+1, 0, 600, 0, nVal), sigma, mu), 0, 0.5, 0, 300)
+			let y2 = 300 - p.map(normalMath.solve(p.map(i + 1, 0, 600, 0, nVal), sigma, mu), 0, yRange, 0, 300-30)
 
 			p.line(x1, y1, x2, y2)
 		}
