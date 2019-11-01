@@ -51,8 +51,13 @@ export default function normalDistributionGraph(p) {
 		let variace = distributionMath.variance(nVal, pVal)
 		let mostCommomValues = normalMath.mostCommonValues(sigma, mu)
 
+		// Highest propability
+		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
+		labeling.labelYAxis(50, 30, 600, 300, highestPropability)
+
 		// Create labels for data 		
 		dataDisplay.addLabel("μ", mu)
+		dataDisplay.addLabel("P(μ)", highestPropability)
 		dataDisplay.addLabel("σ", sigma)
 		dataDisplay.addLabel("σ²", variace)
 		dataDisplay.addLabel("[μ±σ]", '['+(Math.round((mu-sigma)*100)/100)+':'+(Math.round((mu+sigma)*100)/100)+']')
@@ -64,9 +69,6 @@ export default function normalDistributionGraph(p) {
 		// Set fill back
 		p.fill(0)
 
-		// Highest propability
-		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
-		labeling.labelYAxis(50, 30, 600, 300, highestPropability)
 
 		let sublines = 600
 

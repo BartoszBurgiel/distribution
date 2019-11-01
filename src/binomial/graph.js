@@ -57,6 +57,7 @@ export default function binomialDistributionGraph(p) {
 
 		// Create labels for data 		
 		dataDisplay.addLabel("μ", mu)
+		dataDisplay.addLabel("P(μ)", binomialMath.bDistribution(nVal, pVal, Math.round(mu)))
 		dataDisplay.addLabel("σ", sigma)
 		dataDisplay.addLabel("σ²", variace)
 		dataDisplay.addLabel("[μ±σ]", '['+Math.ceil(mu-sigma)+':'+Math.floor(mu + sigma)+']')
