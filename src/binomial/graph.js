@@ -76,7 +76,7 @@ export default function binomialDistributionGraph(p) {
 			highestProp = binomialMath.bDistribution(nVal, pVal, Math.ceil(mu))
 		}
 
-		labeling.labelYAxis(50, 30, 600, 300, highestProp)
+		labeling.labelYAxis(50, 30, 600, 300, highestProp, 1)
 
 		// Generate bars
 		for (let i = 0; i < nVal; i++) {
