@@ -81,7 +81,7 @@ export default function normalDistributionGraph(p) {
 			p.line(x1, y1, x2, y2)
 		}
 
-		labeling.xAxisNormal(50, 300, 650, nVal)
+		labeling.xAxisNormal(50, 300, 600, nVal)
 		
 		let hoverMousePos = p.map(p.mouseX, 50, 650, 0, nVal)
 		hoverInfo.showHoverWindowNormal(hoverMousePos, normalMath.solve(hoverMousePos, sigma, mu))
