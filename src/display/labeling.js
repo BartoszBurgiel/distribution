@@ -40,6 +40,29 @@ export default class Labeling {
         this.p.text('100%', xPos - 45 , yPos + 10)
 
         // Highest propability stamp
-        this.p.text(Math.round(maxProp * 1000) / 10+'%', xPos - 45, yPos + height-this.p.map(maxProp, 0, 1, yPos, height))
+
+        let maxPropPos = yPos + height-this.p.map(maxProp, 0, 1, yPos, height)
+        this.p.text(Math.round(maxProp * 1000) / 10+'%', xPos - 45, maxPropPos)
+
+        // Add inbetween steps
+        if (maxProp > 0.2 && maxProp < 0.4) {
+            this.inbetweenSteps(xPos, yPos, height, 3, maxProp, maxPropPos)
+        } else if (maxProp >= 0.4 && maxProp < 0.6) {            
+            this.inbetweenSteps(xPos, yPos, height, 4, maxProp, maxPropPos)
+        } else if (maxProp >= 0.6) {            
+            this.inbetweenSteps(xPos, yPos, height, 5, maxProp, maxPropPos)
+        }
+    }
+    
+    inbetweenSteps = (xPos, yPos, height, n, maxProp, maxPropPos) => {
+        for(let i = 0; i<n;i++) {
+            // Propability of the step
+            let stepProp = Math.round(this.p.map(i, 0, n, 0, maxProp) * 1000)/10
+
+            // Percentage labels
+            this.p.text(stepProp + '%', xPos-45, this.p.map(i, 0, n, height, maxPropPos))
+            
+            // Lines
+        }
     }
 }
