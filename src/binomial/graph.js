@@ -12,6 +12,8 @@ export default function binomialDistributionGraph(p) {
 	let nBar, pBar, yRangeBar
 	let dataDisplay
 
+	let yRange = 0.5
+
 	// Global slider position
 	const sliderYPosition = 360
 
@@ -28,7 +30,7 @@ export default function binomialDistributionGraph(p) {
 		// Initialize slider
 		nBar = p.createSlider(1, 150)
 		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
-		yRangeBar = p.createSlider(0.01, 0.99, 1, 0.01)
+		yRangeBar = p.createSlider(0.01, 0.99, yRange, 0.01)
 
 		// Set slider
 		nBar.position(20, canvas.position().y + sliderYPosition)
@@ -41,14 +43,13 @@ export default function binomialDistributionGraph(p) {
 
 	p.draw = () => {
 
-		let yRange = yRangeBar.value()
-
+		
 		// Reset screen
 		p.background(240)
 
 		// Array with all bars
 		let bars = []
-
+		
 		// Get values from the sliders
 		const nVal = nBar.value()
 		const pVal = pBar.value()
@@ -78,6 +79,12 @@ export default function binomialDistributionGraph(p) {
 
 		if (binomialMath.bDistribution(nVal, pVal, Math.ceil(mu)) > highestProp) {
 			highestProp = binomialMath.bDistribution(nVal, pVal, Math.ceil(mu))
+		}
+
+		if (highestProp >= yRangeBar.value()) {
+			yRange = 5*highestProp/4
+		} else {
+			yRange = yRangeBar.value()
 		}
 
 		labeling.labelYAxis(50, 30, 600, 300, highestProp, yRange)
