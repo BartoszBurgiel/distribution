@@ -84,6 +84,23 @@ export default function binomialDistributionGraph(p) {
 			bars[i].height = absHeight
 			bars[i].prop = currentPropability
 			bars[i].display(p)
+
+			// Display bar's label
+			if (nVal < 40) {
+				if (i > 9) {
+					p.text(i, bars[i].xPos + bars[i].width/2 -4, bars[i].yPos+20)
+				} else {					
+					p.text(i, bars[i].xPos + bars[i].width/2, bars[i].yPos+20)
+				}
+			} else if (nVal < 100) {
+				if (i % 5 === 0) {					
+					p.text(i, bars[i].xPos + bars[i].width/2 -4, bars[i].yPos+20)
+				}
+			} else {
+				if (i % 10 === 0) {					
+					p.text(i, bars[i].xPos + bars[i].width/2 -8, bars[i].yPos+20)
+				}
+			}
 		}
 
 		// Hovering 
