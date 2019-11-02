@@ -42,17 +42,18 @@ export default function binomialDistributionGraph(p) {
 	}
 
 	p.draw = () => {
-
+		
 		
 		// Reset screen
 		p.background(240)
-
+		
 		// Array with all bars
 		let bars = []
 		
 		// Get values from the sliders
 		const nVal = nBar.value()
 		const pVal = pBar.value()
+		yRange = yRangeBar.value()
 
 		// temp Variables 
 		let mu = distributionMath.expectedValue(nVal, pVal)
@@ -79,12 +80,6 @@ export default function binomialDistributionGraph(p) {
 
 		if (binomialMath.bDistribution(nVal, pVal, Math.ceil(mu)) > highestProp) {
 			highestProp = binomialMath.bDistribution(nVal, pVal, Math.ceil(mu))
-		}
-
-		if (highestProp >= yRangeBar.value()) {
-			yRange = 5*highestProp/4
-		} else {
-			yRange = yRangeBar.value()
 		}
 
 		labeling.labelYAxis(50, 30, 600, 300, highestProp, yRange)

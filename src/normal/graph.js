@@ -47,6 +47,7 @@ export default function normalDistributionGraph(p) {
 		// Get values from the sliders
 		const nVal = nBar.value()
 		const pVal = pBar.value()
+		yRange = yRangeBar.value()
 
 		// temp Variables 
 		let mu = distributionMath.expectedValue(nVal, pVal)
@@ -56,12 +57,6 @@ export default function normalDistributionGraph(p) {
 
 		// Highest propability
 		let highestPropability = normalMath.solve((nVal * pVal), sigma, mu)
-
-		if(highestPropability >= yRangeBar.value()) {
-			yRange = 5*highestPropability/4
-		} else {
-			yRange = yRangeBar.value()
-		}
 
 		labeling.labelYAxis(50, 30, 600, 300, highestPropability, yRange)
 
@@ -81,6 +76,8 @@ export default function normalDistributionGraph(p) {
 
 		let sublines = 600
 
+		p.strokeWeight(2)
+		
 		// plot function
 		for(let i = 0; i<sublines; i++) {
 
@@ -91,6 +88,7 @@ export default function normalDistributionGraph(p) {
 
 			p.line(x1, y1, x2, y2)
 		}
+		p.strokeWeight(1)
 
 		labeling.xAxisNormal(50, 300, 600, nVal)
 		
