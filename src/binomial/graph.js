@@ -11,6 +11,9 @@ export default function binomialDistributionGraph(p) {
 	let canvas
 	let nBar, pBar, yRangeBar
 	let dataDisplay
+	
+	let nVal = 50
+	let pVal = 0.5
 
 	let yRange = 0.5
 
@@ -28,8 +31,8 @@ export default function binomialDistributionGraph(p) {
 		canvas = p.createCanvas(900, 400)
 
 		// Initialize slider
-		nBar = p.createSlider(1, 150)
-		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
+		nBar = p.createSlider(1, 150, nVal, 1)
+		pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
 		yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
 
 		// Set slider
@@ -41,9 +44,15 @@ export default function binomialDistributionGraph(p) {
 		dataDisplay = new Data(p, 700, 0, 400, 200)
 	}
 
+	p.myCustomRedrawAccordingToNewPropsHandler = (props) => {
+		nVal = parseInt(props.nVal)
+		pVal = parseFloat(props.pVal);
+
+		console.log(props)
+	}
+
 	p.draw = () => {
-		
-		
+			
 		// Reset screen
 		p.background(240)
 		
@@ -51,8 +60,8 @@ export default function binomialDistributionGraph(p) {
 		let bars = []
 		
 		// Get values from the sliders
-		const nVal = nBar.value()
-		const pVal = pBar.value()
+		nVal = nBar.value()
+		pVal = pBar.value()
 		yRange = yRangeBar.value()
 
 		// temp Variables 
@@ -110,11 +119,6 @@ export default function binomialDistributionGraph(p) {
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)
 		p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
 		p.text('yRange = ' + Math.round(yRange * 100) + '%', 700/2 - pBar.width/2, sliderYPosition - 10)
-	}
-
-	p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
-		if (canvas) //Make sure the canvas has been created
-			p.fill(newProps.color)
 	}
 
 	// Make sure the sliders are in place
