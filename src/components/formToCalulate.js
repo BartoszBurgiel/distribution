@@ -1,33 +1,37 @@
 import React from 'react';
+import P5Wrapper from 'react-p5';
+import {PropTypes} from 'react';
+import binomialDistributionGraph from '../binomial/graph.js';
+import cumulatedBinomialDistributionGraph  from '../cBinomial/graph.js';
+import normalDistributionGraph from '../normal/graph.js';
 
 export default class FromToCalculate extends React.Component {
 
-    constructor(props) {
-        super(props)
-
+    constructor() {
+        super()
         this.state = {
-            nVal: 1,
-            pVal: 0,
-            kVal: 0, 
-            graph: ""
+            nVal: 50, 
+            kVal: 20,
+            pVal: 0.5,
+            graph: "normalDistributionGraph"
         }
     }
 
     render() {
         return (
-            <>
+            <div>
                 <h1>Hey there</h1>
                 <form>
-                    <select 
+                    <select
                         onChange={e => {
                             this.setState({
                                 graph: e.target.value
                             })
                         }}
                     >
-                        <option>Normalverteilung</option>
-                        <option>Binomialverteilung</option>
-                        <option>kumulierte Binomialverteilung</option>
+                        <option value="normalDistributionGraph">Normalverteilung</option>
+                        <option value="binomialDistributionGraph">Binomialverteilung</option>
+                        <option value="cumulatedBinomialDistributionGraph">kumulierte Binomialverteilung</option>
                     </select>
                     <br />
 
@@ -47,6 +51,8 @@ export default class FromToCalculate extends React.Component {
                     <input
                         type="number"
                         name="kVal"
+                        min="0"
+                        max={this.state.nVal - 1}
                         onChange={e => {
                             this.setState({
                                 kVal: e.target.value
@@ -58,7 +64,10 @@ export default class FromToCalculate extends React.Component {
                     <label>P</label>
                     <input
                         type="number"
+                        step="0.01"
                         name="pVal"
+                        min="0.01"
+                        max="0.99"
                         onChange={e => {
                             this.setState({
                                 pVal: e.target.value
@@ -72,7 +81,10 @@ export default class FromToCalculate extends React.Component {
                 <p> k: {this.state.kVal}</p>
                 <p> p: {this.state.pVal}</p>
                 <p> graph: {this.state.graph}</p>
-            </>
+
+                <P5Wrapper sketch={cumulatedBinomialDistributionGraph} ></P5Wrapper>
+        
+            </div>
         )
     }
 }
