@@ -29,6 +29,7 @@ export default class Data {
         let i = 0
 
         this.p.fill(0)
+        this.p.noStroke()
 
         //Print all lables      
         for (let [key, val] of this.labels) {
@@ -43,6 +44,7 @@ export default class Data {
             i++
         }
 
+        this.p.stroke(0)
         this.p.textSize(12)
     }
 

@@ -84,6 +84,8 @@ export default function cumulatedBinomialDistributionGraph(p) {
 		hoverInfo.bars = bars
 		hoverInfo.showHoverWindow()
 
+		p.noStroke()
+
 		// Print bar values 
 		p.text('n = ' + nVal, 20, sliderYPosition - 10)
 		p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)

@@ -58,6 +58,7 @@ export default class Labeling {
                 this.p.text(i, xPos - 4, yPos)
             }
         }
+        this.p.stroke(0)
     }
 
     labelYAxis = (xPos, yPos, width, height, maxProp, yRange) => {
@@ -85,6 +86,8 @@ export default class Labeling {
         } else if (yRange > 0.6) {
             this.inbetweenSteps(xPos, width, height, 2, yRange, yPos + 10)
         }
+
+        this.p.stroke(0)
     }
 
     inbetweenSteps = (xPos, width, height, n, yRange, upperBond) => {
