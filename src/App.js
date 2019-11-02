@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import FromToCalculate from './components/formToCalulate';
+import FromToCalculate from './components/formToCalculate';
 
 const App = () => {
 	return (

@@ -1,17 +1,14 @@
 import React from 'react';
-import P5Wrapper from 'react-p5';
-import {PropTypes} from 'react';
+import P5Wrapper from 'react-p5-wrapper';
 import binomialDistributionGraph from '../binomial/graph.js';
-import cumulatedBinomialDistributionGraph  from '../cBinomial/graph.js';
-import normalDistributionGraph from '../normal/graph.js';
 
 export default class FromToCalculate extends React.Component {
 
     constructor() {
         super()
         this.state = {
-            nVal: 50, 
-            kVal: 20,
+            nVal: 50,
+            kVal: 20, 
             pVal: 0.5,
             graph: "normalDistributionGraph"
         }
@@ -82,9 +79,12 @@ export default class FromToCalculate extends React.Component {
                 <p> p: {this.state.pVal}</p>
                 <p> graph: {this.state.graph}</p>
 
-                <P5Wrapper sketch={cumulatedBinomialDistributionGraph} ></P5Wrapper>
-        
+
+
+                <P5Wrapper sketch={binomialDistributionGraph}></P5Wrapper>
             </div>
         )
     }
 }
+
+
