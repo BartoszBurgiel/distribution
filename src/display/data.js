@@ -15,6 +15,7 @@ export default class Data {
     // Create rect showing all labels
     display () {
 
+        this.p.stroke(0)
         // Background
         this.p.fill(255, 255, 255)
         this.p.rect(this.x, this.y, this.width, this.height)
