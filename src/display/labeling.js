@@ -6,7 +6,7 @@ export default class Labeling {
 
     xAxisNormal = (xPos, yPos, width, range) => {
         this.p.line(xPos, yPos, xPos + width, yPos)
-
+        this.p.noStroke()
 
         for (let i = 0; i < range; i++) {
 
@@ -36,6 +36,7 @@ export default class Labeling {
     }
 
     labelXAxis = (n, i, xPos, yPos) => {
+        this.p.noStroke()
         // Display bar's label
         if (n < 40) {
 
@@ -63,8 +64,11 @@ export default class Labeling {
 
         // Axis line
         this.p.strokeWeight(1.5)
+        this.p.stroke(0)
         this.p.line(xPos, yPos, xPos, height)
         this.p.strokeWeight(1)
+
+        this.p.noStroke()
 
         // Upper bond label 
         this.p.text(Math.round(yRange * 100) + '%', xPos - 45, yPos + 10)
@@ -89,8 +93,12 @@ export default class Labeling {
             let stepProp = Math.round(this.p.map(i, 0, n, 0, yRange) * 1000) / 10
             let stepPropPos = this.p.map(i, 0, n, height, upperBond)
 
+            this.p.noStroke()
+
             // Percentage labels
             this.p.text(stepProp + '%', xPos - 45, stepPropPos)
+
+            this.p.stroke(0)
 
             // Lines
             this.p.strokeWeight(0.5)

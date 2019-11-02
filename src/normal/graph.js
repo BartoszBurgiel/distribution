@@ -77,6 +77,7 @@ export default function normalDistributionGraph(p) {
 		let sublines = 600
 
 		p.strokeWeight(2)
+		p.stroke(255, 0, 0)
 		
 		// plot function
 		for(let i = 0; i<sublines; i++) {
@@ -88,6 +89,7 @@ export default function normalDistributionGraph(p) {
 
 			p.line(x1, y1, x2, y2)
 		}
+		p.stroke(0)
 		p.strokeWeight(1)
 
 		labeling.xAxisNormal(50, 300, 600, nVal)
