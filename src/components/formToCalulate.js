@@ -8,7 +8,8 @@ export default class FromToCalculate extends React.Component {
         this.state = {
             nVal: 1,
             pVal: 0,
-            kVal: 0
+            kVal: 0, 
+            graph: ""
         }
     }
 
@@ -17,7 +18,13 @@ export default class FromToCalculate extends React.Component {
             <>
                 <h1>Hey there</h1>
                 <form>
-                    <select>
+                    <select 
+                        onChange={e => {
+                            this.setState({
+                                graph: e.target.value
+                            })
+                        }}
+                    >
                         <option>Normalverteilung</option>
                         <option>Binomialverteilung</option>
                         <option>kumulierte Binomialverteilung</option>
@@ -64,6 +71,7 @@ export default class FromToCalculate extends React.Component {
                 <p> N: {this.state.nVal}</p>
                 <p> k: {this.state.kVal}</p>
                 <p> p: {this.state.pVal}</p>
+                <p> graph: {this.state.graph}</p>
             </>
         )
     }
