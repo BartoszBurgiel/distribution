@@ -31,7 +31,9 @@ export default class HoverInfo {
                             this.p.fill(0)
 
                             // Label 
+                            this.p.noStroke()
                             this.p.text('P(' + element.k + ') = ' + Math.round(element.prop * 10000) / 100 + '%', 560, 32.5)
+                            this.p.stroke(0)
                         }
                     }
                 });
