@@ -70,16 +70,16 @@ export default class Labeling {
         this.p.text(Math.round(yRange * 100) + '%', xPos - 45, yPos + 10)
 
         // Add inbetween steps
-        if (maxProp <= 0.2) {
-            this.inbetweenSteps(xPos, width, height, 2, yRange, yPos + 10)
-        } else if (maxProp > 0.2 && maxProp < 0.4) {
-            this.inbetweenSteps(xPos, width, height, 3, yRange, yPos + 10)
-        } else if (maxProp >= 0.4 && maxProp < 0.6) {
-            this.inbetweenSteps(xPos, width, height, 4, yRange, yPos + 10)
-        } else if (maxProp >= 0.6) {
-            this.inbetweenSteps(xPos, width, height, 5, yRange, yPos + 10)
-        } else if (maxProp > 0.6) {
+        if (yRange <= 0.2) {
             this.inbetweenSteps(xPos, width, height, 6, yRange, yPos + 10)
+        } else if (yRange > 0.2 && yRange < 0.4) {
+            this.inbetweenSteps(xPos, width, height, 5, yRange, yPos + 10)
+        } else if (yRange >= 0.4 && yRange < 0.6) {
+            this.inbetweenSteps(xPos, width, height, 4, yRange, yPos + 10)
+        } else if (yRange >= 0.6) {
+            this.inbetweenSteps(xPos, width, height, 3, yRange, yPos + 10)
+        } else if (yRange > 0.6) {
+            this.inbetweenSteps(xPos, width, height, 2, yRange, yPos + 10)
         }
     }
 
