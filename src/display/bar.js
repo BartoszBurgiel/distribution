@@ -16,8 +16,8 @@ export default class Bar {
     }
 
     // Draw a rect according to Bar attributes
-    display(p) {
-        p.fill(255)
+    display(p, col) {
+        p.fill(col)
         p.rect(this.xPos, this.yPos, this.width, -this.height)
         p.fill(0)
     }

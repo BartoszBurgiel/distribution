@@ -6,7 +6,7 @@ import HoverInfo from '../display/hoverInfo.js';
 import Labeling from '../display/labeling.js';
 
 // This function handles p.setup and p.draw  
-export default function createGraph(nValue, pValue, p, slider) {
+export default function createGraph(nValue, pValue, kValue, p, slider) {
 
     let canvas
 
@@ -14,6 +14,7 @@ export default function createGraph(nValue, pValue, p, slider) {
 
     let nVal = nValue
     let pVal = pValue
+    let kVal = kValue
 
     let yRange = 0.5
 
@@ -61,6 +62,7 @@ export default function createGraph(nValue, pValue, p, slider) {
             nVal = nBar.value()
             pVal = pBar.value()
         }
+
         yRange = yRangeBar.value()
 
         // temp Variables 
@@ -102,7 +104,14 @@ export default function createGraph(nValue, pValue, p, slider) {
             let absHeight = p.map(currentPropability, 0, yRange, 0, 300 - 30)
             bars[i].height = absHeight
             bars[i].prop = currentPropability
-            bars[i].display(p)
+
+            if (kVal === i) {
+                bars[i].display(p, 0)
+            } else {                
+                bars[i].display(p, '#22919D')
+                console.log(kVal, "hehe")
+            }
+
 
             labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
         }
@@ -128,7 +137,7 @@ export default function createGraph(nValue, pValue, p, slider) {
             nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
             pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
         }
-        yRangeBar.position(700 / 2 - pBar.width / 2, canvas.position().y + sliderYPosition)
+        yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
     }
 
 }

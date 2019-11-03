@@ -5,10 +5,12 @@ export default function binomialDistributionGraph(p) {
 
 	p.myCustomRedrawAccordingToNewPropsHandler = (props) => {
 		let nVal = parseInt(props.nVal)
-		let pVal = parseFloat(props.pVal);
+		let pVal = parseFloat(props.pVal)
+		let kVal = parseInt(props.kVal)
 
+		// Draw only if valid input
 		if (pVal > 0 && nVal > 0) {
-			createGraph(nVal, pVal, p, false)
+			createGraph(nVal, pVal, kVal, p, false)
 		}
 
 		console.log(props)
