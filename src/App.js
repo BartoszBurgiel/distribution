@@ -7,21 +7,31 @@ import binomialDistributionGraph from './binomial/graph.js'
 import normalDistributionGraph from './normal/graph.js'
 import cumulatedBinomialDistributionGraph from './cBinomial/graph.js'
 import Menu from './components/Menu.js'
+import MenuElement from './components/MenuElement';
 
 const App = () => {
+
+	this.state = {
+		sketch: ''
+	}
+
+	handler = () => {
+
+	}
+
 	return (
 		<>
 			<Menu name="Stochastik - Rechner">
 				<Menu name="Playground">
-					<li> Normalverteilung </li>
-					<li> Binomialverteilung </li>
-					<li> kumulierte Binomialverteilung </li>
+					<MenuElement> Normalverteilung </MenuElement>
+					<MenuElement> Binomialverteilung </MenuElement>
+					<MenuElement> kumulierte Binomialverteilung </MenuElement>
 				</Menu>
 
 				<Menu name="Berechnen">
-					<li> Normalverteilung </li>
-					<li> Binomialverteilung </li>
-					<li> kumulierte Binomialverteilung </li>
+					<MenuElement> Normalverteilung </MenuElement>
+					<MenuElement> Binomialverteilung </MenuElement>
+					<MenuElement> kumulierte Binomialverteilung </MenuElement>
 				</Menu>
 			</Menu>
 		</>
