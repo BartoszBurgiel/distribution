@@ -6,16 +6,24 @@ import FromToCalculate from './components/formToCalculate.js';
 import binomialDistributionGraph from './binomial/graph.js'
 import normalDistributionGraph from './normal/graph.js'
 import cumulatedBinomialDistributionGraph from './cBinomial/graph.js'
+import Menu from './components/Menu.js'
 
 const App = () => {
 	return (
 		<>
-			<FromToCalculate graph={binomialDistributionGraph} name="Binomialverteilung"></FromToCalculate>
-			<FromToCalculate graph={normalDistributionGraph} name="Normalverteilung"></FromToCalculate>
-			<FromToCalculate graph={cumulatedBinomialDistributionGraph} name="kumulierte Binomialverteilung"></FromToCalculate>
+			<Menu name="Stochastik - Rechner">
+				<Menu name="Playground">
+					<li> Normalverteilung </li>
+					<li> Binomialverteilung </li>
+					<li> kumulierte Binomialverteilung </li>
+				</Menu>
 
-			<SketchOnly sketch={cumulatedBinomialDistributionGraph} />
-
+				<Menu name="Berechnen">
+					<li> Normalverteilung </li>
+					<li> Binomialverteilung </li>
+					<li> kumulierte Binomialverteilung </li>
+				</Menu>
+			</Menu>
 		</>
 	);
 }
