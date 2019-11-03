@@ -1,104 +1,15 @@
-import Distribution from '../math/distribution.js';
-import Bar from '../display/bar.js';
-import Data from '../display/data.js';
-import Binomial from '../math/binomial.js';
-import HoverInfo from '../display/hoverInfo.js';
-import Labeling from '../display/labeling.js';
-
+import createGraph from './createGraph.js'
 
 export default function cumulatedBinomialDistributionGraph(p) {
 
-	let canvas
-	let nBar, pBar
-	let dataDisplay
+	p.myCustomRedrawAccordingToNewPropsHandler = (props) => {
+		let nVal = parseInt(props.nVal)
+		let pVal = parseFloat(props.pVal)
+		let kVal = parseInt(props.kVal)
 
-	// Global slider position
-	const sliderYPosition = 360
-
-	let distributionMath = new Distribution()
-	let binomialMath = new Binomial()
-	let hoverInfo = new HoverInfo([], p)
-	let labeling = new Labeling(p)
-
-	p.setup = () => {
-
-		// Initialize canvas
-		canvas = p.createCanvas(900, 400)
-
-		// Initialize slider
-		nBar = p.createSlider(1, 150)
-		pBar = p.createSlider(0.01, 0.99, 0.5, 0.01)
-
-		// Set slider
-		nBar.position(20, canvas.position().y + sliderYPosition)
-		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-
-		// Data class
-		dataDisplay = new Data(p, 700, 0, 400, 200)
-	}
-
-	p.draw = () => {
-
-		// Reset screen
-		p.background(240)
-
-		// Array with all bars
-		let bars = []
-
-		// Get values from the sliders
-		const nVal = nBar.value()
-		const pVal = pBar.value()
-
-		// Create labels for data 		
-		dataDisplay.addLabel("μ", distributionMath.expectedValue(nVal, pVal))
-		dataDisplay.addLabel("σ", distributionMath.standardDeviation(nVal, pVal))
-		dataDisplay.addLabel("σ²", distributionMath.variance(nVal, pVal))
-
-		// Display dataDisplay 
-		dataDisplay.display()
-
-		// Set fill back
-		p.fill(0)
-
-
-		// cumulated propability
-		let propSum = 0
-
-		// Generate bars
-		for (let i = 0; i < nVal; i++) {
-			let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
-			
-			bars[i] = new Bar(50 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
-
-			propSum += currentPropability
-
-			// Calculate, set and display bar's hight
-			let absHeight = p.map(propSum, 0, 1, 0, 200)
-			bars[i].height = absHeight
-			bars[i].prop = propSum
-			bars[i].display(p)
-
-			labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width/2, bars[i].yPos + 20)
+		// Draw only if valid input
+		if (pVal > 0 && pVal < 1 && nVal > 0 && kVal < nVal && kVal >= 0 && nVal < 150) {
+			createGraph(nVal, pVal, kVal, p, false)
 		}
-
-		hoverInfo.bars = bars
-		hoverInfo.showHoverWindow()
-
-		p.noStroke()
-
-		// Print bar values 
-		p.text('n = ' + nVal, 20, sliderYPosition - 10)
-		p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
-	}
-
-	p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
-		if (canvas) //Make sure the canvas has been created
-			p.fill(newProps.color)
-	}
-
-	// Make sure the sliders are in place
-	p.windowResized = () => {
-		nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
-		pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
 	}
 }
