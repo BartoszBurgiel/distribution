@@ -12,19 +12,24 @@ export default class Labeling {
 
             if (range < 250) {
 
-                // Display every tenth
+                // Display every 25th
                 if (i % 25 === 0) {
                     this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
                 }
             } else if (range < 500) {
 
-                // Display every 25-th
+                // Display every 50th
                 if (i % 50 === 0) {
                     this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 50, width, i), yPos + 20)
                 }
-            } else {
-                // Display every 50-th
+            } else if (range < 5000) {
+                // Display every 100th
                 if (i % 100 === 0) {
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 100, width, i), yPos + 20)
+                }
+            } else if (range >= 5000) {
+                // Display every 1000th
+                if (i % 1000 === 0) {
                     this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 100, width, i), yPos + 20)
                 }
             }
