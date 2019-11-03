@@ -101,6 +101,17 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             let y2 = 300 - p.map(normalMath.solve(p.map(i + 1, 0, 600, 0, nVal), sigma, mu), 0, yRange, 0, 300 - 30)
 
             p.line(x1, y1, x2, y2)
+
+            // Mark k 
+            if (i === kValue) {
+                p.stroke('#ada')
+                p.strokeWeight(1)
+
+                p.line(50 + p.map(kValue, 0, nVal, 0, 600), 300, 50 + p.map(kValue, 0, nVal, 0, 600), 30)
+                
+                p.stroke(255, 0, 0)
+                p.strokeWeight(2)
+            }
         }
         p.stroke(0)
         p.strokeWeight(1)
