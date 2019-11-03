@@ -8,7 +8,7 @@ export default class FromToCalculate extends React.Component {
         super()
         this.state = {
             nVal: 10,
-            kVal: 5, 
+            kVal: 5,
             pVal: 0.5,
             graph: "normalDistributionGraph"
         }
@@ -78,7 +78,6 @@ export default class FromToCalculate extends React.Component {
                 <p> k: {this.state.kVal}</p>
                 <p> p: {this.state.pVal}</p>
                 <p> graph: {this.state.graph}</p>
-
 
 
                 <P5Wrapper sketch={binomialDistributionGraph} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />

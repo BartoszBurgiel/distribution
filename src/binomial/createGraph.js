@@ -9,18 +9,18 @@ import Labeling from '../display/labeling.js';
 export default function createGraph(nValue, pValue, kValue, p, slider) {
 
     let canvas
-
     let nBar, pBar, yRangeBar
-
-    let nVal = nValue
-    let pVal = pValue
-    let kVal = kValue
-
-    let yRange = 0.5
 
     // Global slider position
     const sliderYPosition = 360
-
+    
+    let nVal = nValue
+    let pVal = pValue
+    let kVal = kValue
+    
+    let yRange = 0.5
+    
+    
     let distributionMath = new Distribution()
     let binomialMath = new Binomial()
     let hoverInfo = new HoverInfo([], p)
@@ -36,7 +36,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             // Initialize slider
             nBar = p.createSlider(1, 150, nVal, 1)
             pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
-            
+
             // Set slider
             nBar.position(20, canvas.position().y + sliderYPosition)
             pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
@@ -46,9 +46,16 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
     }
     
-    
     // Draw the graph and calculate all constants
     p.draw = () => {
+
+        if (typeof yRangeBar === 'undefined') {
+            canvas = p.createCanvas(900, 400)
+            yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
+            yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+        }
+
+        console.log("draw:", yRangeBar)
 
         // Reset screen
         p.background(240)
@@ -106,10 +113,9 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             bars[i].prop = currentPropability
 
             if (kVal === i) {
-                bars[i].display(p, 0)
-            } else {                
                 bars[i].display(p, '#22919D')
-                console.log(kVal, "hehe")
+            } else {
+                bars[i].display(p, 255)
             }
 
 
