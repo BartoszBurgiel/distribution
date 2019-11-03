@@ -20,7 +20,6 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     
     let yRange = 0.5
     
-    
     let distributionMath = new Distribution()
     let binomialMath = new Binomial()
     let hoverInfo = new HoverInfo([], p)
@@ -54,8 +53,6 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
             yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
         }
-
-        console.log("draw:", yRangeBar)
 
         // Reset screen
         p.background(240)

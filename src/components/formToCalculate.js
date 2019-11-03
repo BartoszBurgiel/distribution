@@ -1,16 +1,16 @@
 import React from 'react';
 import P5Wrapper from 'react-p5-wrapper';
-import binomialDistributionGraph from '../binomial/graph.js';
+
 
 export default class FromToCalculate extends React.Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             nVal: 10,
             kVal: 5,
             pVal: 0.5,
-            graph: "normalDistributionGraph"
+            graph: props.graph
         }
     }
 
@@ -19,17 +19,6 @@ export default class FromToCalculate extends React.Component {
             <div>
                 <h1>Hey there</h1>
                 <form>
-                    <select
-                        onChange={e => {
-                            this.setState({
-                                graph: e.target.value
-                            })
-                        }}
-                    >
-                        <option value="normalDistributionGraph">Normalverteilung</option>
-                        <option value="binomialDistributionGraph">Binomialverteilung</option>
-                        <option value="cumulatedBinomialDistributionGraph">kumulierte Binomialverteilung</option>
-                    </select>
                     <br />
 
                     <label>N</label>
@@ -77,10 +66,9 @@ export default class FromToCalculate extends React.Component {
                 <p> N: {this.state.nVal}</p>
                 <p> k: {this.state.kVal}</p>
                 <p> p: {this.state.pVal}</p>
-                <p> graph: {this.state.graph}</p>
 
 
-                <P5Wrapper sketch={binomialDistributionGraph} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
+                <P5Wrapper sketch={this.state.graph} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
             </div>
         )
     }
