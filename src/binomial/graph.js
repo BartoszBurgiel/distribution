@@ -9,7 +9,7 @@ export default function binomialDistributionGraph(p) {
 		let kVal = parseInt(props.kVal)
 
 		// Draw only if valid input
-		if (pVal > 0 && pVal < 1 && nVal > 0 && kVal < nVal && kVal >= 0) {
+		if (pVal > 0 && pVal < 1 && nVal > 0 && kVal < nVal && kVal >= 0 && nVal < 150) {
 			createGraph(nVal, pVal, kVal, p, false)
 		}
 	}
