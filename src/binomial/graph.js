@@ -7,7 +7,9 @@ export default function binomialDistributionGraph(p) {
 		let nVal = parseInt(props.nVal)
 		let pVal = parseFloat(props.pVal);
 
-		createGraph(nVal, pVal, p)
+		if (pVal > 0 && nVal > 0) {
+			createGraph(nVal, pVal, p, false)
+		}
 
 		console.log(props)
 	}

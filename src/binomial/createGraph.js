@@ -6,14 +6,12 @@ import HoverInfo from '../display/hoverInfo.js';
 import Labeling from '../display/labeling.js';
 
 // This function handles p.setup and p.draw  
-export default function createGraph(nValue, pValue, p) {
+export default function createGraph(nValue, pValue, p, slider) {
 
     let canvas
-    
-    
-    
+
     let nBar, pBar, yRangeBar
-    
+
     let nVal = nValue
     let pVal = pValue
 
@@ -21,26 +19,29 @@ export default function createGraph(nValue, pValue, p) {
 
     // Global slider position
     const sliderYPosition = 360
-    
+
     let distributionMath = new Distribution()
     let binomialMath = new Binomial()
     let hoverInfo = new HoverInfo([], p)
     let labeling = new Labeling(p)
     let dataDisplay = new Data(p, 700, 0, 400, 200)
 
-    // Initialize slider
-    nBar = p.createSlider(1, 150, nVal, 1)
-    pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
-    yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
-    
+
     p.setup = () => {
         // Initialize canvas
         canvas = p.createCanvas(900, 400)
 
-        // Set slider
-        nBar.position(20, canvas.position().y + sliderYPosition)
-        pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-        yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+        if (slider) {
+            // Initialize slider
+            nBar = p.createSlider(1, 150, nVal, 1)
+            pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
+            yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
+
+            // Set slider
+            nBar.position(20, canvas.position().y + sliderYPosition)
+            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+            yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+        }
     }
 
 
@@ -53,10 +54,13 @@ export default function createGraph(nValue, pValue, p) {
         // Array with all bars
         let bars = []
 
-        // Get values from the sliders
-        nVal = nBar.value()
-        pVal = pBar.value()
-        yRange = yRangeBar.value()
+
+        if (slider) {
+            // Get values from the sliders
+            nVal = nBar.value()
+            pVal = pBar.value()
+            yRange = yRangeBar.value()
+        }
 
         // temp Variables 
         let mu = distributionMath.expectedValue(nVal, pVal)
@@ -109,17 +113,21 @@ export default function createGraph(nValue, pValue, p) {
 
         p.noStroke()
 
-        // Print bar values 
-        p.text('n = ' + nVal, 20, sliderYPosition - 10)
-        p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
-        p.text('yRange = ' + Math.round(yRange * 100) + '%', 700 / 2 - pBar.width / 2, sliderYPosition - 10)
+        if (slider) {
+            // Print bar values 
+            p.text('n = ' + nVal, 20, sliderYPosition - 10)
+            p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
+            p.text('yRange = ' + Math.round(yRange * 100) + '%', 700 / 2 - pBar.width / 2, sliderYPosition - 10)
+        }
     }
 
     // Make sure the sliders are in place
     p.windowResized = () => {
-        nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
-        pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-        yRangeBar.position(700 / 2 - pBar.width / 2, canvas.position().y + sliderYPosition)
+        if (slider) {
+            nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
+            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+            yRangeBar.position(700 / 2 - pBar.width / 2, canvas.position().y + sliderYPosition)
+        }
     }
 
 }
