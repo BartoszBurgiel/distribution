@@ -12,7 +12,5 @@ export default function binomialDistributionGraph(p) {
 		if (pVal > 0 && pVal < 1 && nVal > 0 && kVal < nVal && kVal >= 0) {
 			createGraph(nVal, pVal, kVal, p, false)
 		}
-
-		console.log(props)
 	}
 }

@@ -7,10 +7,9 @@ export default class FromToCalculate extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            nVal: 10,
-            kVal: 5,
+            nVal: 100,
+            kVal: 50,
             pVal: 0.5,
-            graph: props.graph
         }
     }
 
@@ -68,7 +67,7 @@ export default class FromToCalculate extends React.Component {
                 <p> p: {this.state.pVal}</p>
 
 
-                <P5Wrapper sketch={this.state.graph} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
+                <P5Wrapper sketch={this.props.graph} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
             </div>
         )
     }
