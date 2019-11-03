@@ -35,16 +35,17 @@ export default function createGraph(nValue, pValue, p, slider) {
             // Initialize slider
             nBar = p.createSlider(1, 150, nVal, 1)
             pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
-            yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
-
+            
             // Set slider
             nBar.position(20, canvas.position().y + sliderYPosition)
             pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-            yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
         }
+
+        yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
+        yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
     }
-
-
+    
+    
     // Draw the graph and calculate all constants
     p.draw = () => {
 
@@ -59,8 +60,8 @@ export default function createGraph(nValue, pValue, p, slider) {
             // Get values from the sliders
             nVal = nBar.value()
             pVal = pBar.value()
-            yRange = yRangeBar.value()
         }
+        yRange = yRangeBar.value()
 
         // temp Variables 
         let mu = distributionMath.expectedValue(nVal, pVal)
@@ -117,8 +118,8 @@ export default function createGraph(nValue, pValue, p, slider) {
             // Print bar values 
             p.text('n = ' + nVal, 20, sliderYPosition - 10)
             p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
-            p.text('yRange = ' + Math.round(yRange * 100) + '%', 700 / 2 - pBar.width / 2, sliderYPosition - 10)
         }
+        p.text('yRange = ' + Math.round(yRange * 100) + '%', 700 / 2 - yRangeBar.width / 2, sliderYPosition - 10)
     }
 
     // Make sure the sliders are in place
@@ -126,8 +127,8 @@ export default function createGraph(nValue, pValue, p, slider) {
         if (slider) {
             nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
             pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-            yRangeBar.position(700 / 2 - pBar.width / 2, canvas.position().y + sliderYPosition)
         }
+        yRangeBar.position(700 / 2 - pBar.width / 2, canvas.position().y + sliderYPosition)
     }
 
 }
