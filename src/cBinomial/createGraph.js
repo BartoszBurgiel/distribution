@@ -9,10 +9,10 @@ import Labeling from '../display/labeling.js';
 export default function createGraph(nValue, pValue, kValue, p, slider) {
     let canvas
     let nBar, pBar
-    
+
     // Global slider position
     const sliderYPosition = 360
-    
+
     let nVal = nValue
     let pVal = pValue
     let kVal = kValue
@@ -22,7 +22,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let hoverInfo = new HoverInfo([], p)
     let labeling = new Labeling(p)
     let dataDisplay = new Data(p, 700, 0, 400, 200)
-    
+
     p.setup = () => {
 
         // Initialize canvas
@@ -104,7 +104,9 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
 
     // Make sure the sliders are in place
     p.windowResized = () => {
-        nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
-        pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+        if (slider) {
+            nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
+            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+        }
     }
 }
