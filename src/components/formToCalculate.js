@@ -17,7 +17,7 @@ export default class FromToCalculate extends React.Component {
     render() {
         return (
             <div>
-                <h1>Hey there</h1>
+                <h1>{this.props.name}</h1>
                 <form>
                     <br />
 
