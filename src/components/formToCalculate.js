@@ -67,7 +67,7 @@ export default class FromToCalculate extends React.Component {
                 <p> p: {this.state.pVal}</p>
 
 
-                <P5Wrapper sketch={this.props.graph} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
+                <P5Wrapper sketch={this.props.graph} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} slider={false} />
             </div>
         )
     }
