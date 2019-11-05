@@ -25,19 +25,19 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
 
 
 
-        // Initialize canvas
-        canvas = p.createCanvas(900, 400)
+    // Initialize canvas
+    canvas = p.createCanvas(900, 400)
 
-        if (slider) {
-            // Initialize slider
-            nBar = p.createSlider(1, 150, nVal, 1)
-            pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
+    if (slider) {
+        // Initialize slider
+        nBar = p.createSlider(1, 150, nVal, 1)
+        pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
 
-            // Set slider
-            nBar.position(20, canvas.position().y + sliderYPosition)
-            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-        }
-    
+        // Set slider
+        nBar.position(20, canvas.position().y + sliderYPosition)
+        pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+    }
+
 
     p.draw = () => {
 
@@ -48,15 +48,6 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         let bars = []
 
         if (slider) {
-            canvas = p.createCanvas(900, 400)
-
-            // Initialize slider
-            nBar = p.createSlider(1, 150, nVal, 1)
-            pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
-
-            // Set slider
-            nBar.position(20, canvas.position().y + sliderYPosition)
-            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
 
             // Get values from the sliders
             nVal = nBar.value()
