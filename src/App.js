@@ -19,25 +19,45 @@ const App = () => {
 	let [formBinom, setFormBinom] = useState(Boolean)
 	let [formcBinom, setFormcBinom] = useState(Boolean)
 
+	const resetAllStateVariables = () => {
+		setPgBinom(false)
+		setPgNormal(false)
+		setPgcBinom(false)
 
+		setFormBinom(false)
+		setFormNormal(false)
+		setFormcBinom(false)
+	}
 
 
 	const handleOnclick = (compName) => {
 		console.log(compName)
 
 		switch (compName) {
-			case 'pgNormal': setPgNormal(true)
+			case 'pgNormal':
+				resetAllStateVariables()
+				setPgNormal(true)
 				break
-			case 'pgBinom': setPgBinom(true)
+			case 'pgBinom':
+				resetAllStateVariables()
+				setPgBinom(true)
 				break
-			case 'pgCBinom': setPgcBinom(true)
+			case 'pgCBinom':
+				resetAllStateVariables()
+				setPgcBinom(true)
 				break
 
-			case 'formNormal': setFormNormal(true)
+			case 'formNormal':
+				resetAllStateVariables()
+				setFormNormal(true)
 				break
-			case 'formBinom': setFormBinom(true)
+			case 'formBinom':
+				resetAllStateVariables()
+				setFormBinom(true)
 				break
-			case 'formCBinom': setFormcBinom(true)
+			case 'formCBinom':
+				resetAllStateVariables()
+				setFormcBinom(true)
 				break
 		}
 	}
