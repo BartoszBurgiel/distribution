@@ -7,9 +7,7 @@ export default class MenuElement extends React.Component {
 
     render() {
         return (
-            <ul onClick={this.props.handler}>
-                <p>{this.props.children}</p>
-            </ul>
+            <button onClick={this.props.onClick}>{this.props.children}</button>
         )
     }
 

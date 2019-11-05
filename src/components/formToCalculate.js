@@ -59,16 +59,11 @@ export default class FromToCalculate extends React.Component {
                             })
                         }}
                     />
-
                 </form>
-
-                <p> N: {this.state.nVal}</p>
-                <p> k: {this.state.kVal}</p>
-                <p> p: {this.state.pVal}</p>
-
-
-                <P5Wrapper sketch={this.props.graph} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} slider={false} />
+                <P5Wrapper sketch={this.props.sketch} nVal={120} pVal={0.4} kVal={30} slider={false} />
             </div>
+            
+
         )
     }
 }

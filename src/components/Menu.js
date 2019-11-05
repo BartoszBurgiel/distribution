@@ -20,9 +20,7 @@ export default class Menu extends React.Component {
             <>
                 <div>
                     <h1>{this.props.name}</h1>
-                    <ul>
-                        {this.props.children}
-                    </ul>
+                    {this.props.children}
                 </div>
             </>
         )
