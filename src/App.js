@@ -64,6 +64,11 @@ const App = () => {
 
 	return (
 		<>
+
+			{pgNormal && <SketchOnly sketch={normalDistributionGraph} eqType="normal" nVal={120} kVal={70} pVal={0.4} />}
+			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} eqType="binom" nVal={120} kVal={70} pVal={0.4} />}
+			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} eqType="cBinom" nVal={120} kVal={70} pVal={0.4} />}
+
 			<Menu name="Stochastik - Rechner">
 				<Menu name="Playground">
 					<MenuElement onClick={handleOnclick.bind(this, 'pgNormal')}> Normalverteilung </MenuElement>
@@ -77,11 +82,6 @@ const App = () => {
 					<MenuElement> kumulierte Binomialverteilung </MenuElement>
 				</Menu>
 			</Menu>
-
-
-			{pgNormal && <SketchOnly sketch={normalDistributionGraph} eqType="normal" />}
-			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} eqType="binom" />}
-			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} eqType="cBinom"/>}
 		</>
 	);
 }
