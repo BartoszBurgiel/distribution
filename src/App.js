@@ -79,9 +79,9 @@ const App = () => {
 			</Menu>
 
 
-			{pgNormal && <SketchOnly sketch={normalDistributionGraph} />}
-			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} />}
-			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} />}
+			{pgNormal && <SketchOnly sketch={normalDistributionGraph} eqType="normal" />}
+			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} eqType="binom" />}
+			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} eqType="cBinom"/>}
 		</>
 	);
 }
