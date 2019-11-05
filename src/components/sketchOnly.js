@@ -9,7 +9,7 @@ export default class SketchOnly extends React.Component {
     }
 
     render() {
-        return <P5Wrapper sketch={this.props.sketch} nVal={120} pVal={0.4} kVal={30} slider={true} />
+        return <P5Wrapper sketch={this.props.sketch} nVal={120} pVal={0.4} kVal={30} slider={false} />
     }
 }
 

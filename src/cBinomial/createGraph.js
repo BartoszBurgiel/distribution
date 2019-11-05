@@ -23,7 +23,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let labeling = new Labeling(p)
     let dataDisplay = new Data(p, 700, 0, 400, 200)
 
-    p.setup = () => {
+
 
         // Initialize canvas
         canvas = p.createCanvas(900, 400)
@@ -37,7 +37,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             nBar.position(20, canvas.position().y + sliderYPosition)
             pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
         }
-    }
+    
 
     p.draw = () => {
 
@@ -48,6 +48,16 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         let bars = []
 
         if (slider) {
+            canvas = p.createCanvas(900, 400)
+
+            // Initialize slider
+            nBar = p.createSlider(1, 150, nVal, 1)
+            pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
+
+            // Set slider
+            nBar.position(20, canvas.position().y + sliderYPosition)
+            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+
             // Get values from the sliders
             nVal = nBar.value()
             pVal = pBar.value()

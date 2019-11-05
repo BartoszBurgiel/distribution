@@ -13,38 +13,38 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
 
     // Global slider position
     const sliderYPosition = 360
-    
+
     let nVal = nValue
     let pVal = pValue
     let kVal = kValue
-    
+
     let yRange = 0.5
-    
+
     let distributionMath = new Distribution()
     let binomialMath = new Binomial()
     let hoverInfo = new HoverInfo([], p)
     let labeling = new Labeling(p)
     let dataDisplay = new Data(p, 700, 0, 400, 200)
 
+    canvas = p.createCanvas(900, 400)
 
-    p.setup = () => {
-        // Initialize canvas
-        canvas = p.createCanvas(900, 400)
 
-        if (slider) {
-            // Initialize slider
-            nBar = p.createSlider(1, 150, nVal, 1)
-            pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
+    // Initialize canvas
 
-            // Set slider
-            nBar.position(20, canvas.position().y + sliderYPosition)
-            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-        }
+    if (slider) {
+        // Initialize slider
+        nBar = p.createSlider(1, 150, nVal, 1)
+        pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
 
-        yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
-        yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+        // Set slider
+        nBar.position(20, canvas.position().y + sliderYPosition)
+        pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
     }
-    
+
+    yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
+    yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+
+
     // Draw the graph and calculate all constants
     p.draw = () => {
 
