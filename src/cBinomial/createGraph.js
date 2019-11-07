@@ -8,7 +8,7 @@ import Labeling from '../display/labeling.js';
 
 export default function createGraph(nValue, pValue, kValue, p, slider) {
     let canvas
-    let nBar, pBar
+    let nBar, pBar, kBar
 
     // Global slider position
     const sliderYPosition = 360
@@ -32,10 +32,12 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         // Initialize slider
         nBar = p.createSlider(1, 150, nVal, 1)
         pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
+        kBar = p.createSlider(0, 149, kVal, 1)
 
         // Set slider
         nBar.position(20, canvas.position().y + sliderYPosition)
         pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+        kBar.position(700 / 2 - kBar.width / 2, canvas.position().y + sliderYPosition)
     }
 
 
@@ -52,10 +54,17 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             // Get values from the sliders
             nVal = nBar.value()
             pVal = pBar.value()
+
+            if (kBar.value() < nVal) {
+                kVal = kBar.value()
+            } else {
+                kVal = nVal -1
+            }
         }
 
         // Create labels for data 		
         dataDisplay.addLabel("μ", distributionMath.expectedValue(nVal, pVal))
+        dataDisplay.addLabel("P(X ≤ k)", binomialMath.cumulatedBinom(nVal, pVal, kVal))
         dataDisplay.addLabel("σ", distributionMath.standardDeviation(nVal, pVal))
         dataDisplay.addLabel("σ²", distributionMath.variance(nVal, pVal))
 
@@ -100,6 +109,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             // Print bar values 
             p.text('n = ' + nVal, 20, sliderYPosition - 10)
             p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
+            p.text('k = ' + kVal, 700 / 2 - kBar.width / 2, sliderYPosition - 10)
         }
     }
 
@@ -108,6 +118,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         if (slider) {
             nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
             pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+            kBar.position(700 / 2 - kBar.width / 2, canvas.position().y + sliderYPosition)
         }
     }
 }

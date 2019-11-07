@@ -39,4 +39,15 @@ export default class Binomial {
 
         return sum
     } 
+
+    // Calculate cumulated binomial distribution
+    cumulatedBinom = (n, p, k) => {
+        let sum = 0
+
+        for (let i = 0; i <= k; i++) {
+            sum += this.bDistribution(n, p, i)
+        }
+
+        return sum
+    }
 }
