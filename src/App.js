@@ -69,9 +69,9 @@ const App = () => {
 			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
 			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
 
-			{formBinom && <FromToCalculate eqType="binom" nVal={120} kVal={70} pVal={0.4} />}
-			{formcBinom && <FromToCalculate eqType="cbinom" nVal={120} kVal={70} pVal={0.4} />}
-			{formNormal && <FromToCalculate eqType="normal" nVal={120} kVal={70} pVal={0.4} />}
+			{formBinom && <FromToCalculate sketch={binomialDistributionGraph} eqType="binom" nVal={120} kVal={70} pVal={0.4} />}
+			{formcBinom && <FromToCalculate sketch={cumulatedBinomialDistributionGraph} eqType="cbinom" nVal={120} kVal={70} pVal={0.4} />}
+			{formNormal && <FromToCalculate sketch={normalDistributionGraph} eqType="normal" nVal={120} kVal={70} pVal={0.4} />}
 
 			<Menu name="Stochastik - Rechner">
 				<Menu name="Playground">
