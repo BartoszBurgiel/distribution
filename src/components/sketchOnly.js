@@ -11,7 +11,6 @@ export default class SketchOnly extends React.Component {
     render() {
         return (
             <>
-                <MathFormula eqType={this.props.eqType} nVal={this.props.nVal} pVal={this.props.pVal} kVal={this.props.kVal}/>
                 <P5Wrapper sketch={this.props.sketch}  nVal={this.props.nVal} pVal={this.props.pVal} kVal={this.props.kVal} slider={true} />
             </>
         )

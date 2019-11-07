@@ -1,5 +1,6 @@
 import React from 'react';
 import P5Wrapper from 'react-p5-wrapper';
+import MathFormula from './mathFormula.js';
 
 
 export default class FromToCalculate extends React.Component {
@@ -60,7 +61,8 @@ export default class FromToCalculate extends React.Component {
                         }}
                     />
                 </form>
-                <P5Wrapper sketch={this.props.sketch} nVal={120} pVal={0.4} kVal={30} slider={false} />
+                <MathFormula eqType={this.props.eqType} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
+                <P5Wrapper sketch={this.props.sketch} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} slider={false} />
             </div>
             
 
