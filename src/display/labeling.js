@@ -10,7 +10,22 @@ export default class Labeling {
 
         for (let i = 0; i < range; i++) {
 
-            if (range < 250) {
+
+            if(range < 20) {
+                this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
+            } else if (range < 50) {
+                
+                // Display every 5th
+                if (i % 5 == 0) {
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
+                }
+            } else if (range < 100) {
+
+                // Display every 10th
+                if (i % 10 == 0) {
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
+                }
+            } else if (range < 250) {
 
                 // Display every 25th
                 if (i % 25 === 0) {
