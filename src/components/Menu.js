@@ -8,13 +8,6 @@ export default class Menu extends React.Component {
         }
     }
 
-
-
-    handleClick() {
-
-    }
-
-
     render() {
         return (
             <>

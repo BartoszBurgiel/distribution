@@ -16,13 +16,13 @@ export default class Labeling {
             } else if (range < 50) {
                 
                 // Display every 5th
-                if (i % 5 == 0) {
+                if (i % 5 === 0) {
                     this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
                 }
             } else if (range < 100) {
 
                 // Display every 10th
-                if (i % 10 == 0) {
+                if (i % 10 === 0) {
                     this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
                 }
             } else if (range < 250) {
