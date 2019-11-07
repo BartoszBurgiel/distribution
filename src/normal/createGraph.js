@@ -8,13 +8,14 @@ import Labeling from '../display/labeling.js';
 export default function createGraph(nValue, pValue, kValue, p, slider) {
 
     let canvas
-    let nBar, pBar, yRangeBar
+    let nBar, pBar, yRangeBar, kBar
 
     // Global slider position
     const sliderYPosition = 360
 
     let nVal = nValue
     let pVal = pValue
+    let kVal = kValue
 
     let yRange = 0.5
 
@@ -22,20 +23,22 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let normalMath = new Normal()
     let hoverInfo = new HoverInfo([], p)
     let labeling = new Labeling(p)
-    let dataDisplay = new Data(p, 700, 0, 400, 200)
+    let dataDisplay = new Data(p, 700, 0, 420, 200)
 
 
     // Initialize canvas
-    canvas = p.createCanvas(900, 400)
+    canvas = p.createCanvas(900, 420)
 
     if (slider) {
         // Initialize slider
         nBar = p.createSlider(1, 150, nVal, 1)
         pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
+        kBar = p.createSlider(0, nVal-1, 1)
 
         // Set slider
         nBar.position(20, canvas.position().y + sliderYPosition)
         pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+        kBar.position(20, canvas.position().y + sliderYPosition + 40)
     }
 
     yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
@@ -45,7 +48,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     p.draw = () => {
 
         if (typeof yRangeBar === 'undefined') {
-            canvas = p.createCanvas(900, 400)
+            canvas = p.createCanvas(900, 420)
             yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
             yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
         }
@@ -58,6 +61,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             // Get values from the sliders
             nVal = nBar.value()
             pVal = pBar.value()
+            kVal = kBar.value()
         }
 
         yRange = yRangeBar.value()
@@ -101,7 +105,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             p.line(x1, y1, x2, y2)
 
             // Mark k 
-            if (i === kValue) {
+            if (i === kVal) {
                 p.stroke('#ada')
                 p.strokeWeight(1)
 
@@ -126,6 +130,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             // Print bar values 
             p.text('n = ' + nVal, 20, sliderYPosition - 10)
             p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
+            p.text('k = ' + kVal, 20, sliderYPosition + 30)
         }
         p.text('yRange = ' + Math.round(yRange * 100) + '%', 700 / 2 - yRangeBar.width / 2, sliderYPosition - 10)
     }
