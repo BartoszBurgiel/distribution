@@ -25,7 +25,6 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let labeling = new Labeling(p)
     let dataDisplay = new Data(p, 700, 0, 420, 200)
 
-
     // Initialize canvas
     canvas = p.createCanvas(900, 420)
 
@@ -33,7 +32,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         // Initialize slider
         nBar = p.createSlider(1, 150, nVal, 1)
         pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
-        kBar = p.createSlider(0, nVal-1, 1)
+        kBar = p.createSlider(0, 150-1, 1)
 
         // Set slider
         nBar.position(20, canvas.position().y + sliderYPosition)
@@ -58,6 +57,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
 
 
         if (slider) {
+            
             // Get values from the sliders
             nVal = nBar.value()
             pVal = pBar.value()
@@ -75,6 +75,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         // Create labels for data 		
         dataDisplay.addLabel("μ", mu)
         dataDisplay.addLabel("P(μ)", normalMath.solve(mu, sigma, mu))
+        dataDisplay.addLabel("P(X=k)", normalMath.solve(kVal, sigma, mu))
         dataDisplay.addLabel("σ", sigma)
         dataDisplay.addLabel("σ²", variace)
         dataDisplay.addLabel("[μ±σ]", '[' + Math.ceil(mu - sigma) + ':' + Math.floor(mu + sigma) + ']')
@@ -109,7 +110,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
                 p.stroke('#ada')
                 p.strokeWeight(1)
 
-                p.line(50 + p.map(kValue, 0, nVal, 0, 600), 300, 50 + p.map(kValue, 0, nVal, 0, 600), 30)
+                p.line(50 + p.map(kVal, 0, nVal, 0, 600), 300, 50 + p.map(kVal, 0, nVal, 0, 600), 30)
 
                 p.stroke(255, 0, 0)
                 p.strokeWeight(2)
