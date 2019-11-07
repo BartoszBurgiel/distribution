@@ -9,7 +9,7 @@ import Labeling from '../display/labeling.js';
 export default function createGraph(nValue, pValue, kValue, p, slider) {
 
     let canvas
-    let nBar, pBar, yRangeBar
+    let nBar, pBar, yRangeBar, kBar
 
     // Global slider position
     const sliderYPosition = 360
@@ -24,9 +24,9 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let binomialMath = new Binomial()
     let hoverInfo = new HoverInfo([], p)
     let labeling = new Labeling(p)
-    let dataDisplay = new Data(p, 700, 0, 400, 200)
+    let dataDisplay = new Data(p, 700, 0, 420, 200)
 
-    canvas = p.createCanvas(900, 400)
+    canvas = p.createCanvas(900, 420)
 
 
     // Initialize canvas
@@ -35,10 +35,12 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         // Initialize slider
         nBar = p.createSlider(1, 150, nVal, 1)
         pBar = p.createSlider(0.01, 0.99, pVal, 0.01)
+        kBar = p.createSlider(0, 149, kVal, 1)
 
         // Set slider
         nBar.position(20, canvas.position().y + sliderYPosition)
         pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+        kBar.position(20, canvas.position().y + sliderYPosition + 40)
     }
 
     yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
@@ -49,7 +51,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     p.draw = () => {
 
         if (typeof yRangeBar === 'undefined') {
-            canvas = p.createCanvas(900, 400)
+            canvas = p.createCanvas(900, 420)
             yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
             yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
         }
@@ -65,6 +67,13 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             // Get values from the sliders
             nVal = nBar.value()
             pVal = pBar.value()
+
+            // If slider value < nVal else stack overflow
+            if (kBar.value() < nVal) {
+                kVal = kBar.value()
+            } else {
+                kVal = nVal -1
+            }
         }
 
         yRange = yRangeBar.value()
@@ -78,6 +87,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         // Create labels for data 		
         dataDisplay.addLabel("μ", mu)
         dataDisplay.addLabel("P(μ)", binomialMath.bDistribution(nVal, pVal, Math.round(mu)))
+        dataDisplay.addLabel("P(X=k)", binomialMath.bDistribution(nVal, pVal, kVal))
         dataDisplay.addLabel("σ", sigma)
         dataDisplay.addLabel("σ²", variace)
         dataDisplay.addLabel("[μ±σ]", '[' + Math.ceil(mu - sigma) + ':' + Math.floor(mu + sigma) + ']')
@@ -130,6 +140,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             // Print bar values 
             p.text('n = ' + nVal, 20, sliderYPosition - 10)
             p.text('p = ' + Math.round(pVal * 100) + '%', 700 - pBar.width - 20, sliderYPosition - 10)
+            p.text('k = ' + kVal, 20, sliderYPosition + 30)
         }
         p.text('yRange = ' + Math.round(yRange * 100) + '%', 700 / 2 - yRangeBar.width / 2, sliderYPosition - 10)
     }
@@ -139,6 +150,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         if (slider) {
             nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
             pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+            kBar.position(20, canvas.position().y + sliderYPosition + 40)
         }
         yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
     }

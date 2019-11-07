@@ -141,6 +141,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         if (slider) {
             nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
             pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
+            kBar.position(20, canvas.position().y + sliderYPosition + 40)
         }
         yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
     }
