@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import SketchOnly from './components/sketchOnly.js';
 import FromToCalculate from './components/formToCalculate.js';
 import binomialDistributionGraph from './binomial/graph.js'
@@ -66,6 +65,8 @@ const App = () => {
 	return (
 		<>
 
+			<h1>Stochastik - Rechner</h1>
+
 			{pgNormal && <SketchOnly sketch={normalDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
 			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
 			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
@@ -74,7 +75,7 @@ const App = () => {
 			{formcBinom && <FromToCalculate sketch={cumulatedBinomialDistributionGraph} eqType="cBinom" nVal={120} kVal={70} pVal={0.4} />}
 			{formNormal && <FromToCalculate sketch={normalDistributionGraph} eqType="normal" nVal={120} kVal={70} pVal={0.4} />}
 
-			<Menu name="Stochastik - Rechner">
+			<Menu>
 				<Menu name="Playground">
 					<MenuElement onClick={handleOnclick.bind(this, 'pgNormal')}> Normalverteilung </MenuElement>
 					<MenuElement onClick={handleOnclick.bind(this, 'pgBinom')}> Binomialverteilung </MenuElement>

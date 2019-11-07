@@ -1,4 +1,5 @@
 import React from 'react';
+import "../assets/style/menu.css"
 
 export default class Menu extends React.Component {
     constructor(props) {
@@ -11,9 +12,11 @@ export default class Menu extends React.Component {
     render() {
         return (
             <>
-                <div>
+                <div className="container column">
                     <h1>{this.props.name}</h1>
-                    {this.props.children}
+                    <div className="container row">
+                        {this.props.children}
+                    </div>
                 </div>
             </>
         )
