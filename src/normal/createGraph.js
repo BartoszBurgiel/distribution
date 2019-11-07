@@ -106,7 +106,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             p.line(x1, y1, x2, y2)
 
             // Mark k 
-            if (i === kVal) {
+            if (i === kVal && kVal <= nVal) {
                 p.stroke('#ada')
                 p.strokeWeight(1)
 

@@ -42,9 +42,14 @@ export default class Labeling {
                 if (i % 100 === 0) {
                     this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 100, width, i), yPos + 20)
                 }
-            } else if (range >= 5000) {
+            } else if (range < 10000) {
                 // Display every 1000th
                 if (i % 1000 === 0) {
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 100, width, i), yPos + 20)
+                }
+            } else if (range >= 10000) {
+                // Display every 1000th
+                if (i % 5000 === 0) {
                     this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 100, width, i), yPos + 20)
                 }
             }
