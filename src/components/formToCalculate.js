@@ -18,9 +18,14 @@ export default class FromToCalculate extends React.Component {
     render() {
         return (
             <>
-                <div className="container">
-                    <form>
-                        <div className="container-element">
+            <div className="main-funciton-display">
+                <div className="container column">
+                    <MathFormula eqType={this.props.eqType} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
+                    <P5Wrapper sketch={this.props.sketch} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} slider={false} />
+                </div>
+
+                <div className="container row">
+                    <div className="container-element">
                             <label>n: </label>
                             <input
                                 type="number"
@@ -31,9 +36,9 @@ export default class FromToCalculate extends React.Component {
                                     })
                                 }}
                             />
-                        </div>
+                            </div>
+                            <div className="container-element">
         
-                        <div className="container-element">
                             <label>k: </label>
                             <input
                                 type="number"
@@ -46,9 +51,9 @@ export default class FromToCalculate extends React.Component {
                                     })
                                 }}
                             />
-                        </div>
+                            </div>
+                            <div className="container-element">
 
-                        <div className="container-element">
                             <label>p: </label>
                             <input
                                 type="number"
@@ -62,10 +67,8 @@ export default class FromToCalculate extends React.Component {
                                     })
                                 }}
                             />
+                            </div>
                         </div>
-                    </form>
-                    <MathFormula eqType={this.props.eqType} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
-                    <P5Wrapper sketch={this.props.sketch} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} slider={false} />
                 </div>
             </>
         )
