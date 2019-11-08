@@ -6,6 +6,7 @@ import normalDistributionGraph from './normal/graph.js'
 import cumulatedBinomialDistributionGraph from './cBinomial/graph.js'
 import Menu from './components/Menu.js'
 import MenuElement from './components/MenuElement';
+import './assets/style/main.css';
 
 const App = () => {
 
@@ -64,6 +65,7 @@ const App = () => {
 
 	return (
 		<>
+		<div className="main">
 			<h1>Stochastik - Rechner</h1>
 
 			{pgNormal && <SketchOnly sketch={normalDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
@@ -87,6 +89,7 @@ const App = () => {
 					<MenuElement onClick={handleOnclick.bind(this, 'formCBinom')}> kumulierte Binomialverteilung </MenuElement>
 				</Menu>
 			</Menu>
+		</div>
 		</>
 	);
 }
