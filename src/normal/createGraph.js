@@ -62,7 +62,12 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             // Get values from the sliders
             nVal = nBar.value()
             pVal = pBar.value()
-            kVal = kBar.value()
+            
+            if (kBar.value() > nVal) {
+                kVal = nVal - 1
+            } else {
+                kVal = kBar.value()
+            }
         }
 
         yRange = yRangeBar.value()
