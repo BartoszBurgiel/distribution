@@ -38,13 +38,13 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         kBar = p.createSlider(0, 149, kVal, 1)
 
         // Set slider
-        nBar.position(20, canvas.position().y + sliderYPosition)
-        pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-        kBar.position(20, canvas.position().y + sliderYPosition + 40)
+        nBar.position(20 + canvas.position().x, canvas.position().y + sliderYPosition)
+        pBar.position(700 - pBar.width - 20 + canvas.position().x, canvas.position().y + sliderYPosition)
+        kBar.position(20 + canvas.position().x, canvas.position().y + sliderYPosition + 40)
     }
 
     yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
-    yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+    yRangeBar.position(700 / 2 - yRangeBar.width / 2 + canvas.position().x, canvas.position().y + sliderYPosition)
 
 
     // Draw the graph and calculate all constants
@@ -53,7 +53,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         if (typeof yRangeBar === 'undefined') {
             canvas = p.createCanvas(900, 420)
             yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
-            yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+            yRangeBar.position(700 / 2 - yRangeBar.width / 2 + canvas.position().x, canvas.position().y + sliderYPosition)
         }
 
         // Reset screen
@@ -148,11 +148,11 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     // Make sure the sliders are in place
     p.windowResized = () => {
         if (slider) {
-            nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
-            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-            kBar.position(20, canvas.position().y + sliderYPosition + 40)
+            nBar.position(20 + canvas.position().x, canvas.position().y + canvas.height + sliderYPosition)
+            pBar.position(700 - pBar.width - 20 + canvas.position().x, canvas.position().y + sliderYPosition)
+            kBar.position(20 + canvas.position().x, canvas.position().y + sliderYPosition + 40)
         }
-        yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+        yRangeBar.position(700 / 2 - yRangeBar.width / 2 + canvas.position().x, canvas.position().y + sliderYPosition)
     }
 
 }

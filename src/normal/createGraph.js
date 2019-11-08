@@ -11,12 +11,11 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let nBar, pBar, yRangeBar, kBar
 
     // Global slider position
-    const sliderYPosition = 360
-
+    
     let nVal = nValue
     let pVal = pValue
     let kVal = kValue
-
+    
     let yRange = 0.5
 
     let distributionMath = new Distribution()
@@ -24,9 +23,11 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let hoverInfo = new HoverInfo([], p)
     let labeling = new Labeling(p)
     let dataDisplay = new Data(p, 700, 0, 420, 200)
-
+    
     // Initialize canvas
     canvas = p.createCanvas(900, 420)
+
+    const sliderYPosition = 360
 
     if (slider) {
         // Initialize slider
@@ -35,13 +36,13 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         kBar = p.createSlider(0, 150-1, 1)
 
         // Set slider
-        nBar.position(20, canvas.position().y + sliderYPosition)
-        pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-        kBar.position(20, canvas.position().y + sliderYPosition + 40)
+        nBar.position(20 + canvas.position().x, canvas.position().y + sliderYPosition)
+        pBar.position(700 - pBar.width - 20 + canvas.position().x, canvas.position().y + sliderYPosition)
+        kBar.position(20 + canvas.position().x, canvas.position().y + sliderYPosition + 40)
     }
 
     yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
-    yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+    yRangeBar.position(700 / 2 - yRangeBar.width / 2 + canvas.position().x, canvas.position().y + sliderYPosition)
 
     // Draw the graph and calculate all constants
     p.draw = () => {
@@ -49,7 +50,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         if (typeof yRangeBar === 'undefined') {
             canvas = p.createCanvas(900, 420)
             yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
-            yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+            yRangeBar.position(700 / 2 - yRangeBar.width / 2  + canvas.position().x, canvas.position().y + sliderYPosition)
         }
 
         // Reset screen
@@ -139,11 +140,11 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     // Make sure the sliders are in place
     p.windowResized = () => {
         if (slider) {
-            nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
-            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-            kBar.position(20, canvas.position().y + sliderYPosition + 40)
+            nBar.position(20 + canvas.position().x, canvas.position().y + canvas.height + sliderYPosition)
+            pBar.position(700 - pBar.width - 20 + canvas.position().x, canvas.position().y + sliderYPosition)
+            kBar.position(20 + canvas.position().x, canvas.position().y + sliderYPosition + 40)
         }
-        yRangeBar.position(700 / 2 - yRangeBar.width / 2, canvas.position().y + sliderYPosition)
+        yRangeBar.position(700 / 2 - yRangeBar.width / 2 + canvas.position().x, canvas.position().y + sliderYPosition)
     }
 
 }

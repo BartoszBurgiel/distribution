@@ -35,9 +35,9 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         kBar = p.createSlider(0, 149, kVal, 1)
 
         // Set slider
-        nBar.position(20, canvas.position().y + sliderYPosition)
-        pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-        kBar.position(700 / 2 - kBar.width / 2, canvas.position().y + sliderYPosition)
+        nBar.position(20 + canvas.position().x, canvas.position().y + sliderYPosition)
+        pBar.position(700 - pBar.width - 20 + canvas.position().x, canvas.position().y + sliderYPosition)
+        kBar.position(700 / 2 - kBar.width / 2 + canvas.position().x, canvas.position().y + sliderYPosition)
     }
 
 
@@ -116,9 +116,9 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     // Make sure the sliders are in place
     p.windowResized = () => {
         if (slider) {
-            nBar.position(20, canvas.position().y + canvas.height + sliderYPosition)
-            pBar.position(700 - pBar.width - 20, canvas.position().y + sliderYPosition)
-            kBar.position(700 / 2 - kBar.width / 2, canvas.position().y + sliderYPosition)
+            nBar.position(20 + canvas.position().x, canvas.position().y + canvas.height + sliderYPosition)
+            pBar.position(700 - pBar.width - 20 + canvas.position().x, canvas.position().y + sliderYPosition)
+            kBar.position(700 / 2 - kBar.width / 2 + canvas.position().x, canvas.position().y + sliderYPosition)
         }
     }
 }
