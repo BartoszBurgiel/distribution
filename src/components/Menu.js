@@ -12,8 +12,10 @@ export default class Menu extends React.Component {
     render() {
         return (
             <>
-                <div className="container column">
-                    <h1>{this.props.name}</h1>
+                <div>
+                    <div className="container row middle">
+                        <h1 className="menu-header">{this.props.name}</h1>
+                    </div>
                     <div className="container row">
                         {this.props.children}
                     </div>
