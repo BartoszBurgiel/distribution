@@ -4,8 +4,8 @@ import FromToCalculate from './components/formToCalculate.js';
 import binomialDistributionGraph from './binomial/graph.js'
 import normalDistributionGraph from './normal/graph.js'
 import cumulatedBinomialDistributionGraph from './cBinomial/graph.js'
-import Menu from './components/Menu.js'
-import MenuElement from './components/MenuElement';
+import Menu from './components/menu.js'
+import MenuElement from './components/menuElement';
 import './assets/style/main.css';
 
 const App = () => {
