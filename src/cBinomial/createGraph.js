@@ -81,6 +81,7 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         // Set fill back
         p.fill(0)
 
+        labeling.labelYAxis(50, 100, 600, 300, 1, 1)
 
         // cumulated propability
         let propSum = 0
