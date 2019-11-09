@@ -36,6 +36,7 @@ export default class FromToCalculate extends React.Component {
                                         nVal: e.target.value
                                     })
                                 }}
+                                placeholder={this.state.nVal}
                             />
                             </div>
                             <div className="container-element">
@@ -51,6 +52,7 @@ export default class FromToCalculate extends React.Component {
                                         kVal: e.target.value
                                     })
                                 }}
+                                placeholder={this.state.kVal}
                             />
                             </div>
                             <div className="container-element">
@@ -67,6 +69,7 @@ export default class FromToCalculate extends React.Component {
                                         pVal: e.target.value
                                     })
                                 }}
+                                placeholder={this.state.pVal}
                             />
                             </div>
 
@@ -75,7 +78,7 @@ export default class FromToCalculate extends React.Component {
                                     <label>α: </label>
                                     <input
                                         type="number"
-                                        step="0.01"
+                                        step="0.001"
                                         name="pVal"
                                         min="0.01"
                                         max="0.99"
@@ -84,6 +87,7 @@ export default class FromToCalculate extends React.Component {
                                                 alphaVal: e.target.value
                                             })
                                         }}
+                                        placeholder={this.state.alphaVal}
                                     />
                                 </div>
                             }
