@@ -56,12 +56,7 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
             // Get values from the sliders
             nVal = nBar.value()
             pVal = pBar.value()
-
-            if (kBar.value() < nVal) {
-                kVal = kBar.value()
-            } else {
-                kVal = nVal -1
-            }
+            kVal = parseInt(p.map(kBar.value(), 0, 150, 0, nVal))
 
             alphaVal = alphaBar.value()
         }
