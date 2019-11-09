@@ -134,4 +134,23 @@ export default class Labeling {
             this.p.strokeWeight(1)
         }
     }
+
+    // Draw line representing the Ā - interval
+    markAlphaRange = (yPos, begin, width, n) => {
+        // Mark Alpha
+        // Color line 
+        this.p.strokeWeight(2)
+        this.p.stroke("#FF33DA")
+
+        //Draw
+        this.p.line(begin, yPos, begin+(width*n), yPos)
+        
+        // Reset
+        this.p.strokeWeight(1)
+        
+        // Label
+        this.p.noStroke()
+        this.p.text("Ā = [0;"+n+"]",begin + ((width*n)/2)-30, yPos - 10)
+        this.p.stroke(0)
+    }
 }

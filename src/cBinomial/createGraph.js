@@ -71,7 +71,7 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         dataDisplay.addLabel("P(X ≤ k)", binomialMath.cumulatedBinom(nVal, pVal, kVal))
         dataDisplay.addLabel("α", alphaVal)
         dataDisplay.addLabel("Ā", "[0;" + binomialMath.getDevianceIndex(nVal, pVal, alphaVal) + "]")
-        dataDisplay.addLabel("A", "["+ 1+binomialMath.getDevianceIndex(nVal, pVal, alphaVal) + ";"+nVal+"]")
+        dataDisplay.addLabel("A", "["+ (1+binomialMath.getDevianceIndex(nVal, pVal, alphaVal)) + ";"+nVal+"]")
         dataDisplay.addLabel("σ", distributionMath.standardDeviation(nVal, pVal))
         dataDisplay.addLabel("σ²", distributionMath.variance(nVal, pVal))
 
@@ -106,6 +106,8 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
 
             labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
         }
+
+        labeling.markAlphaRange(70, 50, 600/nVal, binomialMath.getDevianceIndex(nVal, pVal, alphaVal))
 
         hoverInfo.bars = bars
         hoverInfo.showHoverWindow()
