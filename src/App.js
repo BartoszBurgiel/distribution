@@ -70,10 +70,10 @@ const App = () => {
 
 			{pgNormal && <SketchOnly sketch={normalDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
 			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
-			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
+			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} alphaVal={0.05}/>}
 
 			{formBinom && <FromToCalculate sketch={binomialDistributionGraph} eqType="binom" nVal={120} kVal={70} pVal={0.4} />}
-			{formcBinom && <FromToCalculate sketch={cumulatedBinomialDistributionGraph} eqType="cBinom" nVal={120} kVal={70} pVal={0.4} />}
+			{formcBinom && <FromToCalculate sketch={cumulatedBinomialDistributionGraph} eqType="cBinom" nVal={120} kVal={70} pVal={0.4} alphaVal={0.05}/>}
 			{formNormal && <FromToCalculate sketch={normalDistributionGraph} eqType="normal" nVal={120} kVal={70} pVal={0.4} />}
 
 			<Menu className="container row">

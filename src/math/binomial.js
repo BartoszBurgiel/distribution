@@ -50,4 +50,14 @@ export default class Binomial {
 
         return sum
     }
+
+    // Return the index k of the last value 
+    // that is lower than alpha
+    getDevianceIndex = (n, p, alpha) => {
+        for(let i = 0; i<n; i++) {
+            if (this.cumulatedBinom(n, p, i) > alpha) {
+                return (i-1)
+            }
+        }
+    }
 }

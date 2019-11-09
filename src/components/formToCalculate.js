@@ -12,6 +12,7 @@ export default class FromToCalculate extends React.Component {
             nVal: 100,
             kVal: 50,
             pVal: 0.5,
+            alphaVal: 0.05
         }
     }
 
@@ -21,7 +22,7 @@ export default class FromToCalculate extends React.Component {
             <div className="main-funciton-display">
                 <div className="container column">
                     <MathFormula eqType={this.props.eqType} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
-                    <P5Wrapper sketch={this.props.sketch} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} slider={false} />
+                    <P5Wrapper sketch={this.props.sketch} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} alphaVal={this.state.alphaVal} slider={false} />
                 </div>
 
                 <div className="container row">
@@ -68,6 +69,24 @@ export default class FromToCalculate extends React.Component {
                                 }}
                             />
                             </div>
+
+                            {this.props.eqType === "cBinom" &&   
+                                <div className="container-element">
+                                    <label>α: </label>
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        name="pVal"
+                                        min="0.01"
+                                        max="0.99"
+                                        onChange={e => {
+                                            this.setState({
+                                                alphaVal: e.target.value
+                                            })
+                                        }}
+                                    />
+                                </div>
+                            }
                         </div>
                 </div>
             </>
