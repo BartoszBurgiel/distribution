@@ -109,11 +109,12 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             p.line(x1, y1, x2, y2)
 
             // Mark k 
-            if (i === kVal && kVal <= nVal) {
+            if (i === parseInt(p.map(kVal, 0, nVal-1, 0, 600))) {
                 p.stroke('#ada')
                 p.strokeWeight(1)
 
-                p.line(50 + p.map(kVal, 0, nVal, 0, 600), 300, 50 + p.map(kVal, 0, nVal, 0, 600), 30)
+                let kLineXPos = p.map(kVal, 0, nVal, 0, 600)
+                p.line(50 + kLineXPos, 300, 50 + kLineXPos, 30)
 
                 p.stroke(255, 0, 0)
                 p.strokeWeight(2)
