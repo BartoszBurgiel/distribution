@@ -136,21 +136,38 @@ export default class Labeling {
     }
 
     // Draw line representing the Ā - interval
-    markAlphaRange = (yPos, begin, width, n) => {
+    markAlphaRange = (yPos, begin, width, end, k, n) => {
         // Mark Alpha
+
         // Color line 
         this.p.strokeWeight(2)
-        this.p.stroke("#FF33DA")
+        this.p.stroke("#56FE34")
 
-        //Draw
-        this.p.line(begin, yPos, begin+(width*n), yPos)
+        //Draw opposite A line
+        this.p.line(begin, yPos, begin+(width*k), yPos)
+
+        // Draw A line
+        this.p.stroke("#FE8734")
+        this.p.line(begin+(width*k), yPos, end, yPos)
         
         // Reset
         this.p.strokeWeight(1)
         
         // Label
         this.p.noStroke()
-        this.p.text("Ā = [0;"+n+"]",begin + ((width*n)/2)-30, yPos - 10)
+        this.p.text("Ā = [0;"+k+"]",begin + ((width*k)/2)-30, yPos - 10)
+
+        // x-coordinates
+        // half of the width of the line
+        let AxCoords = (width * (n-k))/2
+        
+        // add the end of the opposite A line
+        AxCoords += begin + width*k
+
+        // add margin
+        AxCoords -= 30
+
+        this.p.text("A = ["+(k+1)+";"+n+"]", AxCoords, yPos - 10)
         this.p.stroke(0)
     }
 }

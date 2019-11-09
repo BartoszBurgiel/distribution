@@ -107,7 +107,7 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
             labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
         }
 
-        labeling.markAlphaRange(70, 50, 600/nVal, binomialMath.getDevianceIndex(nVal, pVal, alphaVal))
+        labeling.markAlphaRange(70, 50, 600/nVal, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal)
 
         hoverInfo.bars = bars
         hoverInfo.showHoverWindow()
