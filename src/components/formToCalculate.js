@@ -12,7 +12,7 @@ export default class FromToCalculate extends React.Component {
         super(props)
         this.state = {
             nVal: 100,
-            kVal: 50,
+            kVal: 0,
             pVal: 0.5,
             alphaVal: 0.05
         }

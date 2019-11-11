@@ -1,4 +1,5 @@
 import React from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import '../assets/style/mupad.css';
 
 export default class MupadFormula extends React.Component {
@@ -20,6 +21,7 @@ export default class MupadFormula extends React.Component {
             case 'normal':
                 functionName = "P"
                 command = `${functionName} := stats::normalPF(${this.props.muVal},${this.props.varVal});\n${functionName}(${this.props.kVal}); \n`
+                break
             default: 
                 break
         }
@@ -37,7 +39,12 @@ export default class MupadFormula extends React.Component {
         return ( 
             <>
                 <h2>Mupad - Befehl</h2>
-                <textarea defaultValue={this.setupCommand()} rows='5' cols='10'></textarea>
+                <div>
+                    {this.setupCommand()}
+                    <CopyToClipboard text={this.setupCommand()}>
+                        <button>Kopieren</button>
+                    </CopyToClipboard>
+                </div> 
             </>
         )
     }
