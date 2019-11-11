@@ -8,8 +8,6 @@ export default class Labeling {
         this.p.line(xPos, yPos, xPos + width, yPos)
         this.p.noStroke()
 
-        let steps
-
         for (let i = 0; i < range; i++) {
 
 

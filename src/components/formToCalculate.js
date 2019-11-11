@@ -2,6 +2,7 @@ import React from 'react';
 import P5Wrapper from 'react-p5-wrapper';
 import MathFormula from './mathFormula.js';
 import '../assets/style/form.css';
+import MupadFormula from './mupadFormula.js';
 
 
 export default class FromToCalculate extends React.Component {
@@ -22,6 +23,7 @@ export default class FromToCalculate extends React.Component {
             <div className="main-funciton-display">
                 <div className="container column">
                     <MathFormula eqType={this.props.eqType} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
+                    <MupadFormula eqType={this.props.eqType} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
                     <P5Wrapper sketch={this.props.sketch} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} alphaVal={this.state.alphaVal} slider={false} />
                 </div>
 
