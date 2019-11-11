@@ -1,4 +1,5 @@
 import React from 'react';
+import '../assets/style/mupad.css';
 
 export default class MupadFormula extends React.Component {
 
@@ -16,12 +17,17 @@ export default class MupadFormula extends React.Component {
                 functionName = "F"
                 command = `${functionName} := stats::binomialCDF(${this.props.nVal},${this.props.pVal});\n${functionName}(${this.props.kVal}); \n`
                 break
+            case 'normal':
+                functionName = "P"
+                command = `${functionName} := stats::normalPF(${this.props.muVal},${this.props.varVal});\n${functionName}(${this.props.kVal}); \n`
             default: 
                 break
         }
 
         if (this.props.eqType !== 'normal') {
             command += `\ndaten := [${functionName}(k)$k=0..${this.props.nVal}];\nplot(plot::Bars2d(daten));`
+        } else {
+            command += `\nplotfunc2d(${functionName}(x), x=0..${this.props.nVal}, YRange=0..1);`
         }
 
         return command
@@ -31,7 +37,7 @@ export default class MupadFormula extends React.Component {
         return ( 
             <>
                 <h2>Mupad - Befehl</h2>
-                <textarea defaultValue={this.setupCommand()}></textarea>
+                <textarea defaultValue={this.setupCommand()} rows='5' cols='10'></textarea>
             </>
         )
     }

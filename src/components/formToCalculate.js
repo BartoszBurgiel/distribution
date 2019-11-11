@@ -3,6 +3,7 @@ import P5Wrapper from 'react-p5-wrapper';
 import MathFormula from './mathFormula.js';
 import '../assets/style/form.css';
 import MupadFormula from './mupadFormula.js';
+import Distribution from '../math/distribution.js';
 
 
 export default class FromToCalculate extends React.Component {
@@ -15,15 +16,28 @@ export default class FromToCalculate extends React.Component {
             pVal: 0.5,
             alphaVal: 0.05
         }
+
+        this.distributionMath = new Distribution()
     }
+
+    // Returns the expected value \mu for the given n and p 
+    getMu = () => {
+        return (this.distributionMath.expectedValue(this.state.nVal, this.state.pVal))
+    }
+
+    // Returns the variance of the given values
+    getVariance = () => {
+        return (this.distributionMath.variance(this.state.nVal, this.state.pVal))
+    }
+
 
     render() {
         return (
             <>
             <div className="main-funciton-display">
-                <div className="container column">
+                <div className="container column middle">
                     <MathFormula eqType={this.props.eqType} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
-                    <MupadFormula eqType={this.props.eqType} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} />
+                    <MupadFormula eqType={this.props.eqType} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} muVal={this.getMu()} varVal={this.getVariance()} />
                     <P5Wrapper sketch={this.props.sketch} nVal={this.state.nVal} pVal={this.state.pVal} kVal={this.state.kVal} alphaVal={this.state.alphaVal} slider={false} />
                 </div>
 

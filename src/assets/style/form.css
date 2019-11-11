@@ -11,3 +11,7 @@
 .column {
     flex-direction: column;
 }
+
+.middle {
+    margin: auto;
+}
