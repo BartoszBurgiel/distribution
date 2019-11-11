@@ -47,6 +47,7 @@ export default class FromToCalculate extends React.Component {
                             <input
                                 type="number"
                                 min="1"
+                                value={this.state.nVal}
                                 onChange={e => {
                                     this.setState({
                                         nVal: e.target.value
@@ -62,6 +63,7 @@ export default class FromToCalculate extends React.Component {
                                 type="number"
                                 name="kVal"
                                 min="0"
+                                value={this.state.kVal}
                                 max={this.state.nVal - 1}
                                 onChange={e => {
                                     this.setState({
@@ -80,6 +82,7 @@ export default class FromToCalculate extends React.Component {
                                 name="pVal"
                                 min="0.01"
                                 max="0.99"
+                                value={this.state.pVal}
                                 onChange={e => {
                                     this.setState({
                                         pVal: e.target.value
@@ -97,6 +100,7 @@ export default class FromToCalculate extends React.Component {
                                         step="0.001"
                                         name="pVal"
                                         min="0.01"
+                                        value={this.state.alphaVal}
                                         max="0.99"
                                         onChange={e => {
                                             this.setState({
