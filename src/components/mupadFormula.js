@@ -1,6 +1,5 @@
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import '../assets/style/mupad.css';
 
 export default class MupadFormula extends React.Component {
 
