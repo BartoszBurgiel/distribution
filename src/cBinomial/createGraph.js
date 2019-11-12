@@ -116,10 +116,14 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
 
             p.textSize(14)
 
-            let devIndex = binomialMath.getDevianceIndex(nVal, pVal, alphaVal)
+            let devIndex = distributionMath.getDevianceIndex(nVal, pVal, alphaVal)
 
             p.text("P(X ≤ k) < α = [0;" + devIndex + "]", 60, 180)
             p.text("P(X ≤ k) > α = [" + (devIndex+1) +";" + nVal + "]", 60, 200)
+        
+            p.textSize(12)
+            // Disclaimer
+            p.text("(approx. Wert -> gerechnet mit der kumilierten Normalverteilung)", 60, 280)
         }
         
         
