@@ -10,27 +10,31 @@ export default class Labeling {
 
         for (let i = 0; i < range; i++) {
 
-            if (range < 250) {
 
-                // Display every 25th
-                if (i % 25 === 0) {
+            if(range < 20) {
+                this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
+            } else if (range < 50) {
+                
+                // Display every 5th
+                if (i % 5 === 0) {
                     this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
                 }
-            } else if (range < 500) {
+            } else if (range < 100) {
 
-                // Display every 50th
+                // Display every 10th
+                if (i % 10 === 0) {
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
+                }
+            } else if (range < 250) {
+
+
+                // Display every 25th
                 if (i % 50 === 0) {
-                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 50, width, i), yPos + 20)
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
                 }
-            } else if (range < 5000) {
-                // Display every 100th
-                if (i % 100 === 0) {
-                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 100, width, i), yPos + 20)
-                }
-            } else if (range >= 5000) {
-                // Display every 1000th
-                if (i % 1000 === 0) {
-                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 100, width, i), yPos + 20)
+            } else if (range > 250) {
+                if (i % parseInt(range/5) === 0) {
+                    this.p.text(i, xPos - 8 + this.xAxisNormalSteps(range, 25, width, i), yPos + 20)
                 }
             }
         }
@@ -113,5 +117,41 @@ export default class Labeling {
             this.p.line(xPos, stepPropPos, xPos + width, stepPropPos)
             this.p.strokeWeight(1)
         }
+    }
+
+    // Draw line representing the Ā - interval
+    markAlphaRange = (yPos, begin, width, end, k, n) => {
+        // Mark Alpha
+
+        // Color line 
+        this.p.strokeWeight(2)
+        this.p.stroke("#56FE34")
+
+        //Draw opposite A line
+        this.p.line(begin, yPos, begin+(width*k), yPos)
+
+        // Draw A line
+        this.p.stroke("#FE8734")
+        this.p.line(begin+(width*k), yPos, end, yPos)
+        
+        // Reset
+        this.p.strokeWeight(1)
+        
+        // Label
+        this.p.noStroke()
+        this.p.text("Ā = [0;"+k+"]",begin + ((width*k)/2)-30, yPos - 10)
+
+        // x-coordinates
+        // half of the width of the line
+        let AxCoords = (width * (n-k))/2
+        
+        // add the end of the opposite A line
+        AxCoords += begin + width*k
+
+        // add margin
+        AxCoords -= 30
+
+        this.p.text("A = ["+(k+1)+";"+n+"]", AxCoords, yPos - 10)
+        this.p.stroke(0)
     }
 }

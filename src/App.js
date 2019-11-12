@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import './App.css';
-import P5Wrapper from 'react-p5-wrapper'
 import SketchOnly from './components/sketchOnly.js';
 import FromToCalculate from './components/formToCalculate.js';
 import binomialDistributionGraph from './binomial/graph.js'
 import normalDistributionGraph from './normal/graph.js'
 import cumulatedBinomialDistributionGraph from './cBinomial/graph.js'
-import Menu from './components/Menu.js'
-import MenuElement from './components/MenuElement';
+import Menu from './components/menu.js'
+import MenuElement from './components/menuElement';
+import './assets/style/main.css';
 
 const App = () => {
 
@@ -59,17 +58,25 @@ const App = () => {
 				resetAllStateVariables()
 				setFormcBinom(true)
 				break
+			default: 
+			resetAllStateVariables()
 		}
 	}
 
 	return (
 		<>
+		<div className="main">
+			<h1>Stochastik - Rechner</h1>
 
-			{pgNormal && <SketchOnly sketch={normalDistributionGraph} eqType="normal" nVal={120} kVal={70} pVal={0.4} />}
-			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} eqType="binom" nVal={120} kVal={70} pVal={0.4} />}
-			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} eqType="cBinom" nVal={120} kVal={70} pVal={0.4} />}
+			{pgNormal && <SketchOnly sketch={normalDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
+			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
+			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} alphaVal={0.05}/>}
 
-			<Menu name="Stochastik - Rechner">
+			{formBinom && <FromToCalculate sketch={binomialDistributionGraph} eqType="binom" nVal={120} kVal={70} pVal={0.4} />}
+			{formcBinom && <FromToCalculate sketch={cumulatedBinomialDistributionGraph} eqType="cBinom" nVal={120} kVal={70} pVal={0.4} alphaVal={0.05}/>}
+			{formNormal && <FromToCalculate sketch={normalDistributionGraph} eqType="normal" nVal={120} kVal={70} pVal={0.4} />}
+
+			<Menu className="container row">
 				<Menu name="Playground">
 					<MenuElement onClick={handleOnclick.bind(this, 'pgNormal')}> Normalverteilung </MenuElement>
 					<MenuElement onClick={handleOnclick.bind(this, 'pgBinom')}> Binomialverteilung </MenuElement>
@@ -77,11 +84,12 @@ const App = () => {
 				</Menu>
 
 				<Menu name="Berechnen">
-					<MenuElement> Normalverteilung </MenuElement>
-					<MenuElement> Binomialverteilung </MenuElement>
-					<MenuElement> kumulierte Binomialverteilung </MenuElement>
+					<MenuElement onClick={handleOnclick.bind(this, 'formNormal')}> Normalverteilung </MenuElement>
+					<MenuElement onClick={handleOnclick.bind(this, 'formBinom')}> Binomialverteilung </MenuElement>
+					<MenuElement onClick={handleOnclick.bind(this, 'formCBinom')}> kumulierte Binomialverteilung </MenuElement>
 				</Menu>
 			</Menu>
+		</div>
 		</>
 	);
 }

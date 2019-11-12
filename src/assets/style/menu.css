@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    align-content: space-between;
+    width: 100%;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.middle {
+    align-content: space-around;
+    width: 100%;
+}
+
+.menu-header {
+    margin: auto;
+    margin-bottom: 1%;
+}

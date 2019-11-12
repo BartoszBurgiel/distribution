@@ -1,13 +1,9 @@
 import { BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import React from 'react';
-import Distribution from '../math/distribution';
 
 
 export default class MathFormula extends React.Component {
-    constructor(props) {
-        super(props)
-    }
     
     assembleFormula = () => {
 
@@ -28,6 +24,7 @@ export default class MathFormula extends React.Component {
                 return <BlockMath math={`P(X = ${k}) = \\binom{${n}}{${k}} * {${p}}^{${k}} * (1-{${p}})^{${n}-${k}}`} />
             case 'normal':
                 return <BlockMath math={`P(x) = \\frac{1}{\\sqrt{2\\pi ${v}}}e^{\\frac{-(x-${eV})}{2${v}}}`} />
+            default:
         }
     }
 

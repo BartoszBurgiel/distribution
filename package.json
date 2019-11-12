@@ -1,10 +1,12 @@
 {
+  "homepage": "https://bartoszburgiel.github.io/distribution",
   "name": "distribution",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "p5": "^0.10.2",
     "react": "^16.11.0",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.11.0",
     "react-katex": "^2.0.2",
     "react-p5": "^1.1.1",
@@ -12,6 +14,8 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -31,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }

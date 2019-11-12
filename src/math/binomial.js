@@ -39,4 +39,25 @@ export default class Binomial {
 
         return sum
     } 
+
+    // Calculate cumulated binomial distribution
+    cumulatedBinom = (n, p, k) => {
+        let sum = 0
+
+        for (let i = 0; i <= k; i++) {
+            sum += this.bDistribution(n, p, i)
+        }
+
+        return sum
+    }
+
+    // Return the index k of the last value 
+    // that is lower than alpha
+    getDevianceIndex = (n, p, alpha) => {
+        for(let i = 0; i<n; i++) {
+            if (this.cumulatedBinom(n, p, i) > alpha) {
+                return (i-1)
+            }
+        }
+    }
 }
