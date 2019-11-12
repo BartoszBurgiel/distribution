@@ -23,7 +23,7 @@ export default class MathFormula extends React.Component {
         // Check props
         switch (this.props.eqType) {
             case 'cBinom':
-                return <BlockMath math={`P(X \\le K) = \\sum_{k=0}^{${n}} \\Big[\\binom{${n}}{k} * {${p}}^{k} * (1-{${p}})^{${n}-k}\\Big]`} />
+                return <BlockMath math={`P(X \\le k) = \\sum_{k=0}^{${n}} \\Big[\\binom{${n}}{k} * {${p}}^{k} * (1-{${p}})^{${n}-k}\\Big]`} />
             case 'binom':
                 return <BlockMath math={`P(X = ${k}) = \\binom{${n}}{${k}} * {${p}}^{${k}} * (1-{${p}})^{${n}-${k}}`} />
             case 'normal':
