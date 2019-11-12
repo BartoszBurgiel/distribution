@@ -72,6 +72,7 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         p.fill(0)
 
         labeling.labelYAxis(50, 100, 600, 300, 1, 1)
+        labeling.markAlphaRange(70, 100, 50, 600/nVal, 230, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal, alphaVal)
 
         // cumulated propability
         let propSum = 0
@@ -101,7 +102,6 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
             }
 
             
-            labeling.markAlphaRange(70, 50, 600/nVal, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal)
         } else {
             
             // Infoscreen
