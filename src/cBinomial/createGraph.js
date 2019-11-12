@@ -64,14 +64,9 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         // Create labels for data 		
         dataDisplay.addLabel("μ", distributionMath.expectedValue(nVal, pVal))
         dataDisplay.addLabel("P(X ≤ k)", binomialMath.cumulatedBinom(nVal, pVal, kVal))
-        dataDisplay.addLabel("α", alphaVal)
-        dataDisplay.addLabel("Ā", "[0;" + binomialMath.getDevianceIndex(nVal, pVal, alphaVal) + "]")
-        dataDisplay.addLabel("A", "["+ (1+binomialMath.getDevianceIndex(nVal, pVal, alphaVal)) + ";"+nVal+"]")
         dataDisplay.addLabel("σ", distributionMath.standardDeviation(nVal, pVal))
         dataDisplay.addLabel("σ²", distributionMath.variance(nVal, pVal))
 
-        // Display dataDisplay 
-        dataDisplay.display()
 
         // Set fill back
         p.fill(0)
@@ -104,19 +99,33 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
                 
                 labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
             }
+
+            
             labeling.markAlphaRange(70, 50, 600/nVal, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal)
         } else {
-
-            // // Infoscreen
-            // p.fill(255)
-            // p.rect(50, 100, 600, 200)
-        
-            // //p.textSize(24)
-
-            // p.text("Leider aus performance-Gründen ist das Programm nicht in der Lage \n"+
-            //         "den Histogramm anzuzeichnen", 60, 140)
-        }
             
+            // Infoscreen
+            p.fill(255)
+            p.rect(50, 100, 600, 200)
+            
+            p.fill(0)
+            p.textSize(18)
+            
+            p.text("Leider aus Performance Gründen ist das Programm nicht in der Lage \n"+
+            "das Histogramm anzuzeichnen", 60, 130)
+
+            p.textSize(14)
+
+            let devIndex = binomialMath.getDevianceIndex(nVal, pVal, alphaVal)
+
+            p.text("P(X ≤ k) < α = [0;" + devIndex + "]", 60, 180)
+            p.text("P(X ≤ k) > α = [" + (devIndex+1) +";" + nVal + "]", 60, 200)
+        }
+        
+        
+        // Display dataDisplay 
+        dataDisplay.addLabel("α", alphaVal)
+        dataDisplay.display()
 
         hoverInfo.bars = bars
         hoverInfo.showHoverWindow()
