@@ -1,9 +1,10 @@
 {
-  "homepage": "https://bartoszburgiel.github.io/distribution",
+  "homepage": "https://magicmaths.netlify.com",
   "name": "distribution",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "katex": "^0.11.1",
     "p5": "^0.10.2",
     "react": "^16.11.0",
     "react-copy-to-clipboard": "^5.0.2",
