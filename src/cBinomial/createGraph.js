@@ -102,9 +102,9 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
                     bars[i].display(p, 255)
                 }
                 
-                labeling.markAlphaRange(70, 50, 600/nVal, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal)
                 labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
             }
+            labeling.markAlphaRange(70, 50, 600/nVal, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal)
         } else {
 
             // // Infoscreen

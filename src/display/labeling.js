@@ -139,7 +139,8 @@ export default class Labeling {
         
         // Label
         this.p.noStroke()
-        this.p.text("P(X≤k) < α = [0;"+k+"]",begin + ((width*k)/2)-30, yPos - 10)
+        this.p.textSize(18)
+        this.p.text("P(X≤k) < α = [0;"+k+"]",begin + ((width*k)/2)-50, yPos - 10)
 
         // x-coordinates
         // half of the width of the line
@@ -149,7 +150,7 @@ export default class Labeling {
         AxCoords += begin + width*k
 
         // add margin
-        AxCoords -= 30
+        AxCoords -= 50
 
         this.p.text("P(X≤k) > α = ["+(k+1)+";"+n+"]", AxCoords, yPos - 10)
         this.p.stroke(0)
