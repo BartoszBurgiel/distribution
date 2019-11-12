@@ -4,7 +4,7 @@ import Data from '../display/data.js';
 import Binomial from '../math/binomial.js';
 import HoverInfo from '../display/hoverInfo.js';
 import Labeling from '../display/labeling.js';
-
+import Normal from '../math/normal.js';
 
 export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
     let canvas
@@ -81,29 +81,42 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         // cumulated propability
         let propSum = 0
 
-        // Generate bars
-        for (let i = 0; i < nVal; i++) {
-            let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
+        if (nVal < 150) {
 
-            bars[i] = new Bar(50 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
+            // Generate bars
+            for (let i = 0; i < nVal; i++) {
+                let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
-            propSum += currentPropability
+                bars[i] = new Bar(50 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
 
-            // Calculate, set and display bar's hight
-            let absHeight = p.map(propSum, 0, 1, 0, 200)
-            bars[i].height = absHeight
-            bars[i].prop = propSum
+                propSum += currentPropability
 
-            if (kVal === i) {
-                bars[i].display(p, '#22919D')
-            } else {
-                bars[i].display(p, 255)
+                // Calculate, set and display bar's hight
+                let absHeight = p.map(propSum, 0, 1, 0, 200)
+                bars[i].height = absHeight
+                bars[i].prop = propSum
+                
+                if (kVal === i) {
+                    bars[i].display(p, '#22919D')
+                } else {
+                    bars[i].display(p, 255)
+                }
+                
+                labeling.markAlphaRange(70, 50, 600/nVal, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal)
+                labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
             }
+        } else {
 
-            labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
+            // // Infoscreen
+            // p.fill(255)
+            // p.rect(50, 100, 600, 200)
+        
+            // //p.textSize(24)
+
+            // p.text("Leider aus performance-Gründen ist das Programm nicht in der Lage \n"+
+            //         "den Histogramm anzuzeichnen", 60, 140)
         }
-
-        labeling.markAlphaRange(70, 50, 600/nVal, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal)
+            
 
         hoverInfo.bars = bars
         hoverInfo.showHoverWindow()
