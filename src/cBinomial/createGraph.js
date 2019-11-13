@@ -77,55 +77,27 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         // cumulated propability
         let propSum = 0
 
-        if (nVal < 150) {
+        // Generate bars
+        for (let i = 0; i < nVal; i++) {
+            let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
-            // Generate bars
-            for (let i = 0; i < nVal; i++) {
-                let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
+            bars[i] = new Bar(50 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
 
-                bars[i] = new Bar(50 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
+            propSum += currentPropability
 
-                propSum += currentPropability
-
-                // Calculate, set and display bar's hight
-                let absHeight = p.map(propSum, 0, 1, 0, 200)
-                bars[i].height = absHeight
-                bars[i].prop = propSum
-                
-                if (kVal === i) {
-                    bars[i].display(p, '#22919D')
-                } else {
-                    bars[i].display(p, 255)
-                }
-                
-                labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
+            // Calculate, set and display bar's hight
+            let absHeight = p.map(propSum, 0, 1, 0, 200)
+            bars[i].height = absHeight
+            bars[i].prop = propSum
+            
+            if (kVal === i) {
+                bars[i].display(p, '#22919D')
+            } else {
+                bars[i].display(p, 255)
             }
-
             
-        } else {
-            
-            // Infoscreen
-            p.fill(255)
-            p.rect(50, 100, 600, 200)
-            
-            p.fill(0)
-            p.textSize(18)
-            
-            p.text("Leider aus Performance Gründen ist das Programm nicht in der Lage \n"+
-            "das Histogramm anzuzeichnen", 60, 130)
-
-            p.textSize(14)
-
-            let devIndex = distributionMath.getDevianceIndex(nVal, pVal, alphaVal)
-
-            p.text("P(X ≤ k) < α = [0;" + devIndex + "]", 60, 180)
-            p.text("P(X ≤ k) > α = [" + (devIndex+1) +";" + nVal + "]", 60, 200)
-        
-            p.textSize(12)
-            // Disclaimer
-            p.text("(approx. Wert -> gerechnet mit der kumilierten Normalverteilung)", 60, 280)
+            labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
         }
-        
         
         // Display dataDisplay 
         dataDisplay.addLabel("α", alphaVal)

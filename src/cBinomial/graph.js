@@ -10,7 +10,7 @@ export default function cumulatedBinomialDistributionGraph(p) {
 		let slider = props.slider
 
 		// Draw only if valid input
-		if (pVal > 0 && pVal < 1 && nVal > 0 && kVal < nVal && kVal >= 0 && nVal < 1000 && alphaVal > 0 && alphaVal < 1) {
+		if (pVal > 0 && pVal < 1 && nVal > 0 && kVal < nVal && kVal >= 0 && nVal < 150 && alphaVal > 0 && alphaVal < 1) {
 			createGraph(nVal, pVal, kVal, alphaVal,p, slider)
 		}
 	}
