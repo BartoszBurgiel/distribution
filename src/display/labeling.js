@@ -120,7 +120,7 @@ export default class Labeling {
     }
 
     // Draw line representing the Ā - interval
-    markAlphaRange = (yPos, begin, width, end, k, n) => {
+    markAlphaRange = (yPos, yAxisBegin ,begin, width, height, end, k, n, alpha) => {
         // Mark Alpha
 
         // Color line 
@@ -130,16 +130,28 @@ export default class Labeling {
         //Draw opposite A line
         this.p.line(begin, yPos, begin+(width*k), yPos)
 
+        // Draw x - axis marker
+        this.p.stroke(150)
+        this.p.line(begin +(width*k), yPos, begin + (width*k), yPos + height)
+
+
         // Draw A line
         this.p.stroke("#FE8734")
         this.p.line(begin+(width*k), yPos, end, yPos)
         
+        // draw y-axis marker
+        this.p.stroke(150)
+
+        let tempYPos = this.p.map(alpha, 0, 1, yAxisBegin+height-(yAxisBegin-yPos), yAxisBegin)
+        this.p.line(begin, tempYPos, begin+(width*k), tempYPos) 
+
         // Reset
         this.p.strokeWeight(1)
         
         // Label
         this.p.noStroke()
-        this.p.text("Ā = [0;"+k+"]",begin + ((width*k)/2)-30, yPos - 10)
+        this.p.textSize(18)
+        this.p.text("P(X≤k) < α = [0;"+k+"]",begin + ((width*k)/2)-50, yPos - 10)
 
         // x-coordinates
         // half of the width of the line
@@ -149,9 +161,9 @@ export default class Labeling {
         AxCoords += begin + width*k
 
         // add margin
-        AxCoords -= 30
+        AxCoords -= 50
 
-        this.p.text("A = ["+(k+1)+";"+n+"]", AxCoords, yPos - 10)
+        this.p.text("P(X≤k) > α = ["+(k+1)+";"+n+"]", AxCoords, yPos - 10)
         this.p.stroke(0)
     }
 }

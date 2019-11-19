@@ -1,5 +1,5 @@
 {
-  "homepage": "https://magicmaths.netlify.com",
+  "homepage": "https://mupadstinktnachfisch.netlify.com",
   "name": "distribution",
   "version": "0.1.0",
   "private": true,
@@ -9,6 +9,7 @@
     "react": "^16.11.0",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.11.0",
+    "react-helmet": "^5.2.1",
     "react-katex": "^2.0.2",
     "react-p5": "^1.1.1",
     "react-p5-wrapper": "^2.0.0",

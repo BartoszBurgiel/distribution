@@ -4,7 +4,7 @@ import Data from '../display/data.js';
 import Binomial from '../math/binomial.js';
 import HoverInfo from '../display/hoverInfo.js';
 import Labeling from '../display/labeling.js';
-
+import Normal from '../math/normal.js';
 
 export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
     let canvas
@@ -64,19 +64,15 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         // Create labels for data 		
         dataDisplay.addLabel("μ", distributionMath.expectedValue(nVal, pVal))
         dataDisplay.addLabel("P(X ≤ k)", binomialMath.cumulatedBinom(nVal, pVal, kVal))
-        dataDisplay.addLabel("α", alphaVal)
-        dataDisplay.addLabel("Ā", "[0;" + binomialMath.getDevianceIndex(nVal, pVal, alphaVal) + "]")
-        dataDisplay.addLabel("A", "["+ (1+binomialMath.getDevianceIndex(nVal, pVal, alphaVal)) + ";"+nVal+"]")
         dataDisplay.addLabel("σ", distributionMath.standardDeviation(nVal, pVal))
         dataDisplay.addLabel("σ²", distributionMath.variance(nVal, pVal))
 
-        // Display dataDisplay 
-        dataDisplay.display()
 
         // Set fill back
         p.fill(0)
 
         labeling.labelYAxis(50, 100, 600, 300, 1, 1)
+        labeling.markAlphaRange(70, 100, 50, 600/nVal, 230, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal, alphaVal)
 
         // cumulated propability
         let propSum = 0
@@ -93,17 +89,19 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
             let absHeight = p.map(propSum, 0, 1, 0, 200)
             bars[i].height = absHeight
             bars[i].prop = propSum
-
+            
             if (kVal === i) {
                 bars[i].display(p, '#22919D')
             } else {
                 bars[i].display(p, 255)
             }
-
+            
             labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
         }
-
-        labeling.markAlphaRange(70, 50, 600/nVal, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal)
+        
+        // Display dataDisplay 
+        dataDisplay.addLabel("α", alphaVal)
+        dataDisplay.display()
 
         hoverInfo.bars = bars
         hoverInfo.showHoverWindow()

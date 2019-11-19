@@ -1,3 +1,5 @@
+import Normal from './normal.js';
+
 export default class Distribution {
 
     standardDeviation = (n, p) => {

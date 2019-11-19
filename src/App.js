@@ -7,8 +7,11 @@ import cumulatedBinomialDistributionGraph from './cBinomial/graph.js'
 import Menu from './components/menu.js'
 import MenuElement from './components/menuElement';
 import './assets/style/main.css';
+import {Helmet} from 'react-helmet';
 
 const App = () => {
+
+	document.title = "MupadStinktNachFisch"
 
 	let [pgNormal, setPgNormal] = useState(Boolean)
 	let [pgBinom, setPgBinom] = useState(Boolean)
@@ -27,7 +30,6 @@ const App = () => {
 		setFormNormal(false)
 		setFormcBinom(false)
 	}
-
 
 	const handleOnclick = (compName) => {
 		console.log(compName)
@@ -65,6 +67,8 @@ const App = () => {
 
 	return (
 		<>
+		<Helmet>MupadStinktNachFisch</Helmet>
+
 		<div className="main">
 			<h1>Stochastik - Rechner</h1>
 
