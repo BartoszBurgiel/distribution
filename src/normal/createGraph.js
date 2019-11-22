@@ -9,8 +9,6 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
 
     let canvas
     let nBar, pBar, yRangeBar, kBar
-
-    // Global slider position
     
     let nVal = nValue
     let pVal = pValue
@@ -27,7 +25,15 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     // Initialize canvas
     canvas = p.createCanvas(900, 420)
 
+
+    // Constants
     const sliderYPosition = 360
+    
+    const graphWidth = 600
+    const graphHeight = 300
+
+    const graphXPos = 50
+    const graphYPos = 30
 
     if (slider) {
         // Initialize slider
@@ -79,8 +85,8 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
 
         // Create labels for data 		
         dataDisplay.addLabel("μ", mu)
-        dataDisplay.addLabel("P(μ)", normalMath.solve(mu, sigma, mu))
-        dataDisplay.addLabel("P(X=k)", normalMath.solve(kVal, sigma, mu))
+        dataDisplay.addLabel("f(μ)", normalMath.solve(mu, sigma, mu))
+        dataDisplay.addLabel("f(X=k)", normalMath.solve(kVal, sigma, mu))
         dataDisplay.addLabel("σ", sigma)
         dataDisplay.addLabel("σ²", variace)
         dataDisplay.addLabel("[μ±σ]", '[' + Math.ceil(mu - sigma) + ':' + Math.floor(mu + sigma) + ']')
@@ -98,7 +104,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         p.fill(0)
 
         let highestProp = normalMath.solve(mu, sigma, mu)
-        labeling.labelYAxis(50, 30, 600, 300, highestProp, yRange)
+        labeling.labelYAxis(graphXPos, graphYPos, graphWidth, graphHeight, highestProp, yRange)
 
         p.strokeWeight(2)
         p.stroke(255, 0, 0)
@@ -106,25 +112,19 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         // Mark sigma intervals
         if(nVal <= 500) {
             
-            // Calculate the +sigma value
-            const getPlusSigmaMapped = (n) => {
-                return p.map(mu + (n*sigma), 0, nVal, 50, 650)
+            // Calculate the sigma value
+            const getSigmaMapped = (n) => {
+                return p.map(mu + (n*sigma), 0, nVal, graphXPos, graphXPos+graphWidth)
             }
-
-            // Calculate the -sigma value
-            const getMinusSigmaMapped = (n) => {
-                return p.map(mu - (n*sigma), 0, nVal, 50, 650)
-            }
-
 
             // First sigma
-            labeling.markInterval(30, 270, getMinusSigmaMapped(1), getPlusSigmaMapped(1), "[μ±σ]", p.color(255, 143, 21, 50), 50, 650)
+            labeling.markInterval(graphYPos, graphHeight-graphYPos, getSigmaMapped(-1), getSigmaMapped(1), "[μ±σ]", p.color(255, 143, 21, 50), graphXPos, graphWidth+graphXPos)
 
             // Second sigma
-            labeling.markInterval(30, 270, getMinusSigmaMapped(2), getPlusSigmaMapped(2), "[μ±2σ]", p.color(255, 143, 21, 50), 50, 650)
+            labeling.markInterval(graphYPos, graphHeight-graphYPos, getSigmaMapped(-2), getSigmaMapped(2), "[μ±2σ]", p.color(255, 143, 21, 50), graphXPos, graphWidth+graphXPos)
 
             // Third sigma
-            labeling.markInterval(30, 270, getMinusSigmaMapped(3), getPlusSigmaMapped(3), "[μ±3σ]", p.color(255, 143, 21, 50), 50, 650)
+            labeling.markInterval(graphYPos, graphHeight-graphYPos, getSigmaMapped(-3), getSigmaMapped(3), "[μ±3σ]", p.color(255, 143, 21, 50), graphXPos, graphWidth+graphXPos)
         }
         
         
@@ -134,34 +134,33 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         // plot function
         for (let i = 0; i < sublines; i++) {
 
-            let x1 = 50 + i
-            let y1 = 300 - p.map(normalMath.solve(p.map(i, 0, 600, 0, nVal), sigma, mu), 0, yRange, 0, 300 - 30)
-            let x2 = 50 + i + 1
-            let y2 = 300 - p.map(normalMath.solve(p.map(i + 1, 0, 600, 0, nVal), sigma, mu), 0, yRange, 0, 300 - 30)
+            let x1 = graphXPos + i
+            let y1 = graphHeight - p.map(normalMath.solve(p.map(i, 0, graphWidth, 0, nVal), sigma, mu), 0, yRange, 0, graphHeight - graphYPos)
+            let x2 = graphXPos + i + 1
+            let y2 = graphHeight - p.map(normalMath.solve(p.map(i + 1, 0, graphWidth, 0, nVal), sigma, mu), 0, yRange, 0, graphHeight - graphYPos)
 
             p.line(x1, y1, x2, y2)
 
-
-
             // Mark k 
-            if (i === parseInt(p.map(kVal, 0, nVal-1, 0, 600))) {
+            if (i === parseInt(p.map(kVal, 0, nVal-1, 0, graphWidth))) {
                 p.stroke('#ada')
                 p.strokeWeight(1)
 
-                let kLineXPos = p.map(kVal, 0, nVal, 0, 600)
-                p.line(50 + kLineXPos, 300, 50 + kLineXPos, 30)
+                let kLineXPos = p.map(kVal, 0, nVal, 0, graphWidth)
+                p.line(graphXPos + kLineXPos, graphHeight, graphXPos + kLineXPos, graphYPos)
 
                 p.stroke(255, 0, 0)
                 p.strokeWeight(2)
             }
         }
+
         p.stroke(0)
         p.strokeWeight(1)
 
-        labeling.xAxisNormal(50, 300, 600, nVal)
+        labeling.xAxisNormal(graphXPos, graphHeight, graphWidth, nVal)
 
 
-        let hoverMousePos = p.map(p.mouseX, 50, 650, 0, nVal)
+        let hoverMousePos = p.map(p.mouseX, graphXPos, graphXPos+graphWidth, 0, nVal)
         hoverInfo.showHoverWindowNormal(hoverMousePos, normalMath.solve(hoverMousePos, sigma, mu))
 
         p.noStroke()
