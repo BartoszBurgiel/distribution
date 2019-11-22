@@ -131,6 +131,9 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         
         const sublines = 600
 
+        // Set stroke 
+        p.stroke(255, 0, 0)
+
         // plot function
         for (let i = 0; i < sublines; i++) {
 

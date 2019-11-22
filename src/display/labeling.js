@@ -180,5 +180,6 @@ export default class Labeling {
 
         // Reset fill and stroke
         this.p.fill(0)
+        this.p.stroke(1)
     }
 }
