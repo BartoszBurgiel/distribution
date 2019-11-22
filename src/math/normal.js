@@ -10,14 +10,13 @@ export default class Normal {
         return coef * Math.pow(Math.E, power)
     }
 
-    // Calculates the cumulated propability of the most common values 
-    // -> expectedValue +/- standard deviation
-    mostCommonValues = (sD, eV) => {
+    // Calculates the area under the function under between the given interval  
+    calcInterval = (sD, eV, start, end) => {
         let sum = 0
         
         const factor = 0.01
 
-        for(let i = (eV-sD); i<=(sD + eV); i+=factor) {
+        for(let i = start; i<=end; i+=factor) {
             sum += this.solve(i, sD, eV) * factor
         }
 

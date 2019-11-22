@@ -73,7 +73,9 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         let mu = distributionMath.expectedValue(nVal, pVal)
         let sigma = distributionMath.standardDeviation(nVal, pVal)
         let variace = distributionMath.variance(nVal, pVal)
-        let mostCommonValues = normalMath.mostCommonValues(sigma, mu)
+        let oneSigma = normalMath.calcInterval(sigma, mu, mu - sigma, mu + sigma)
+        let twoSigma = normalMath.calcInterval(sigma, mu, mu - (2*sigma), mu + (2*sigma))
+        let threeSigma = normalMath.calcInterval(sigma, mu, mu - (3*sigma), mu + (3*sigma))
 
         // Create labels for data 		
         dataDisplay.addLabel("μ", mu)
@@ -84,7 +86,10 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         dataDisplay.addLabel("[μ±σ]", '[' + Math.ceil(mu - sigma) + ':' + Math.floor(mu + sigma) + ']')
         dataDisplay.addLabel("[μ±2σ]", '[' + Math.ceil(mu - (2*sigma)) + ':' + Math.floor(mu + (2*sigma)) + ']')
         dataDisplay.addLabel("[μ±3σ]", '[' + Math.ceil(mu - (3*sigma)) + ':' + Math.floor(mu + (3*sigma)) + ']')
-        dataDisplay.addLabel("P([μ±σ])", mostCommonValues)
+        
+        dataDisplay.addLabel("P([μ±σ])", oneSigma)
+        dataDisplay.addLabel("P([μ±2σ])", twoSigma)
+        dataDisplay.addLabel("P([μ±3σ])", threeSigma)
 
         // Display dataDisplay 
         dataDisplay.display()
