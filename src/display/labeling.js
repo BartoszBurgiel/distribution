@@ -166,4 +166,19 @@ export default class Labeling {
         this.p.text("P(X≤k) > α = ["+(k+1)+";"+n+"]", AxCoords, yPos - 10)
         this.p.stroke(0)
     }
+
+    // Mark interval marks a given interval with two lines 
+    markInterval = (yPos, height, x1, x2, label, col, limX, limY) => {
+
+        this.p.fill(col)
+        this.p.noStroke()
+        
+
+        if (x1>limX && x2 < limY)
+        // Draw rect
+        this.p.rect(x1, yPos, x2-x1, height)
+
+        // Reset fill and stroke
+        this.p.fill(0)
+    }
 }

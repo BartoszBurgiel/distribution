@@ -103,6 +103,32 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         p.strokeWeight(2)
         p.stroke(255, 0, 0)
 
+        // Mark sigma intervals
+        if(nVal <= 500) {
+            
+            // Calculate the +sigma value
+            const getPlusSigmaMapped = (n) => {
+                return p.map(mu + (n*sigma), 0, nVal, 50, 650)
+            }
+
+            // Calculate the -sigma value
+            const getMinusSigmaMapped = (n) => {
+                return p.map(mu - (n*sigma), 0, nVal, 50, 650)
+            }
+
+
+            // First sigma
+            labeling.markInterval(30, 270, getMinusSigmaMapped(1), getPlusSigmaMapped(1), "[μ±σ]", p.color(255, 143, 21, 50), 50, 650)
+
+            // Second sigma
+            labeling.markInterval(30, 270, getMinusSigmaMapped(2), getPlusSigmaMapped(2), "[μ±2σ]", p.color(255, 143, 21, 50), 50, 650)
+
+            // Third sigma
+            labeling.markInterval(30, 270, getMinusSigmaMapped(3), getPlusSigmaMapped(3), "[μ±3σ]", p.color(255, 143, 21, 50), 50, 650)
+        }
+        
+        
+        
         const sublines = 600
 
         // plot function
@@ -114,6 +140,8 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             let y2 = 300 - p.map(normalMath.solve(p.map(i + 1, 0, 600, 0, nVal), sigma, mu), 0, yRange, 0, 300 - 30)
 
             p.line(x1, y1, x2, y2)
+
+
 
             // Mark k 
             if (i === parseInt(p.map(kVal, 0, nVal-1, 0, 600))) {
