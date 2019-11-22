@@ -11,8 +11,16 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let canvas
     let nBar, pBar, yRangeBar, kBar
 
-    // Global slider position
-    const sliderYPosition = 360
+    // Constants
+    const sliderYPosition = 360   
+    
+    const graphWidth = 600
+    const graphHeight = 300
+
+    const graphXPos = 50
+    const graphYPos = 30
+
+
 
     let nVal = nValue
     let pVal = pValue
@@ -100,16 +108,16 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             highestProp = binomialMath.bDistribution(nVal, pVal, Math.ceil(mu))
         }
 
-        labeling.labelYAxis(50, 30, 600, 300, highestProp, yRange)
+        labeling.labelYAxis(graphXPos, graphYPos, graphWidth, graphHeight, highestProp, yRange)
 
         // Generate bars
         for (let i = 0; i < nVal; i++) {
-            bars[i] = new Bar(50 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
+            bars[i] = new Bar(graphXPos + p.map(i, 0, nVal, 0, graphWidth), graphHeight, graphWidth / nVal, 0, 0, i)
 
             let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
             // 300 - 30 because of the xPos margin
-            let absHeight = p.map(currentPropability, 0, yRange, 0, 300 - 30)
+            let absHeight = p.map(currentPropability, 0, yRange, 0, graphHeight - graphYPos)
             bars[i].height = absHeight
             bars[i].prop = currentPropability
 

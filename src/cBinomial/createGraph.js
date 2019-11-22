@@ -4,14 +4,19 @@ import Data from '../display/data.js';
 import Binomial from '../math/binomial.js';
 import HoverInfo from '../display/hoverInfo.js';
 import Labeling from '../display/labeling.js';
-import Normal from '../math/normal.js';
 
 export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
     let canvas
     let nBar, pBar, kBar, alphaBar
 
-    // Global slider position
+    // Constants
     const sliderYPosition = 360
+
+    const graphWidth = 600
+    const graphHeight = 300
+
+    const graphXPos = 50
+    const graphYPos = 30
 
     let nVal = nValue
     let pVal = pValue
@@ -71,8 +76,8 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         // Set fill back
         p.fill(0)
 
-        labeling.labelYAxis(50, 100, 600, 300, 1, 1)
-        labeling.markAlphaRange(70, 100, 50, 600/nVal, 230, 650, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal, alphaVal)
+        labeling.labelYAxis(graphXPos, 100, graphWidth, graphHeight, 1, 1)
+        labeling.markAlphaRange(70, 100, graphXPos, graphWidth/nVal, 230, graphWidth + graphXPos, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal, alphaVal)
 
         // cumulated propability
         let propSum = 0
@@ -81,7 +86,7 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         for (let i = 0; i < nVal; i++) {
             let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
-            bars[i] = new Bar(50 + p.map(i, 0, nVal, 0, 600), 300, 600 / nVal, 0, 0, i)
+            bars[i] = new Bar(graphXPos + p.map(i, 0, nVal, 0, graphWidth), graphHeight, graphWidth / nVal, 0, 0, i)
 
             propSum += currentPropability
 
