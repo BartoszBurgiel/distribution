@@ -93,7 +93,8 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         dataDisplay.addLabel("σ", sigma)
         dataDisplay.addLabel("σ²", variace)
         dataDisplay.addLabel("[μ±σ]", '[' + Math.ceil(mu - sigma) + ':' + Math.floor(mu + sigma) + ']')
-        dataDisplay.addLabel("P([μ±σ])", mostCommonValues)
+        dataDisplay.addLabel("[μ±2σ]", '[' + Math.ceil(mu - (2*sigma)) + ':' + Math.floor(mu + (2*sigma)) + ']')
+        dataDisplay.addLabel("[μ±3σ]", '[' + Math.ceil(mu - (2*sigma)) + ':' + Math.floor(mu + (3*sigma)) + ']')
 
         // Display dataDisplay 
         dataDisplay.display()
@@ -109,6 +110,24 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         }
 
         labeling.labelYAxis(graphXPos, graphYPos, graphWidth, graphHeight, highestProp, yRange)
+
+        // Calculate the mapped sigma value
+        const getSigmaMapped = (n) => {
+            if (n < 1) {
+                return p.map(Math.ceil(mu + (n*sigma)), 0, nVal, graphXPos, graphXPos+graphWidth)
+            } 
+            return p.map(Math.floor(mu + (n*sigma))+1, 0, nVal, graphXPos, graphXPos+graphWidth)
+        }
+
+        // First sigma
+        labeling.markInterval(graphYPos, graphHeight-graphYPos, getSigmaMapped(-1), getSigmaMapped(1), "[μ±σ]", p.color(255, 143, 21, 50), graphXPos, graphWidth+graphXPos)
+
+        // Second sigma
+        labeling.markInterval(graphYPos, graphHeight-graphYPos, getSigmaMapped(-2), getSigmaMapped(2), "[μ±2σ]", p.color(255, 143, 21, 50), graphXPos, graphWidth+graphXPos)
+
+        // Third sigma
+        labeling.markInterval(graphYPos, graphHeight-graphYPos, getSigmaMapped(-3), getSigmaMapped(3), "[μ±3σ]", p.color(255, 143, 21, 50), graphXPos, graphWidth+graphXPos)
+       
 
         // Generate bars
         for (let i = 0; i < nVal; i++) {

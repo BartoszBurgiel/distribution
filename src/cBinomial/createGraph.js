@@ -16,7 +16,7 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
     const graphHeight = 300
 
     const graphXPos = 50
-    const graphYPos = 30
+    // const graphYPos = 30
 
     let nVal = nValue
     let pVal = pValue
