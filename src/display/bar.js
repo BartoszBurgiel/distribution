@@ -16,9 +16,14 @@ export default class Bar {
     }
 
     // Draw a rect according to Bar attributes
-    display(p, col) {
+    display = (p, col) => {
         p.fill(col)
         p.rect(this.xPos, this.yPos, this.width, -this.height)
         p.fill(0)
+    }
+
+    // Get the middle coordinates of the bar
+    getMiddle = () => {
+        return this.xPos + (this.width / 2)
     }
 }

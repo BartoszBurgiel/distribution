@@ -7,6 +7,7 @@ export default class HoverInfo {
         this.p = p
     }
 
+    // Display the window with hover date
     showHoverWindow = () => {
         // Check x-Axis
         if (this.p.mouseX >= 50 && this.p.mouseX <= 650) {
@@ -41,6 +42,7 @@ export default class HoverInfo {
         }
     }
 
+    // Show hover window with the info about normal distribution
     showHoverWindowNormal = (x, prop) => {
 
         // Check x-Axis

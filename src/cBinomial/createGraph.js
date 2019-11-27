@@ -12,21 +12,29 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
     // Constants
     const sliderYPosition = 360
 
-    const graphWidth = 600
-    const graphHeight = 300
+    // All of canvas constants
+    const graph = {
+        'width': 600, 
+        'height': 300, 
+        'xPos': 50,
+        'yPos': 30,
+        
+        // Change if any varables changed 
+        'endX': 600 + 50,
+        'endY': 300 + 30,
+    }
 
-    const graphXPos = 50
-    // const graphYPos = 30
-
+    // Fetch data from parameters [props]
     let nVal = nValue
     let pVal = pValue
     let kVal = kValue
     let alphaVal = alpha
 
+    // Declare external classess
     let distributionMath = new Distribution()
     let binomialMath = new Binomial()
     let hoverInfo = new HoverInfo([], p)
-    let labeling = new Labeling(p)
+    let labeling = new Labeling(p, graph)
     let dataDisplay = new Data(p, 700, 0, 420, 200)
 
 
@@ -71,14 +79,26 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         dataDisplay.addLabel("P(X ≤ k)", binomialMath.cumulatedBinom(nVal, pVal, kVal))
         dataDisplay.addLabel("σ", distributionMath.standardDeviation(nVal, pVal))
         dataDisplay.addLabel("σ²", distributionMath.variance(nVal, pVal))
+        dataDisplay.addLabel("α", alphaVal)
+        dataDisplay.addLabel("P(X ≤ k) < α", "[0;" + (binomialMath.getDevianceIndex(nVal, pVal, alphaVal)-1) + "]")
+        dataDisplay.addLabel("P(X ≤ k) > α", "[" + (binomialMath.getDevianceIndex(nVal, pVal, alphaVal)) + ";" + nVal + "]")
 
 
         // Set fill back
         p.fill(0)
 
-        labeling.labelYAxis(graphXPos, 100, graphWidth, graphHeight, 1, 1)
-        labeling.markAlphaRange(70, 100, graphXPos, graphWidth/nVal, 230, graphWidth + graphXPos, binomialMath.getDevianceIndex(nVal, pVal, alphaVal), nVal, alphaVal)
+        labeling.labelYAxis(1)
 
+        // Calculate the deviance index
+        let devIndex = binomialMath.getDevianceIndex(nVal, pVal, alphaVal)   
+
+        // Fit devIndex to the graph
+        let devIndexMapped = p.map(devIndex, 0, nVal, graph.xPos, graph.endX)
+
+        // Mark alpha intervals
+        labeling.markInterval(graph.xPos, devIndexMapped, p.color(37, 186, 0, 70), 0, graph.endX)
+        labeling.markInterval(devIndexMapped, graph.endX, p.color(255, 77, 77, 70), 0, graph.endX)
+        
         // cumulated propability
         let propSum = 0
 
@@ -86,8 +106,10 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
         for (let i = 0; i < nVal; i++) {
             let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
-            bars[i] = new Bar(graphXPos + p.map(i, 0, nVal, 0, graphWidth), graphHeight, graphWidth / nVal, 0, 0, i)
+            // Define bar
+            bars[i] = new Bar(graph.xPos + p.map(i, 0, nVal, 0, graph.width), graph.height, graph.width / nVal, 0, 0, i)
 
+            // Add to the sum 
             propSum += currentPropability
 
             // Calculate, set and display bar's hight
@@ -101,7 +123,8 @@ export default function createGraph(nValue, pValue, kValue, alpha, p, slider) {
                 bars[i].display(p, 255)
             }
             
-            labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
+            
+            labeling.labelXAxis(nVal, i, bars[i].getMiddle(), bars[i].yPos + 20)
         }
         
         // Display dataDisplay 

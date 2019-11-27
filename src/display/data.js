@@ -49,6 +49,7 @@ export default class Data {
         this.p.textSize(12)
     }
 
+    // Add a label to the map
     addLabel(key, val) {
         this.labels.set(key, val)
     }

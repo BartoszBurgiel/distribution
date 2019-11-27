@@ -19,26 +19,32 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         'width': 600, 
         'height': 300, 
         'xPos': 50,
-        'yPos': 30
+        'yPos': 30,
+        
+        // Change if any varables changed 
+        'endX': 600 + 50,
+        'endY': 300 + 30,
     }
 
+    // Fetch values from parameterst [props]
     let nVal = nValue
     let pVal = pValue
     let kVal = kValue
 
     let yRange = 0.5
 
+    // Declare and innitialize external classes 
     let distributionMath = new Distribution()
     let binomialMath = new Binomial()
     let hoverInfo = new HoverInfo([], p)
     let labeling = new Labeling(p, graph)
     let dataDisplay = new Data(p, 700, 0, 420, 200)
 
-    canvas = p.createCanvas(900, 420)
-
 
     // Initialize canvas
+    canvas = p.createCanvas(900, 420)
 
+    // Create slider
     if (slider) {
         // Initialize slider
         nBar = p.createSlider(1, 150, nVal, 1)
@@ -58,6 +64,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     // Draw the graph and calculate all constants
     p.draw = () => {
 
+        // If rangebar not defined -> define
         if (typeof yRangeBar === 'undefined') {
             canvas = p.createCanvas(900, 420)
             yRangeBar = p.createSlider(0.01, 1, yRange, 0.01)
@@ -109,24 +116,24 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             highestProp = binomialMath.bDistribution(nVal, pVal, Math.ceil(mu))
         }
 
-        labeling.labelYAxis(highestProp, yRange)
+        labeling.labelYAxis(yRange)
 
         // Calculate the mapped sigma value
         const getSigmaMapped = (n) => {
             if (n < 1) {
-                return p.map(Math.ceil(mu + (n*sigma)), 0, nVal, graph.xPos, graph.xPos+graph.width)
+                return p.map(Math.ceil(mu + (n*sigma)), 0, nVal, graph.xPos, graph.endX)
             } 
-            return p.map(Math.floor(mu + (n*sigma))+1, 0, nVal, graph.xPos, graph.xPos+graph.width)
+            return p.map(Math.floor(mu + (n*sigma))+1, 0, nVal, graph.xPos, graph.endX)
         }
 
         // First sigma
-        labeling.markInterval(graph.yPos, graph.height-graph.yPos, getSigmaMapped(-1), getSigmaMapped(1), "[μ±σ]", p.color(255, 143, 21, 50), graph.xPos, graph.width+graph.xPos)
+        labeling.markInterval(getSigmaMapped(-1), getSigmaMapped(1), p.color(255, 143, 21, 50), graph.xPos, graph.endX)
 
         // Second sigma
-        labeling.markInterval(graph.yPos, graph.height-graph.yPos, getSigmaMapped(-2), getSigmaMapped(2), "[μ±2σ]", p.color(255, 143, 21, 50), graph.xPos, graph.width+graph.xPos)
+        labeling.markInterval(getSigmaMapped(-2), getSigmaMapped(2), p.color(255, 143, 21, 50), graph.xPos, graph.endX)
 
         // Third sigma
-        labeling.markInterval(graph.yPos, graph.height-graph.yPos, getSigmaMapped(-3), getSigmaMapped(3), "[μ±3σ]", p.color(255, 143, 21, 50), graph.xPos, graph.width+graph.xPos)
+        labeling.markInterval(getSigmaMapped(-3), getSigmaMapped(3), p.color(255, 143, 21, 50), graph.xPos, graph.endX)
        
 
         // Generate bars
@@ -147,7 +154,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             }
 
 
-            labeling.labelXAxis(nVal, i, bars[i].xPos + bars[i].width / 2, bars[i].yPos + 20)
+            labeling.labelXAxis(nVal, i, bars[i].getMiddle())
         }
 
 
