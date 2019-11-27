@@ -13,14 +13,14 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
 
     // Constants
     const sliderYPosition = 360   
-    
-    const graphWidth = 600
-    const graphHeight = 300
-
-    const graphXPos = 50
-    const graphYPos = 30
-
-
+   
+    // All of canvas constants
+    const graph = {
+        'width': 600, 
+        'height': 300, 
+        'xPos': 50,
+        'yPos': 30
+    }
 
     let nVal = nValue
     let pVal = pValue
@@ -31,7 +31,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let distributionMath = new Distribution()
     let binomialMath = new Binomial()
     let hoverInfo = new HoverInfo([], p)
-    let labeling = new Labeling(p)
+    let labeling = new Labeling(p, graph)
     let dataDisplay = new Data(p, 700, 0, 420, 200)
 
     canvas = p.createCanvas(900, 420)
@@ -84,7 +84,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         let mu = distributionMath.expectedValue(nVal, pVal)
         let sigma = distributionMath.standardDeviation(nVal, pVal)
         let variace = distributionMath.variance(nVal, pVal)
-        let mostCommonValues = binomialMath.binomMostCommon(nVal, pVal, sigma, mu)
+        // let mostCommonValues = binomialMath.binomMostCommon(nVal, pVal, sigma, mu)
 
         // Create labels for data 		
         dataDisplay.addLabel("μ", mu)
@@ -109,34 +109,34 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
             highestProp = binomialMath.bDistribution(nVal, pVal, Math.ceil(mu))
         }
 
-        labeling.labelYAxis(graphXPos, graphYPos, graphWidth, graphHeight, highestProp, yRange)
+        labeling.labelYAxis(highestProp, yRange)
 
         // Calculate the mapped sigma value
         const getSigmaMapped = (n) => {
             if (n < 1) {
-                return p.map(Math.ceil(mu + (n*sigma)), 0, nVal, graphXPos, graphXPos+graphWidth)
+                return p.map(Math.ceil(mu + (n*sigma)), 0, nVal, graph.xPos, graph.xPos+graph.width)
             } 
-            return p.map(Math.floor(mu + (n*sigma))+1, 0, nVal, graphXPos, graphXPos+graphWidth)
+            return p.map(Math.floor(mu + (n*sigma))+1, 0, nVal, graph.xPos, graph.xPos+graph.width)
         }
 
         // First sigma
-        labeling.markInterval(graphYPos, graphHeight-graphYPos, getSigmaMapped(-1), getSigmaMapped(1), "[μ±σ]", p.color(255, 143, 21, 50), graphXPos, graphWidth+graphXPos)
+        labeling.markInterval(graph.yPos, graph.height-graph.yPos, getSigmaMapped(-1), getSigmaMapped(1), "[μ±σ]", p.color(255, 143, 21, 50), graph.xPos, graph.width+graph.xPos)
 
         // Second sigma
-        labeling.markInterval(graphYPos, graphHeight-graphYPos, getSigmaMapped(-2), getSigmaMapped(2), "[μ±2σ]", p.color(255, 143, 21, 50), graphXPos, graphWidth+graphXPos)
+        labeling.markInterval(graph.yPos, graph.height-graph.yPos, getSigmaMapped(-2), getSigmaMapped(2), "[μ±2σ]", p.color(255, 143, 21, 50), graph.xPos, graph.width+graph.xPos)
 
         // Third sigma
-        labeling.markInterval(graphYPos, graphHeight-graphYPos, getSigmaMapped(-3), getSigmaMapped(3), "[μ±3σ]", p.color(255, 143, 21, 50), graphXPos, graphWidth+graphXPos)
+        labeling.markInterval(graph.yPos, graph.height-graph.yPos, getSigmaMapped(-3), getSigmaMapped(3), "[μ±3σ]", p.color(255, 143, 21, 50), graph.xPos, graph.width+graph.xPos)
        
 
         // Generate bars
         for (let i = 0; i < nVal; i++) {
-            bars[i] = new Bar(graphXPos + p.map(i, 0, nVal, 0, graphWidth), graphHeight, graphWidth / nVal, 0, 0, i)
+            bars[i] = new Bar(graph.xPos + p.map(i, 0, nVal, 0, graph.width), graph.height, graph.width / nVal, 0, 0, i)
 
             let currentPropability = binomialMath.bDistribution(nVal, pVal, i)
 
             // 300 - 30 because of the xPos margin
-            let absHeight = p.map(currentPropability, 0, yRange, 0, graphHeight - graphYPos)
+            let absHeight = p.map(currentPropability, 0, yRange, 0, graph.height - graph.yPos)
             bars[i].height = absHeight
             bars[i].prop = currentPropability
 
