@@ -92,9 +92,6 @@ export default class Labeling {
         // Upper bond label 
         this.p.text(Math.round(yRange * 100) + '%', this.graph.xPos - 45, this.graph.yPos + 10)
 
-        // Add inbetween steps
-        this.inbetweenSteps(Math.round(this.p.map(yRange, 0, 1, 6, 2)), yRange, this.graph.yPos + 10)
-
         // Number of the inbetween steps
         let n = Math.round(this.p.map(yRange, 0, 1, 6, 2))
         
