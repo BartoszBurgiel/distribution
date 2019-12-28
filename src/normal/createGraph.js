@@ -95,8 +95,8 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
 
         // Create labels for data 		
         dataDisplay.addLabel("μ", mu)
-        dataDisplay.addLabel("f(μ)", normalMath.solve(mu, sigma, mu))
-        dataDisplay.addLabel("f(X=k)", normalMath.solve(kVal, sigma, mu))
+        dataDisplay.addLabel("P(μ)", normalMath.solve(mu, sigma, mu))
+        dataDisplay.addLabel("P(X=k)", normalMath.solve(kVal, sigma, mu))
         dataDisplay.addLabel("σ", sigma)
         dataDisplay.addLabel("σ²", variace)
         dataDisplay.addLabel("[μ±σ]", '[' + Math.ceil(mu - sigma) + ':' + Math.floor(mu + sigma) + ']')

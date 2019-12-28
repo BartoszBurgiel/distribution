@@ -27,6 +27,7 @@ export default class HoverInfo {
                             this.p.fill(255)
 
                             // Draw window
+                            this.p.stroke(0)
                             this.p.rect(550, 20, 100, 20)
 
                             this.p.fill(0)

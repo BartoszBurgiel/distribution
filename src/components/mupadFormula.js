@@ -23,14 +23,14 @@ export default class MupadFormula extends React.Component {
         // determine which function
         switch (this.props.eqType) {
             case 'binom':
-
-                return (`${this.getFunctionName()} := stats::binomialPF(${this.props.nVal},${this.props.pVal});\n`)
+            
+                return (`${this.getFunctionName()} := stats::binomialPF(${this.props.nVal},${Math.round(this.props.pVal)});\n`)
             case 'cBinom':
 
-                return(`${this.getFunctionName()} := stats::binomialCDF(${this.props.nVal},${this.props.pVal});\n`)
+                return(`${this.getFunctionName()} := stats::binomialCDF(${this.props.nVal},${Math.round(this.props.pVal)});\n`)
             case 'normal':
 
-                return(`${this.getFunctionName()} := stats::normalPF(${this.props.muVal},${this.props.varVal});\n`)
+                return(`${this.getFunctionName()} := stats::normalPF(${Math.round(this.props.muVal)},${Math.round(this.props.varVal)});\n`)
             default: 
                 break
         }

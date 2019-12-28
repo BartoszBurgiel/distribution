@@ -60,7 +60,7 @@ export default class Binomial {
             sum += this.bDistribution(n, p, i)
 
             if (sum > alpha) {
-                return (i-1)
+                return (i)
             }
         }
     }
