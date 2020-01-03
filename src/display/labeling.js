@@ -16,29 +16,30 @@ export default class Labeling {
         for (let i = 0; i < range; i++) {
 
             if(range < 20) {
-                this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 25, this.graph.width, i), this.graph.yPos + 20)
+                this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 20, i), this.graph.endY-10)
+
             } else if (range < 50) {
                 
                 // Display every 5th
                 if (i % 5 === 0) {
-                    this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 25, this.graph.width, i), this.graph.yPos + 20)
+                    this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 10, i), this.graph.endY-10)
                 }
             } else if (range < 100) {
 
                 // Display every 10th
                 if (i % 10 === 0) {
-                    this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 25, this.graph.width, i), this.graph.yPos + 20)
+                    this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 10, i), this.graph.endY-10)
                 }
             } else if (range < 250) {
 
 
                 // Display every 25th
                 if (i % 50 === 0) {
-                    this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 25, this.graph.width, i), this.graph.yPos + 20)
+                    this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 5, i), this.graph.endY-10)
                 }
             } else if (range > 250) {
                 if (i % parseInt(range/5) === 0) {
-                    this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 25, this.graph.width, i), this.graph.yPos + 20)
+                    this.p.text(i, this.graph.xPos - 8 + this.xAxisNormalSteps(range, 5, i), this.graph.endY-10)
                 }
             }
         }

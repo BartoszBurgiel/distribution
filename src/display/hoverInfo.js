@@ -54,11 +54,14 @@ export default class HoverInfo {
                 this.p.fill(255)
 
                 // Draw window
+                this.p.stroke(0)
                 this.p.rect(550, 20, 120, 20)
 
                 this.p.fill(0)
                 // Label 
+                this.p.noStroke()
                 this.p.text('P(' + Math.round(x*100)/100+ ') = ' + Math.round(prop * 100000) / 1000 + '%', 560, 32.5)
+                this.p.stroke(0)
             }
         }
     }

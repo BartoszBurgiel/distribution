@@ -11,16 +11,19 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     let nBar, pBar, yRangeBar, kBar
     
     // All of canvas constants
-    const graph = {
+    let graph = {
         'width': 600, 
         'height': 300, 
         'xPos': 50,
         'yPos': 30,
         
-        // Change if any varables changed 
-        'endX': 600 + 50,
-        'endY': 300 + 30,
+        'endX': 0,
+        'endY': 0,
     }
+
+    // Calculate endX and endY attributes dependent on the set dimensions
+    graph.endX = graph.width + graph.xPos
+    graph.endY = graph.height + graph.yPos
 
     // Fetch variables from the parameters [props] 
     let nVal = nValue
@@ -38,7 +41,6 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
     
     // Initialize canvas
     canvas = p.createCanvas(900, 420)
-
 
     // Constants
     const sliderYPosition = 360
@@ -159,7 +161,10 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
                 p.strokeWeight(1)
 
                 let kLineXPos = p.map(kVal, 0, nVal, 0, graph.width)
+                
+                p.strokeWeight(2)
                 p.line(graph.xPos + kLineXPos, graph.height, graph.xPos + kLineXPos, graph.yPos)
+                p.strokeWeight(1)
 
                 p.stroke(255, 0, 0)
                 p.strokeWeight(2)

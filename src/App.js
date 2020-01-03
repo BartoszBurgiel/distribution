@@ -11,7 +11,7 @@ import {Helmet} from 'react-helmet';
 
 const App = () => {
 
-	document.title = "MupadStinktNachFisch"
+	document.title = "CristalMath"
 
 	let [pgNormal, setPgNormal] = useState(Boolean)
 	let [pgBinom, setPgBinom] = useState(Boolean)
@@ -67,18 +67,10 @@ const App = () => {
 
 	return (
 		<>
-		<Helmet>MupadStinktNachFisch</Helmet>
+		<Helmet>CristalMath</Helmet>
 
 		<div className="main">
 			<h1>Stochastik - Rechner</h1>
-
-			{pgNormal && <SketchOnly sketch={normalDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
-			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
-			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} alphaVal={0.05}/>}
-
-			{formBinom && <FromToCalculate sketch={binomialDistributionGraph} eqType="binom" nVal={120} kVal={70} pVal={0.4} />}
-			{formcBinom && <FromToCalculate sketch={cumulatedBinomialDistributionGraph} eqType="cBinom" nVal={120} kVal={70} pVal={0.4} alphaVal={0.05}/>}
-			{formNormal && <FromToCalculate sketch={normalDistributionGraph} eqType="normal" nVal={120} kVal={70} pVal={0.4} />}
 
 			<Menu className="container row">
 				<Menu name="Playground">
@@ -93,6 +85,14 @@ const App = () => {
 					<MenuElement onClick={handleOnclick.bind(this, 'formCBinom')}> kumulierte Binomialverteilung </MenuElement>
 				</Menu>
 			</Menu>
+			
+			{pgNormal && <SketchOnly sketch={normalDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
+			{pgBinom && <SketchOnly sketch={binomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} />}
+			{pgcBinom && <SketchOnly sketch={cumulatedBinomialDistributionGraph} nVal={120} kVal={70} pVal={0.4} alphaVal={0.05}/>}
+
+			{formBinom && <FromToCalculate sketch={binomialDistributionGraph} eqType="binom" nVal={120} kVal={70} pVal={0.4} />}
+			{formcBinom && <FromToCalculate sketch={cumulatedBinomialDistributionGraph} eqType="cBinom" nVal={120} kVal={70} pVal={0.4} alphaVal={0.05}/>}
+			{formNormal && <FromToCalculate sketch={normalDistributionGraph} eqType="normal" nVal={120} kVal={70} pVal={0.4} />}
 		</div>
 		</>
 	);

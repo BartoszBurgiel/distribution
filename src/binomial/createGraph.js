@@ -21,10 +21,13 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         'xPos': 50,
         'yPos': 30,
         
-        // Change if any varables changed 
-        'endX': 600 + 50,
-        'endY': 300 + 30,
+        'endX': 0,
+        'endY': 0,
     }
+
+    // Calculate endX and endY attributes dependent on the set dimensions
+    graph.endX = graph.width + graph.xPos
+    graph.endY = graph.height + graph.yPos
 
     // Fetch values from parameterst [props]
     let nVal = nValue
