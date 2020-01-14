@@ -104,7 +104,7 @@ export default function createGraph(nValue, pValue, kValue, p, slider) {
         dataDisplay.addLabel("σ²", variace)
         dataDisplay.addLabel("[μ±σ]", '[' + Math.ceil(mu - sigma) + ':' + Math.floor(mu + sigma) + ']')
         dataDisplay.addLabel("[μ±2σ]", '[' + Math.ceil(mu - (2*sigma)) + ':' + Math.floor(mu + (2*sigma)) + ']')
-        dataDisplay.addLabel("[μ±3σ]", '[' + Math.ceil(mu - (2*sigma)) + ':' + Math.floor(mu + (3*sigma)) + ']')
+        dataDisplay.addLabel("[μ±3σ]", '[' + Math.ceil(mu - (3*sigma)) + ':' + Math.floor(mu + (3*sigma)) + ']')
 
         // Display dataDisplay 
         dataDisplay.display()
